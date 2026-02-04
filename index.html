@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ASKUS · AI Consultancy</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%230a0a0a'/><text x='50' y='68' font-family='Helvetica,Arial,sans-serif' font-size='48' font-weight='bold' fill='white' text-anchor='middle'>A</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -58,7 +59,12 @@
       justify-content: space-between;
       align-items: center;
       z-index: 100;
-      mix-blend-mode: difference;
+      transition: color 0.3s ease;
+    }
+
+    header.inverted .logo,
+    header.inverted nav a {
+      color: var(--white);
     }
 
     .logo {
@@ -66,7 +72,8 @@
       font-size: 0.75rem;
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: var(--white);
+      color: var(--black);
+      transition: color 0.3s ease;
     }
 
     .lang-switcher {
@@ -77,7 +84,11 @@
       display: flex;
       gap: 0.5rem;
       z-index: 101;
-      mix-blend-mode: difference;
+      transition: color 0.3s ease;
+    }
+
+    .lang-switcher.inverted .lang-btn {
+      color: var(--white);
     }
 
     .lang-btn {
@@ -85,13 +96,13 @@
       font-size: 0.6rem;
       letter-spacing: 0.05em;
       text-transform: uppercase;
-      color: var(--white);
+      color: var(--black);
       background: none;
       border: none;
       padding: 0.3rem 0.5rem;
       cursor: pointer;
       opacity: 0.5;
-      transition: opacity 0.3s ease;
+      transition: opacity 0.3s ease, color 0.3s ease;
     }
 
     .lang-btn:hover,
@@ -114,9 +125,9 @@
       font-size: 0.7rem;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: var(--white);
+      color: var(--black);
       text-decoration: none;
-      transition: opacity 0.3s ease;
+      transition: opacity 0.3s ease, color 0.3s ease;
     }
 
     nav a:hover {
@@ -537,7 +548,7 @@
         'services.ethics.title': 'Ethics',
         'services.ethics.desc': 'Governance frameworks ensuring responsible and transparent AI use.',
         'about.title': 'Precision meets possibility',
-        'about.p1': 'Founded in the heart of Europe, Askus brings Swiss principles of precision, discretion, and quality to the field of artificial intelligence.',
+        'about.p1': 'Founded in the heart of Europe, Askus brings Swiss principles of precision, discretion, and quality to the field of artificial intelligence. Our team includes former software engineers from Microsoft and Intel.',
         'about.p2': 'We work with organizations ready to transform their operations through thoughtful AI adoption—not hype, but measurable impact.',
         'footer.imprint': 'Imprint',
         'footer.privacy': 'Privacy Policy',
@@ -561,7 +572,7 @@
         'services.ethics.title': 'Ethik',
         'services.ethics.desc': 'Governance-Rahmenwerke für verantwortungsvolle und transparente KI-Nutzung.',
         'about.title': 'Präzision trifft Möglichkeit',
-        'about.p1': 'Im Herzen Europas gegründet, bringt Askus Schweizer Prinzipien von Präzision, Diskretion und Qualität in das Feld der künstlichen Intelligenz.',
+        'about.p1': 'Im Herzen Europas gegründet, bringt Askus Schweizer Prinzipien von Präzision, Diskretion und Qualität in das Feld der künstlichen Intelligenz. Unser Team umfasst ehemalige Software-Ingenieure von Microsoft und Intel.',
         'about.p2': 'Wir arbeiten mit Organisationen, die bereit sind, ihre Abläufe durch durchdachte KI-Einführung zu transformieren – kein Hype, sondern messbare Wirkung.',
         'footer.imprint': 'Impressum',
         'footer.privacy': 'Datenschutz',
@@ -585,7 +596,7 @@
         'services.ethics.title': 'Éthique',
         'services.ethics.desc': 'Cadres de gouvernance assurant une utilisation responsable et transparente de l\'IA.',
         'about.title': 'La précision rencontre le possible',
-        'about.p1': 'Fondée au cœur de l\'Europe, Askus apporte les principes suisses de précision, de discrétion et de qualité au domaine de l\'intelligence artificielle.',
+        'about.p1': 'Fondée au cœur de l\'Europe, Askus apporte les principes suisses de précision, de discrétion et de qualité au domaine de l\'intelligence artificielle. Notre équipe comprend d\'anciens ingénieurs logiciels de Microsoft et Intel.',
         'about.p2': 'Nous travaillons avec des organisations prêtes à transformer leurs opérations grâce à une adoption réfléchie de l\'IA – pas de battage, mais un impact mesurable.',
         'footer.imprint': 'Mentions légales',
         'footer.privacy': 'Confidentialité',
@@ -609,7 +620,7 @@
         'services.ethics.title': 'Etica',
         'services.ethics.desc': 'Quadri di governance per un uso responsabile e trasparente dell\'IA.',
         'about.title': 'La precisione incontra la possibilità',
-        'about.p1': 'Fondata nel cuore dell\'Europa, Askus porta i principi svizzeri di precisione, discrezione e qualità nel campo dell\'intelligenza artificiale.',
+        'about.p1': 'Fondata nel cuore dell\'Europa, Askus porta i principi svizzeri di precisione, discrezione e qualità nel campo dell\'intelligenza artificiale. Il nostro team include ex ingegneri software di Microsoft e Intel.',
         'about.p2': 'Lavoriamo con organizzazioni pronte a trasformare le loro operazioni attraverso un\'adozione ponderata dell\'IA – non clamore, ma impatto misurabile.',
         'footer.imprint': 'Impronta',
         'footer.privacy': 'Privacy',
@@ -633,7 +644,7 @@
         'services.ethics.title': 'Etica',
         'services.ethics.desc': 'Structuras da governance per in diever responsabel e transparent da l\'IA.',
         'about.title': 'Precisiun inscuntra pussaivladad',
-        'about.p1': 'Fundada en il cor da l\'Europa, Askus porta ils princips svizzers da precisiun, discreziun e qualitad en il champ da l\'intelligenza artifiziala.',
+        'about.p1': 'Fundada en il cor da l\'Europa, Askus porta ils princips svizzers da precisiun, discreziun e qualitad en il champ da l\'intelligenza artifiziala. Nossa equipa cumpiglia anteriurs ingeniurs da software da Microsoft e Intel.',
         'about.p2': 'Nus lavurain cun organisaziuns ch\'èn prontas da transformar lur operaziuns tras ina adopziun reflechida da l\'IA – betg hype, ma impact mesirabel.',
         'footer.imprint': 'Impressum',
         'footer.privacy': 'Protecziun da datas',
@@ -674,6 +685,33 @@
     if (savedLang && translations[savedLang]) {
       setLanguage(savedLang);
     }
+
+    // Header color inversion based on scroll position
+    const header = document.querySelector('header');
+    const langSwitcher = document.querySelector('.lang-switcher');
+    const servicesSection = document.querySelector('.services');
+
+    function updateHeaderColor() {
+      const scrollY = window.scrollY;
+      const servicesTop = servicesSection.offsetTop;
+      const servicesBottom = servicesTop + servicesSection.offsetHeight;
+      const headerHeight = 80; // approximate header height
+      
+      // Check if header overlaps with services section
+      const headerBottom = scrollY + headerHeight;
+      const inServices = headerBottom > servicesTop && scrollY < servicesBottom;
+      
+      if (inServices) {
+        header.classList.add('inverted');
+        langSwitcher.classList.add('inverted');
+      } else {
+        header.classList.remove('inverted');
+        langSwitcher.classList.remove('inverted');
+      }
+    }
+
+    window.addEventListener('scroll', updateHeaderColor);
+    updateHeaderColor();
 
     // Modal functions
     function openModal(id) {
