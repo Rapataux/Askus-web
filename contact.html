@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Askus · AI Consultancy</title>
+  <title>Contact · Askus</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%230a0a0a'/><text x='50' y='68' font-family='Helvetica,Arial,sans-serif' font-size='48' font-weight='bold' fill='white' text-anchor='middle'>A</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -39,10 +39,9 @@
     .services { background: var(--black); color: var(--white); }
     .services h2 { font-weight: 400; font-size: clamp(2rem, 5vw, 4rem); letter-spacing: -0.02em; margin-bottom: 4rem; }
     .service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1px; background: rgba(255,255,255,0.1); max-width: 1200px; }
-    .service-item { background: var(--black); padding: 3rem; text-decoration: none; color: inherit; transition: background 0.3s ease; }
-    .service-item:hover { background: #1a1a1a; }
+    .service-item { background: var(--black); padding: 3rem; }
     .service-number { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.2em; color: var(--gray); margin-bottom: 1.5rem; }
-    .service-item h3 { font-weight: 400; font-size: 1.5rem; letter-spacing: -0.01em; margin-bottom: 1rem; color: var(--white); }
+    .service-item h3 { font-weight: 400; font-size: 1.5rem; letter-spacing: -0.01em; margin-bottom: 1rem; }
     .service-item p { font-size: 0.9rem; color: var(--gray); line-height: 1.7; }
     .about { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
     .about h2 { font-weight: 400; font-size: clamp(2rem, 5vw, 3.5rem); letter-spacing: -0.02em; line-height: 1.2; }
@@ -91,50 +90,50 @@
         <a href="engineering.html" data-i18n="nav.engineering">Engineering</a>
         <a href="enablement.html" data-i18n="nav.enablement">Enablement</a>
         <a href="liechtenstein.html" data-i18n="nav.liechtenstein">Liechtenstein</a>
-        <a href="contact.html" data-i18n="nav.contact">Contact</a>
+        <a href="contact.html" class="active" data-i18n="nav.contact">Contact</a>
       </nav>
     </header>
 
     <section class="hero">
-      <p class="subtitle" data-i18n="hero.subtitle">Liechtenstein</p>
-      <h1 data-i18n="hero.title">AI that works</h1>
-      <p class="intro" data-i18n="hero.intro">Engineers who've built systems at Microsoft and Intel. Now helping organizations cut through the noise and implement what matters.</p>
-      <a href="contact.html" class="cta" data-i18n="hero.cta">Get in touch</a>
+      <p class="subtitle" data-i18n="hero.subtitle">AI Consultancy · Liechtenstein</p>
+      <h1 data-i18n="hero.title">Clarity through intelligence</h1>
+      <p class="intro" data-i18n="hero.intro">We help organizations navigate the complexities of artificial intelligence with precision and purpose.</p>
+      <a href="contact.html" class="active" class="cta" data-i18n="hero.cta">Start a conversation</a>
     </section>
 
-    <section class="services">
-      <h2 data-i18n="services.title">What we offer</h2>
+    <section class="services" id="services">
+      <h2 data-i18n="services.title">What we do</h2>
       <div class="service-grid">
-        <a href="consultancy.html" class="service-item">
+        <div class="service-item">
           <p class="service-number">01</p>
-          <h3 data-i18n="services.consultancy.title">AI Consultancy</h3>
-          <p data-i18n="services.consultancy.desc">Strategy, implementation, and custom models. From feasibility to deployment.</p>
-        </a>
-        <a href="engineering.html" class="service-item">
+          <h3 data-i18n="services.strategy.title">Strategy</h3>
+          <p data-i18n="services.strategy.desc">AI roadmaps and implementation strategies tailored to your business objectives.</p>
+        </div>
+        <div class="service-item">
           <p class="service-number">02</p>
-          <h3 data-i18n="services.engineering.title">Engineering</h3>
-          <p data-i18n="services.engineering.desc">Scalable systems and secure integrations. Infrastructure that handles both deterministic and probabilistic workloads.</p>
-        </a>
-        <a href="enablement.html" class="service-item">
+          <h3 data-i18n="services.integration.title">Integration</h3>
+          <p data-i18n="services.integration.desc">Technical implementation of AI systems into your workflows, including custom-trained and fine-tuned models built for your specific requirements.</p>
+        </div>
+        <div class="service-item">
           <p class="service-number">03</p>
-          <h3 data-i18n="services.enablement.title">Enablement</h3>
-          <p data-i18n="services.enablement.desc">We build the system, then train your team to run it. Technical upskilling that creates independence.</p>
-        </a>
-        <a href="liechtenstein.html" class="service-item">
+          <h3 data-i18n="services.training.title">Training</h3>
+          <p data-i18n="services.training.desc">Comprehensive programs to build internal AI capabilities and literacy.</p>
+        </div>
+        <div class="service-item">
           <p class="service-number">04</p>
-          <h3 data-i18n="services.liechtenstein.title">Liechtenstein</h3>
-          <p data-i18n="services.liechtenstein.desc">Data sovereignty, IP protection, and EEA market access. Why jurisdiction matters for AI.</p>
-        </a>
+          <h3 data-i18n="services.ethics.title">Ethics</h3>
+          <p data-i18n="services.ethics.desc">Governance frameworks ensuring responsible and transparent AI use.</p>
+        </div>
       </div>
     </section>
 
-    <section class="about">
+    <section class="about" id="about">
       <div>
         <h2 data-i18n="about.title">Precision meets possibility</h2>
       </div>
       <div class="about-text">
-        <p data-i18n="about.p1">We've spent years building large-scale AI systems. Now we help organizations figure out what's real and what's noise, then build what actually works.</p>
-        <p data-i18n="about.p2">No slides, no buzzwords — just working solutions.</p>
+        <p data-i18n="about.p1">Founded in the heart of Europe, Askus brings a culture of discretion, reliability, and long-term thinking to the application of artificial intelligence.</p>
+        <p data-i18n="about.p2">We work with organizations that want to use AI thoughtfully, with a clear focus on real outcomes and durable value.</p>
         <p class="location">Vaduz, Liechtenstein</p>
       </div>
     </section>
@@ -153,77 +152,77 @@
     const translations = {
       en: {
         'nav.consultancy': 'AI Consultancy', 'nav.engineering': 'Engineering', 'nav.enablement': 'Enablement', 'nav.liechtenstein': 'Liechtenstein', 'nav.contact': 'Contact',
-        'hero.subtitle': 'Liechtenstein', 'hero.title': 'AI that works',
-        'hero.intro': 'Engineers who\'ve built systems at Microsoft and Intel. Now helping organizations cut through the noise and implement what matters.',
-        'hero.cta': 'Get in touch',
-        'services.title': 'What we offer',
-        'services.consultancy.title': 'AI Consultancy', 'services.consultancy.desc': 'Strategy, implementation, and custom models. From feasibility to deployment.',
-        'services.engineering.title': 'Engineering', 'services.engineering.desc': 'Scalable systems and secure integrations. Infrastructure that handles both deterministic and probabilistic workloads.',
-        'services.enablement.title': 'Enablement', 'services.enablement.desc': 'We build the system, then train your team to run it. Technical upskilling that creates independence.',
-        'services.liechtenstein.title': 'Liechtenstein', 'services.liechtenstein.desc': 'Data sovereignty, IP protection, and EEA market access. Why jurisdiction matters for AI.',
+        'hero.subtitle': 'AI Consultancy · Liechtenstein', 'hero.title': 'Clarity through intelligence',
+        'hero.intro': 'We help organizations navigate the complexities of artificial intelligence with precision and purpose.',
+        'hero.cta': 'Start a conversation',
+        'services.title': 'What we do',
+        'services.strategy.title': 'Strategy', 'services.strategy.desc': 'AI roadmaps and implementation strategies tailored to your business objectives.',
+        'services.integration.title': 'Integration', 'services.integration.desc': 'Technical implementation of AI systems into your workflows, including custom-trained and fine-tuned models built for your specific requirements.',
+        'services.training.title': 'Training', 'services.training.desc': 'Comprehensive programs to build internal AI capabilities and literacy.',
+        'services.ethics.title': 'Ethics', 'services.ethics.desc': 'Governance frameworks ensuring responsible and transparent AI use.',
         'about.title': 'Precision meets possibility',
-        'about.p1': 'We\'ve spent years building large-scale AI systems. Now we help organizations figure out what\'s real and what\'s noise, then build what actually works.',
-        'about.p2': 'No slides, no buzzwords — just working solutions.',
+        'about.p1': 'Founded in the heart of Europe, Askus brings a culture of discretion, reliability, and long-term thinking to the application of artificial intelligence.',
+        'about.p2': 'We work with organizations that want to use AI thoughtfully, with a clear focus on real outcomes and durable value.',
         'footer.imprint': 'Imprint', 'footer.privacy': 'Privacy'
       },
       de: {
         'nav.consultancy': 'KI-Beratung', 'nav.engineering': 'Engineering', 'nav.enablement': 'Befähigung', 'nav.liechtenstein': 'Liechtenstein', 'nav.contact': 'Kontakt',
-        'hero.subtitle': 'Liechtenstein', 'hero.title': 'KI, die funktioniert',
-        'hero.intro': 'Ingenieure, die bei Microsoft und Intel Systeme gebaut haben. Jetzt helfen wir Organisationen, das Wesentliche umzusetzen.',
-        'hero.cta': 'Kontakt aufnehmen',
-        'services.title': 'Was wir bieten',
-        'services.consultancy.title': 'KI-Beratung', 'services.consultancy.desc': 'Strategie, Implementierung und massgeschneiderte Modelle. Von der Machbarkeit bis zum Einsatz.',
-        'services.engineering.title': 'Engineering', 'services.engineering.desc': 'Skalierbare Systeme und sichere Integrationen. Infrastruktur für deterministische und probabilistische Arbeitslasten.',
-        'services.enablement.title': 'Befähigung', 'services.enablement.desc': 'Wir bauen das System, dann schulen wir Ihr Team. Technisches Upskilling für Unabhängigkeit.',
-        'services.liechtenstein.title': 'Liechtenstein', 'services.liechtenstein.desc': 'Datensouveränität, IP-Schutz und EWR-Marktzugang. Warum der Standort für KI wichtig ist.',
+        'hero.subtitle': 'KI-Beratung · Liechtenstein', 'hero.title': 'Klarheit durch Intelligenz',
+        'hero.intro': 'Wir helfen Organisationen, die Komplexität künstlicher Intelligenz mit Präzision und Zielstrebigkeit zu meistern.',
+        'hero.cta': 'Gespräch beginnen',
+        'services.title': 'Was wir tun',
+        'services.strategy.title': 'Strategie', 'services.strategy.desc': 'KI-Roadmaps und Implementierungsstrategien, massgeschneidert auf Ihre Geschäftsziele.',
+        'services.integration.title': 'Integration', 'services.integration.desc': 'Technische Implementierung von KI-Systemen in Ihre Arbeitsabläufe, inklusive massgeschneiderter und feinabgestimmter Modelle.',
+        'services.training.title': 'Schulung', 'services.training.desc': 'Umfassende Programme zum Aufbau interner KI-Kompetenzen.',
+        'services.ethics.title': 'Ethik', 'services.ethics.desc': 'Governance-Rahmenwerke für verantwortungsvolle und transparente KI-Nutzung.',
         'about.title': 'Präzision trifft Möglichkeit',
-        'about.p1': 'Wir haben jahrelang grosse KI-Systeme gebaut. Jetzt helfen wir Organisationen herauszufinden, was funktioniert.',
-        'about.p2': 'Keine Folien, keine Schlagwörter — nur funktionierende Lösungen.',
+        'about.p1': 'Im Herzen Europas gegründet, steht Askus für Diskretion, Verlässlichkeit und langfristiges Denken im Einsatz künstlicher Intelligenz.',
+        'about.p2': 'Wir arbeiten mit Organisationen, die KI bewusst einsetzen möchten, mit klarem Fokus auf nachhaltigen Nutzen.',
         'footer.imprint': 'Impressum', 'footer.privacy': 'Datenschutz'
       },
       fr: {
         'nav.consultancy': 'Conseil IA', 'nav.engineering': 'Ingénierie', 'nav.enablement': 'Habilitation', 'nav.liechtenstein': 'Liechtenstein', 'nav.contact': 'Contact',
-        'hero.subtitle': 'Liechtenstein', 'hero.title': 'L\'IA qui fonctionne',
-        'hero.intro': 'Des ingénieurs qui ont construit des systèmes chez Microsoft et Intel. Maintenant, nous aidons les organisations à implémenter ce qui compte.',
-        'hero.cta': 'Nous contacter',
-        'services.title': 'Ce que nous offrons',
-        'services.consultancy.title': 'Conseil IA', 'services.consultancy.desc': 'Stratégie, implémentation et modèles personnalisés. De la faisabilité au déploiement.',
-        'services.engineering.title': 'Ingénierie', 'services.engineering.desc': 'Systèmes évolutifs et intégrations sécurisées. Infrastructure pour charges déterministes et probabilistes.',
-        'services.enablement.title': 'Habilitation', 'services.enablement.desc': 'Nous construisons le système, puis formons votre équipe. Montée en compétences pour l\'autonomie.',
-        'services.liechtenstein.title': 'Liechtenstein', 'services.liechtenstein.desc': 'Souveraineté des données, protection IP et accès au marché EEE. Pourquoi la juridiction compte.',
+        'hero.subtitle': 'Conseil en IA · Liechtenstein', 'hero.title': 'La clarté par l\'intelligence',
+        'hero.intro': 'Nous aidons les organisations à naviguer dans la complexité de l\'intelligence artificielle avec précision et détermination.',
+        'hero.cta': 'Entamer une conversation',
+        'services.title': 'Ce que nous faisons',
+        'services.strategy.title': 'Stratégie', 'services.strategy.desc': 'Feuilles de route IA et stratégies de mise en œuvre adaptées à vos objectifs.',
+        'services.integration.title': 'Intégration', 'services.integration.desc': 'Implémentation technique de systèmes IA dans vos flux de travail, y compris des modèles personnalisés.',
+        'services.training.title': 'Formation', 'services.training.desc': 'Programmes complets pour développer les compétences internes en IA.',
+        'services.ethics.title': 'Éthique', 'services.ethics.desc': 'Cadres de gouvernance assurant une utilisation responsable et transparente de l\'IA.',
         'about.title': 'La précision rencontre le possible',
-        'about.p1': 'Nous avons passé des années à construire des systèmes IA à grande échelle. Maintenant nous aidons les organisations à construire ce qui fonctionne.',
-        'about.p2': 'Pas de présentations, pas de buzzwords — juste des solutions qui marchent.',
+        'about.p1': 'Fondée au cœur de l\'Europe, Askus incarne une culture de discrétion, de fiabilité et de vision à long terme.',
+        'about.p2': 'Nous accompagnons des organisations qui souhaitent utiliser l\'IA de manière réfléchie.',
         'footer.imprint': 'Mentions légales', 'footer.privacy': 'Confidentialité'
       },
       it: {
         'nav.consultancy': 'Consulenza IA', 'nav.engineering': 'Ingegneria', 'nav.enablement': 'Abilitazione', 'nav.liechtenstein': 'Liechtenstein', 'nav.contact': 'Contatto',
-        'hero.subtitle': 'Liechtenstein', 'hero.title': 'IA che funziona',
-        'hero.intro': 'Ingegneri che hanno costruito sistemi in Microsoft e Intel. Ora aiutiamo le organizzazioni a implementare ciò che conta.',
-        'hero.cta': 'Contattaci',
-        'services.title': 'Cosa offriamo',
-        'services.consultancy.title': 'Consulenza IA', 'services.consultancy.desc': 'Strategia, implementazione e modelli personalizzati. Dalla fattibilità al deployment.',
-        'services.engineering.title': 'Ingegneria', 'services.engineering.desc': 'Sistemi scalabili e integrazioni sicure. Infrastruttura per carichi deterministici e probabilistici.',
-        'services.enablement.title': 'Abilitazione', 'services.enablement.desc': 'Costruiamo il sistema, poi formiamo il vostro team. Upskilling tecnico per l\'indipendenza.',
-        'services.liechtenstein.title': 'Liechtenstein', 'services.liechtenstein.desc': 'Sovranità dei dati, protezione IP e accesso al mercato SEE. Perché la giurisdizione conta.',
+        'hero.subtitle': 'Consulenza IA · Liechtenstein', 'hero.title': 'Chiarezza attraverso l\'intelligenza',
+        'hero.intro': 'Aiutiamo le organizzazioni a navigare nella complessità dell\'intelligenza artificiale con precisione e determinazione.',
+        'hero.cta': 'Inizia una conversazione',
+        'services.title': 'Cosa facciamo',
+        'services.strategy.title': 'Strategia', 'services.strategy.desc': 'Roadmap IA e strategie di implementazione su misura per i vostri obiettivi.',
+        'services.integration.title': 'Integrazione', 'services.integration.desc': 'Implementazione tecnica di sistemi IA nei vostri flussi di lavoro, inclusi modelli personalizzati.',
+        'services.training.title': 'Formazione', 'services.training.desc': 'Programmi completi per sviluppare competenze interne in materia di IA.',
+        'services.ethics.title': 'Etica', 'services.ethics.desc': 'Quadri di governance per un uso responsabile e trasparente dell\'IA.',
         'about.title': 'La precisione incontra la possibilità',
-        'about.p1': 'Abbiamo passato anni a costruire sistemi IA su larga scala. Ora aiutiamo le organizzazioni a costruire ciò che funziona.',
-        'about.p2': 'Niente slide, niente buzzword — solo soluzioni che funzionano.',
+        'about.p1': 'Fondata nel cuore dell\'Europa, Askus riflette una cultura di discrezione, affidabilità e visione di lungo periodo.',
+        'about.p2': 'Lavoriamo con organizzazioni che vogliono utilizzare l\'IA in modo consapevole.',
         'footer.imprint': 'Impronta', 'footer.privacy': 'Privacy'
       },
       rm: {
         'nav.consultancy': 'Cussegliaziun IA', 'nav.engineering': 'Ingenieria', 'nav.enablement': 'Abilitaziun', 'nav.liechtenstein': 'Liechtenstein', 'nav.contact': 'Contact',
-        'hero.subtitle': 'Liechtenstein', 'hero.title': 'IA che funcziuna',
-        'hero.intro': 'Ingeniurs che han construì systems tar Microsoft e Intel. Ussa gidain nus organisaziuns ad implementar quai che cunta.',
-        'hero.cta': 'Contactar',
-        'services.title': 'Tge che nus offrin',
-        'services.consultancy.title': 'Cussegliaziun IA', 'services.consultancy.desc': 'Strategia, implementaziun e models persunalisads. Da la factibilitad fin al deployment.',
-        'services.engineering.title': 'Ingenieria', 'services.engineering.desc': 'Systems scalabels e integraziuns segiradas. Infrastructura per chargia deterministica e probabilistica.',
-        'services.enablement.title': 'Abilitaziun', 'services.enablement.desc': 'Nus construin il sistem, lura furmain voss team. Upskilling tecnic per independenza.',
-        'services.liechtenstein.title': 'Liechtenstein', 'services.liechtenstein.desc': 'Suveranitad da datas, protecziun IP e access al martgà EEE. Pertge la giurisdicziun cunta.',
+        'hero.subtitle': 'Cussegliaziun IA · Liechtenstein', 'hero.title': 'Clarezia tras intelligenza',
+        'hero.intro': 'Nus gidain organisaziuns da navigar tras la cumplexitad da l\'intelligenza artifiziala cun precisiun e determinaziun.',
+        'hero.cta': 'Cumenzar ina conversaziun',
+        'services.title': 'Tge che nus faschain',
+        'services.strategy.title': 'Strategia', 'services.strategy.desc': 'Roadmaps IA e strategias d\'implementaziun adattadas a voss objetivs.',
+        'services.integration.title': 'Integraziun', 'services.integration.desc': 'Implementaziun tecnica da systems IA en voss workflows, inclus models persunalisads.',
+        'services.training.title': 'Furmaziun', 'services.training.desc': 'Programs cumplets per construir cumpetenzas internas en IA.',
+        'services.ethics.title': 'Etica', 'services.ethics.desc': 'Structuras da governance per in diever responsabel e transparent da l\'IA.',
         'about.title': 'Precisiun inscuntra pussaivladad',
-        'about.p1': 'Nus avain construì systems IA a gronda scala durant onns. Ussa gidain nus organisaziuns a construir quai che funcziuna.',
-        'about.p2': 'Naginas presentaziuns, nagins buzzwords — mo soluziuns che funcziunan.',
+        'about.p1': 'Fundada en il cor da l\'Europa, Askus represchenta ina cultura da discreziun, fidabladad e pensar a lunga vista.',
+        'about.p2': 'Nus lavurain cun organisaziuns che vulan duvrar l\'IA en moda reflechida.',
         'footer.imprint': 'Impressum', 'footer.privacy': 'Protecziun da datas'
       }
     };
@@ -231,15 +230,24 @@
     function setLanguage(lang) {
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
-        if (translations[lang] && translations[lang][key]) el.textContent = translations[lang][key];
+        if (translations[lang] && translations[lang][key]) {
+          el.textContent = translations[lang][key];
+        }
       });
-      document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.lang === lang));
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+      });
       localStorage.setItem('askus-lang', lang);
     }
 
-    document.querySelectorAll('.lang-btn').forEach(btn => btn.addEventListener('click', () => setLanguage(btn.dataset.lang)));
-    setLanguage(localStorage.getItem('askus-lang') || 'en');
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+    });
 
+    const savedLang = localStorage.getItem('askus-lang') || 'en';
+    setLanguage(savedLang);
+
+    // Header inversion
     const header = document.querySelector('header');
     const langSwitcher = document.querySelector('.lang-switcher');
     const servicesSection = document.querySelector('.services');
@@ -255,6 +263,7 @@
     window.addEventListener('scroll', updateHeader);
     updateHeader();
 
+    // Dot field
     const canvas = document.getElementById('dotfield');
     const ctx = canvas.getContext('2d');
     let width, height, dots = [];
