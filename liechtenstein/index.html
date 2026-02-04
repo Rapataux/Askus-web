@@ -1,1 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Site Advantages · Askus</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%230a0a0a'/><text x='50' y='68' font-family='Helvetica,Arial,sans-serif' font-size='48' font-weight='bold' fill='white' text-anchor='middle'>A</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --black: #0a0a0a; --white: #fafafa; --gray: #888; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background: var(--white); color: var(--black); line-height: 1.6; overflow-x: hidden; }
+    canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+    .content { position: relative; z-index: 1; }
+    header { position: fixed; top: 0; left: 0; right: 0; padding: 2rem 3rem; display: flex; justify-content: space-between; align-items: center; z-index: 100; transition: color 0.3s ease; }
+    header.inverted .logo, header.inverted nav a { color: var(--white); }
+    .logo { font-family: 'Space Mono', monospace; font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--black); text-decoration: none; transition: color 0.3s ease; }
+    .logo:hover { opacity: 0.5; }
+    .lang-switcher { position: fixed; top: 2rem; right: 50%; transform: translateX(50%); display: flex; gap: 0.5rem; z-index: 101; }
+    .lang-switcher.inverted .lang-btn { color: var(--white); }
+    .lang-btn { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--black); background: none; border: none; padding: 0.3rem 0.5rem; cursor: pointer; opacity: 0.5; transition: opacity 0.3s ease, color 0.3s ease; }
+    .lang-btn:hover, .lang-btn.active { opacity: 1; }
+    .lang-btn.active { text-decoration: underline; text-underline-offset: 3px; }
+    nav { display: flex; gap: 2rem; }
+    nav a { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--black); text-decoration: none; transition: opacity 0.3s ease, color 0.3s ease; }
+    nav a:hover { opacity: 0.5; }
+    nav a.active { text-decoration: underline; text-underline-offset: 4px; }
+    section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 8rem 3rem; }
+    .hero { align-items: flex-start; padding-top: 12rem; }
+    .subtitle { font-family: 'Space Mono', monospace; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray); margin-bottom: 1rem; }
+    h1 { font-weight: 400; font-size: clamp(3rem, 8vw, 7rem); line-height: 1.05; letter-spacing: -0.03em; max-width: 900px; margin-bottom: 3rem; }
+    .intro { max-width: 480px; font-size: 1.1rem; color: var(--gray); margin-bottom: 4rem; }
+    .cta { display: inline-flex; align-items: center; gap: 1rem; font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--black); text-decoration: none; padding: 1rem 0; border-bottom: 1px solid var(--black); transition: gap 0.3s ease; }
+    .cta:hover { gap: 1.5rem; }
+    .cta::after { content: '→'; }
+    .services { background: var(--black); color: var(--white); }
+    .services h2 { font-weight: 400; font-size: clamp(2rem, 5vw, 4rem); letter-spacing: -0.02em; margin-bottom: 4rem; }
+    .service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1px; background: rgba(255,255,255,0.1); max-width: 1200px; }
+    .service-item { background: var(--black); padding: 3rem; }
+    .service-number { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.2em; color: var(--gray); margin-bottom: 1.5rem; }
+    .service-item h3 { font-weight: 400; font-size: 1.5rem; letter-spacing: -0.01em; margin-bottom: 1rem; }
+    .service-item p { font-size: 0.9rem; color: var(--gray); line-height: 1.7; }
+    .about { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+    .about h2 { font-weight: 400; font-size: clamp(2rem, 5vw, 3.5rem); letter-spacing: -0.02em; line-height: 1.2; }
+    .about-text { color: var(--gray); font-size: 1rem; max-width: 500px; }
+    .about-text p { margin-bottom: 1.5rem; }
+    .location { font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; margin-top: 2rem; color: var(--black); }
+    footer { padding: 3rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(0,0,0,0.1); }
+    .footer-text { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; color: var(--gray); }
+    .footer-links { display: flex; gap: 2rem; }
+    .footer-link { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; color: var(--gray); text-decoration: none; text-transform: uppercase; }
+    .footer-link:hover { color: var(--black); }
+    .contact-link { font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 0.1em; color: var(--black); text-decoration: none; }
+    .contact-link:hover { text-decoration: underline; }
+    @media (max-width: 768px) {
+      header { padding: calc(0.9rem + env(safe-area-inset-top)) 1rem 0.75rem 1rem; background: rgba(250,250,250,0.9); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+      header.inverted { background: rgba(10,10,10,0.8); }
+      nav { gap: 1rem; }
+      nav a { font-size: 0.6rem; }
+      .lang-switcher { top: calc(3.2rem + env(safe-area-inset-top)); right: 1rem; transform: none; }
+      section { padding: 7.5rem 1.25rem 5rem 1.25rem; min-height: auto; }
+      .hero { padding-top: 9rem; }
+      h1 { font-size: clamp(2.2rem, 9vw, 3.2rem); margin-bottom: 1.5rem; }
+      .intro { font-size: 1rem; margin-bottom: 2.25rem; }
+      .about { grid-template-columns: 1fr; gap: 3rem; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+    @media (pointer: coarse) { canvas#dotfield { display: none; } }
+  </style>
+</head>
+<body>
+  <canvas id="dotfield"></canvas>
+
+  <div class="content">
+    <div class="lang-switcher">
+      <button class="lang-btn active" data-lang="en">EN</button>
+      <button class="lang-btn" data-lang="de">DE</button>
+      <button class="lang-btn" data-lang="fr">FR</button>
+      <button class="lang-btn" data-lang="it">IT</button>
+      <button class="lang-btn" data-lang="rm">RM</button>
+    </div>
+
+    <header>
+      <a href="index.html" class="logo">Askus</a>
+      <nav>
+        <a href="consultancy.html" data-i18n="nav.consultancy">AI Consultancy</a>
+        <a href="engineering.html" data-i18n="nav.engineering">Engineering</a>
+        <a href="enablement.html" data-i18n="nav.enablement">AI Enablement</a>
+        <a href="liechtenstein.html" class="active" data-i18n="nav.liechtenstein">Site Advantages</a>
+        <a href="contact.html" data-i18n="nav.contact">Contact</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <p class="subtitle" data-i18n="hero.subtitle">Site Advantages · Liechtenstein</p>
+      <h1 data-i18n="hero.title">Swiss Precision. Liechtenstein Stability.</h1>
+      <p class="intro" data-i18n="hero.intro">Legal, operational, and financial safeguards unique to Liechtenstein. Why jurisdiction matters for AI and software.</p>
+      <a href="contact.html" class="cta" data-i18n="hero.cta">Get in touch</a>
+    </section>
+
+    <section class="services" id="services">
+      <h2 data-i18n="services.title">Client advantages</h2>
+      <div class="service-grid">
+        <div class="service-item">
+          <p class="service-number">01</p>
+          <h3 data-i18n="services.compliance.title">EU/EEA Compliance</h3>
+          <p data-i18n="services.compliance.desc">EU AI Act ready. Export-ready software with built-in risk classification. GDPR with direct access to a responsive Data Protection Authority.</p>
+        </div>
+        <div class="service-item">
+          <p class="service-number">02</p>
+          <h3 data-i18n="services.ip.title">IP &amp; Digital Assets</h3>
+          <p data-i18n="services.ip.desc">Token Container Model under the TVTG. IP rights in legally recognized digital tokens. Fractional ownership with full legal certainty.</p>
+        </div>
+        <div class="service-item">
+          <p class="service-number">03</p>
+          <h3 data-i18n="services.stability.title">Stability &amp; Discretion</h3>
+          <p data-i18n="services.stability.desc">CHF-denominated contracts. AAA sovereign credit rating, debt-free jurisdiction. Professional secrecy applied to source code and AI models.</p>
+        </div>
+        <div class="service-item">
+          <p class="service-number">04</p>
+          <h3 data-i18n="services.access.title">Sandbox &amp; Market Access</h3>
+          <p data-i18n="services.access.desc">FMA regulatory sandbox for AI and fintech innovation. Dual EU/EEA and Swiss market access from one jurisdiction.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="about" id="about">
+      <div>
+        <h2 data-i18n="about.title">Why jurisdiction matters</h2>
+      </div>
+      <div class="about-text">
+        <p data-i18n="about.p1">Where your consultancy is domiciled defines your regulatory exposure, IP protection, and market access. Liechtenstein offers a legal framework purpose-built for innovation.</p>
+        <p data-i18n="about.p2">EEA membership with Swiss economic integration. One of the most stable jurisdictions in the world.</p>
+        <p class="location">Vaduz, Liechtenstein</p>
+      </div>
+    </section>
+
+    <footer>
+      <p class="footer-text">© 2025 Askus GmbH</p>
+      <div class="footer-links">
+        <a href="imprint.html" class="footer-link" data-i18n="footer.imprint">Imprint</a>
+        <a href="privacy.html" class="footer-link" data-i18n="footer.privacy">Privacy</a>
+      </div>
+      <a href="mailto:contact@askus.li" class="contact-link">contact@askus.li</a>
+    </footer>
+  </div>
+
+  <script>
+    const translations = {
+      en: {
+        'nav.consultancy': 'AI Consultancy', 'nav.engineering': 'Engineering', 'nav.enablement': 'AI Enablement', 'nav.liechtenstein': 'Site Advantages', 'nav.contact': 'Contact',
+        'hero.subtitle': 'Site Advantages · Liechtenstein',
+        'hero.title': 'Swiss Precision. Liechtenstein Stability.',
+        'hero.intro': 'Legal, operational, and financial safeguards unique to Liechtenstein. Why jurisdiction matters for AI and software.',
+        'hero.cta': 'Get in touch',
+        'services.title': 'Client advantages',
+        'services.compliance.title': 'EU/EEA Compliance',
+        'services.compliance.desc': 'EU AI Act ready. Export-ready software with built-in risk classification. GDPR with direct access to a responsive Data Protection Authority.',
+        'services.ip.title': 'IP & Digital Assets',
+        'services.ip.desc': 'Token Container Model under the TVTG. IP rights in legally recognized digital tokens. Fractional ownership with full legal certainty.',
+        'services.stability.title': 'Stability & Discretion',
+        'services.stability.desc': 'CHF-denominated contracts. AAA sovereign credit rating, debt-free jurisdiction. Professional secrecy applied to source code and AI models.',
+        'services.access.title': 'Sandbox & Market Access',
+        'services.access.desc': 'FMA regulatory sandbox for AI and fintech innovation. Dual EU/EEA and Swiss market access from one jurisdiction.',
+        'about.title': 'Why jurisdiction matters',
+        'about.p1': 'Where your consultancy is domiciled defines your regulatory exposure, IP protection, and market access. Liechtenstein offers a legal framework purpose-built for innovation.',
+        'about.p2': 'EEA membership with Swiss economic integration. One of the most stable jurisdictions in the world.',
+        'footer.imprint': 'Imprint', 'footer.privacy': 'Privacy'
+      },
+      de: {
+        'nav.consultancy': 'KI-Beratung', 'nav.engineering': 'Engineering', 'nav.enablement': 'KI-Befähigung', 'nav.liechtenstein': 'Standortvorteile', 'nav.contact': 'Kontakt',
+        'hero.subtitle': 'Standortvorteile · Liechtenstein',
+        'hero.title': 'Schweizer Präzision. Liechtensteiner Stabilität.',
+        'hero.intro': 'Rechtliche, operative und finanzielle Absicherungen, die es nur in Liechtenstein gibt. Warum der Standort für KI und Software entscheidend ist.',
+        'hero.cta': 'Kontakt aufnehmen',
+        'services.title': 'Vorteile für Kunden',
+        'services.compliance.title': 'EU/EWR-Konformität',
+        'services.compliance.desc': 'EU AI Act konform. Exportfähige Software mit integrierter Risikoklassifizierung. DSGVO mit direktem Zugang zu einer reaktionsfähigen Datenschutzbehörde.',
+        'services.ip.title': 'IP & digitale Vermögenswerte',
+        'services.ip.desc': 'Token-Container-Modell nach dem TVTG. Rechte an geistigem Eigentum in rechtlich anerkannten digitalen Token. Bruchteilseigentum mit voller Rechtssicherheit.',
+        'services.stability.title': 'Stabilität & Diskretion',
+        'services.stability.desc': 'Verträge in Schweizer Franken (CHF). AAA-Kreditrating, schuldenfreier Staat. Berufsgeheimnis auf Quellcode und KI-Modelle angewandt.',
+        'services.access.title': 'Sandbox & Marktzugang',
+        'services.access.desc': 'FMA-Regulierungssandbox für KI- und Fintech-Innovation. Gleichzeitiger EU/EWR- und Schweizer Marktzugang aus einer Jurisdiktion.',
+        'about.title': 'Warum der Standort zählt',
+        'about.p1': 'Wo Ihr Berater domiziliert ist, bestimmt Ihre regulatorische Exposition, Ihren IP-Schutz und Marktzugang. Liechtenstein bietet einen für Innovation konzipierten Rechtsrahmen.',
+        'about.p2': 'EWR-Mitgliedschaft mit Schweizer Wirtschaftsintegration. Einer der stabilsten Standorte der Welt.',
+        'footer.imprint': 'Impressum', 'footer.privacy': 'Datenschutz'
+      },
+      fr: {
+        'nav.consultancy': 'Conseil IA', 'nav.engineering': 'Ingénierie', 'nav.enablement': 'Formation IA', 'nav.liechtenstein': 'Atouts du site', 'nav.contact': 'Contact',
+        'hero.subtitle': 'Atouts du site · Liechtenstein',
+        'hero.title': 'Précision Suisse. Stabilité Liechtensteinoise.',
+        'hero.intro': 'Garanties juridiques, opérationnelles et financières propres au Liechtenstein. Pourquoi la juridiction compte pour l\'IA et le logiciel.',
+        'hero.cta': 'Nous contacter',
+        'services.title': 'Avantages clients',
+        'services.compliance.title': 'Conformité EU/EEE',
+        'services.compliance.desc': 'Conforme au AI Act européen. Logiciels prêts à l\'exportation avec classification des risques intégrée. RGPD avec accès direct à une autorité de protection des données réactive.',
+        'services.ip.title': 'PI & actifs numériques',
+        'services.ip.desc': 'Modèle Token Container selon le TVTG. Droits de PI encapsulés dans des tokens numériques juridiquement reconnus. Propriété fractionnée avec pleine sécurité juridique.',
+        'services.stability.title': 'Stabilité & discrétion',
+        'services.stability.desc': 'Contrats en francs suisses (CHF). Notation souveraine AAA, juridiction sans dette. Secret professionnel appliqué au code source et aux modèles IA.',
+        'services.access.title': 'Sandbox & accès au marché',
+        'services.access.desc': 'Sandbox réglementaire FMA pour l\'innovation en IA et fintech. Double accès EU/EEE et suisse depuis une seule juridiction.',
+        'about.title': 'Pourquoi la juridiction compte',
+        'about.p1': 'Le domicile de votre prestataire définit votre exposition réglementaire, la protection de votre PI et votre accès au marché. Le Liechtenstein offre un cadre juridique conçu pour l\'innovation.',
+        'about.p2': 'Membre de l\'EEE avec intégration économique suisse. L\'une des juridictions les plus stables au monde.',
+        'footer.imprint': 'Mentions légales', 'footer.privacy': 'Confidentialité'
+      },
+      it: {
+        'nav.consultancy': 'Consulenza IA', 'nav.engineering': 'Ingegneria', 'nav.enablement': 'Formazione IA', 'nav.liechtenstein': 'Vantaggi del sito', 'nav.contact': 'Contatto',
+        'hero.subtitle': 'Vantaggi del sito · Liechtenstein',
+        'hero.title': 'Precisione Svizzera. Stabilità del Liechtenstein.',
+        'hero.intro': 'Garanzie legali, operative e finanziarie uniche del Liechtenstein. Perché la giurisdizione conta per IA e software.',
+        'hero.cta': 'Contattaci',
+        'services.title': 'Vantaggi per i clienti',
+        'services.compliance.title': 'Conformità EU/SEE',
+        'services.compliance.desc': 'Pronto per il AI Act europeo. Software pronto per l\'esportazione con classificazione dei rischi integrata. GDPR con accesso diretto a un\'autorità di protezione dati reattiva.',
+        'services.ip.title': 'PI & asset digitali',
+        'services.ip.desc': 'Modello Token Container secondo il TVTG. Diritti di PI in token digitali giuridicamente riconosciuti. Proprietà frazionata con piena certezza legale.',
+        'services.stability.title': 'Stabilità & discrezione',
+        'services.stability.desc': 'Contratti in franchi svizzeri (CHF). Rating sovrano AAA, giurisdizione senza debito. Segreto professionale applicato a codice sorgente e modelli IA.',
+        'services.access.title': 'Sandbox & accesso al mercato',
+        'services.access.desc': 'Sandbox regolamentare FMA per innovazione IA e fintech. Doppio accesso EU/SEE e svizzero da un\'unica giurisdizione.',
+        'about.title': 'Perché la giurisdizione conta',
+        'about.p1': 'Dove è domiciliato il vostro consulente definisce la vostra esposizione normativa, la protezione della PI e l\'accesso al mercato. Il Liechtenstein offre un quadro giuridico pensato per l\'innovazione.',
+        'about.p2': 'Membro dello SEE con integrazione economica svizzera. Una delle giurisdizioni più stabili al mondo.',
+        'footer.imprint': 'Impronta', 'footer.privacy': 'Privacy'
+      },
+      rm: {
+        'nav.consultancy': 'Cussegliaziun IA', 'nav.engineering': 'Ingenieria', 'nav.enablement': 'Furmaziun IA', 'nav.liechtenstein': 'Avantatgs dal lieu', 'nav.contact': 'Contact',
+        'hero.subtitle': 'Avantatgs dal lieu · Liechtenstein',
+        'hero.title': 'Precisiun Svizra. Stabilitad dal Liechtenstein.',
+        'hero.intro': 'Garanziuns giuridicas, operativas e finanzialas unicam dal Liechtenstein. Pertge che la jurisdicziun importa per IA e software.',
+        'hero.cta': 'Prender contact',
+        'services.title': 'Avantatgs per clients',
+        'services.compliance.title': 'Conformitad EU/SEE',
+        'services.compliance.desc': 'Pront per il AI Act europeic. Software pront per l\'export cun classificaziun da risks integrada. GDPR cun access direct a in\'autoritad da protecziun da datas reactiva.',
+        'services.ip.title': 'PI & bains digitals',
+        'services.ip.desc': 'Model Token Container tenor il TVTG. Dretgs da PI en tokens digitals giuridicamain renconuschids. Proprietad fracziuna cun cumplaina segirtad giuridica.',
+        'services.stability.title': 'Stabilitad & discreziun',
+        'services.stability.desc': 'Contracts en francs svizzers (CHF). Rating suveran AAA, jurisdicziun senza debits. Secret professiunal applitgà a code e models IA.',
+        'services.access.title': 'Sandbox & access al martgà',
+        'services.access.desc': 'Sandbox regulatorica FMA per innovaziun en IA e fintech. Access dubel EU/SEE e svizzer ord ina singula jurisdicziun.',
+        'about.title': 'Pertge che la jurisdicziun importa',
+        'about.p1': 'Nua che voss cussegliad è domicilià definescha vossa exposiziun regulatorica, la protecziun da vossa PI e l\'access al martgà. Il Liechtenstein offra in rom giuridic concepì per l\'innovaziun.',
+        'about.p2': 'Commembranza dal SEE cun integraziun economica svizra. Ina da las jurisdicziuns las pli stabilas dal mund.',
+        'footer.imprint': 'Impressum', 'footer.privacy': 'Protecziun da datas'
+      }
+    };
+
+    function setLanguage(lang) {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[lang] && translations[lang][key]) {
+          el.textContent = translations[lang][key];
+        }
+      });
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+      });
+      localStorage.setItem('askus-lang', lang);
+    }
+
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+    });
+
+    const savedLang = localStorage.getItem('askus-lang') || 'en';
+    setLanguage(savedLang);
+
+    // Header inversion
+    const header = document.querySelector('header');
+    const langSwitcher = document.querySelector('.lang-switcher');
+    const servicesSection = document.querySelector('.services');
+
+    function updateHeader() {
+      if (!servicesSection) return;
+      const rect = servicesSection.getBoundingClientRect();
+      const invert = rect.top < 80 && rect.bottom > 0;
+      header.classList.toggle('inverted', invert);
+      langSwitcher.classList.toggle('inverted', invert);
+    }
+
+    window.addEventListener('scroll', updateHeader);
+    updateHeader();
+
+    // Dot field
+    const canvas = document.getElementById('dotfield');
+    const ctx = canvas.getContext('2d');
+    let width, height, dots = [];
+    let mouse = { x: -1000, y: -1000 };
+    const DOT_SPACING = 24, DOT_RADIUS = 1.2, INFLUENCE_RADIUS = 130, MAX_DISPLACEMENT = 28;
+
+    function resize() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; initDots(); }
+    function initDots() { dots = []; const cols = Math.ceil(width / DOT_SPACING) + 1; const rows = Math.ceil(height / DOT_SPACING) + 1; for (let i = 0; i < cols; i++) { for (let j = 0; j < rows; j++) { dots.push({ baseX: i * DOT_SPACING, baseY: j * DOT_SPACING, x: i * DOT_SPACING, y: j * DOT_SPACING }); } } }
+    function draw() { ctx.clearRect(0, 0, width, height); for (const dot of dots) { const dx = mouse.x - dot.baseX, dy = mouse.y - dot.baseY; const dist = Math.sqrt(dx * dx + dy * dy); let targetX = dot.baseX, targetY = dot.baseY; if (dist < INFLUENCE_RADIUS) { const force = (1 - dist / INFLUENCE_RADIUS) * MAX_DISPLACEMENT; const angle = Math.atan2(dy, dx); targetX -= Math.cos(angle) * force; targetY -= Math.sin(angle) * force; } dot.x += (targetX - dot.x) * 0.12; dot.y += (targetY - dot.y) * 0.12; ctx.beginPath(); ctx.arc(dot.x, dot.y, DOT_RADIUS, 0, Math.PI * 2); ctx.fillStyle = 'rgba(0,0,0,0.1)'; ctx.fill(); } requestAnimationFrame(draw); }
+    document.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
+    document.addEventListener('mouseleave', () => { mouse.x = -1000; mouse.y = -1000; });
+    window.addEventListener('resize', resize);
+    resize(); draw();
+  </script>
+</body>
+</html>
 
