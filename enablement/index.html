@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AI Enablement · Askus</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%230a0a0a'/><text x='50' y='68' font-family='Helvetica,Arial,sans-serif' font-size='48' font-weight='bold' fill='white' text-anchor='middle'>A</text></svg>">
+  <meta name="description" content="AI Enablement services by Askus GmbH. Empowering teams with AI capabilities, based in Liechtenstein.">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -20,8 +21,8 @@
     nav.inverted a { color: var(--white); }
     .logo { font-family: 'Space Mono', monospace; font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--black); text-decoration: none; transition: color 0.3s ease; }
     .logo:hover { opacity: 0.5; }
-    .lang-switcher { position: fixed; top: 2rem; right: 50%; transform: translateX(50%); display: flex; gap: 0.5rem; z-index: 101; }
-    .lang-switcher.inverted .lang-btn { color: var(--white); }
+    .lang-switcher { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: flex; gap: 0.5rem; transition: opacity 0.3s ease; }
+    header.inverted .lang-btn { color: var(--white); }
     .lang-btn { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--black); background: none; border: none; padding: 0.3rem 0.5rem; cursor: pointer; opacity: 0.5; transition: opacity 0.3s ease, color 0.3s ease; }
     .lang-btn:hover, .lang-btn.active { opacity: 1; }
     .lang-btn.active { text-decoration: underline; text-underline-offset: 3px; }
@@ -68,11 +69,11 @@
       header.inverted { background: rgba(10,10,10,0.8); }
       header.menu-open { background: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; }
       header.menu-open .logo { color: var(--black); }
+      header.menu-open .lang-switcher { opacity: 0; pointer-events: none; }
       .menu-toggle { display: flex; }
       nav { top: 0; left: 0; right: 0; bottom: 0; padding: 0; flex-direction: column; justify-content: center; align-items: center; gap: 2rem; background: var(--white); z-index: 200; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
       nav.open { opacity: 1; pointer-events: auto; }
       nav.open a { font-size: 1.1rem; letter-spacing: 0.15em; color: var(--black); }
-      .lang-switcher { top: calc(3.2rem + env(safe-area-inset-top)); left: 50%; right: auto; transform: translateX(-50%); z-index: 201; }
       section { padding: 7.5rem 1.25rem 5rem 1.25rem; min-height: auto; }
       .hero { padding-top: 9rem; }
       h1 { font-size: clamp(2.2rem, 9vw, 3.2rem); margin-bottom: 1.5rem; }
@@ -87,17 +88,16 @@
   <canvas id="dotfield"></canvas>
 
   <div class="content">
-    <div class="lang-switcher">
-      <button class="lang-btn active" data-lang="en">EN</button>
-            <button class="lang-btn" data-lang="es">ES</button>
-<button class="lang-btn" data-lang="de">DE</button>
-      <button class="lang-btn" data-lang="fr">FR</button>
-      <button class="lang-btn" data-lang="it">IT</button>
-      <button class="lang-btn" data-lang="rm">RM</button>
-    </div>
-
     <header>
       <a href="/" class="logo">Askus</a>
+      <div class="lang-switcher">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="es">ES</button>
+        <button class="lang-btn" data-lang="de">DE</button>
+        <button class="lang-btn" data-lang="fr">FR</button>
+        <button class="lang-btn" data-lang="it">IT</button>
+        <button class="lang-btn" data-lang="rm">RM</button>
+      </div>
       <button class="menu-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
     </header>
     <nav>
@@ -291,7 +291,6 @@
 
     // Header inversion
     const header = document.querySelector('header');
-    const langSwitcher = document.querySelector('.lang-switcher');
     const servicesSection = document.querySelector('.services');
     const navEl = document.querySelector('nav');
 
@@ -300,7 +299,6 @@
       const rect = servicesSection.getBoundingClientRect();
       const invert = rect.top < 80 && rect.bottom > 0;
       header.classList.toggle('inverted', invert);
-      langSwitcher.classList.toggle('inverted', invert);
       if (!navEl.classList.contains('open')) navEl.classList.toggle('inverted', invert);
     }
 
@@ -313,18 +311,13 @@
       menuToggle.classList.toggle('open');
       navEl.classList.toggle('open');
       header.classList.toggle('menu-open');
-      const isOpen = navEl.classList.contains('open');
-      document.body.style.overflow = isOpen ? 'hidden' : '';
-      langSwitcher.style.opacity = isOpen ? '0' : '';
-      langSwitcher.style.pointerEvents = isOpen ? 'none' : '';
+      document.body.style.overflow = navEl.classList.contains('open') ? 'hidden' : '';
     });
     navEl.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
       menuToggle.classList.remove('open');
       navEl.classList.remove('open');
       header.classList.remove('menu-open');
       document.body.style.overflow = '';
-      langSwitcher.style.opacity = '';
-      langSwitcher.style.pointerEvents = '';
     }));
 
     // Dot field
