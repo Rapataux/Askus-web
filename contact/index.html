@@ -16,7 +16,8 @@
     canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
     .content { position: relative; z-index: 1; }
     header { position: fixed; top: 0; left: 0; right: 0; padding: 2rem 3rem; display: flex; justify-content: space-between; align-items: center; z-index: 100; transition: color 0.3s ease; }
-    header.inverted .logo, header.inverted nav a { color: var(--white); }
+    header.inverted .logo { color: var(--white); }
+    nav.inverted a { color: var(--white); }
     .logo { font-family: 'Space Mono', monospace; font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--black); text-decoration: none; transition: color 0.3s ease; }
     .logo:hover { opacity: 0.5; }
     .lang-switcher { position: fixed; top: 2rem; right: 50%; transform: translateX(50%); display: flex; gap: 0.5rem; z-index: 101; }
@@ -24,7 +25,7 @@
     .lang-btn { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--black); background: none; border: none; padding: 0.3rem 0.5rem; cursor: pointer; opacity: 0.5; transition: opacity 0.3s ease, color 0.3s ease; }
     .lang-btn:hover, .lang-btn.active { opacity: 1; }
     .lang-btn.active { text-decoration: underline; text-underline-offset: 3px; }
-    nav { display: flex; gap: 2rem; }
+    nav { position: fixed; top: 0; right: 0; padding: 2rem 3rem; display: flex; gap: 2rem; z-index: 100; }
     nav a { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--black); text-decoration: none; transition: opacity 0.3s ease, color 0.3s ease; }
     nav a:hover { opacity: 0.5; }
     nav a.active { text-decoration: underline; text-underline-offset: 4px; }
@@ -66,9 +67,9 @@
       header { padding: calc(0.9rem + env(safe-area-inset-top)) 1rem 0.75rem 1rem; background: rgba(250,250,250,0.9); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
       header.inverted { background: rgba(10,10,10,0.8); }
       .menu-toggle { display: flex; }
-      nav { position: fixed; top: 0; left: 0; right: 0; bottom: 0; flex-direction: column; justify-content: center; align-items: center; gap: 2rem; background: var(--white); z-index: 200; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+      nav { top: 0; left: 0; right: 0; bottom: 0; padding: 0; flex-direction: column; justify-content: center; align-items: center; gap: 2rem; background: var(--white); z-index: 200; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
       nav.open { opacity: 1; pointer-events: auto; }
-      nav a { font-size: 1.1rem; letter-spacing: 0.15em; color: var(--black); }
+      nav.open a { font-size: 1.1rem; letter-spacing: 0.15em; color: var(--black); }
       .lang-switcher { top: calc(3.2rem + env(safe-area-inset-top)); right: 1rem; transform: none; z-index: 201; }
       section { padding: 7.5rem 1.25rem 5rem 1.25rem; min-height: auto; }
       .hero { padding-top: 9rem; }
@@ -96,14 +97,14 @@
     <header>
       <a href="/" class="logo">Askus</a>
       <button class="menu-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
-      <nav>
-        <a href="/consultancy/" data-i18n="nav.consultancy">AI Consultancy</a>
-        <a href="/engineering/" data-i18n="nav.engineering">Engineering</a>
-        <a href="/enablement/" data-i18n="nav.enablement">AI Enablement</a>
-        <a href="/liechtenstein/" data-i18n="nav.liechtenstein">Site Advantages</a>
-        <a href="/contact/" class="active" data-i18n="nav.contact">Contact</a>
-      </nav>
     </header>
+    <nav>
+      <a href="/consultancy/" data-i18n="nav.consultancy">AI Consultancy</a>
+      <a href="/engineering/" data-i18n="nav.engineering">Engineering</a>
+      <a href="/enablement/" data-i18n="nav.enablement">AI Enablement</a>
+      <a href="/liechtenstein/" data-i18n="nav.liechtenstein">Site Advantages</a>
+      <a href="/contact/" class="active" data-i18n="nav.contact">Contact</a>
+    </nav>
 
     <section class="hero">
       <p class="subtitle" data-i18n="hero.subtitle">Contact · Liechtenstein</p>
@@ -266,6 +267,7 @@
     const header = document.querySelector('header');
     const langSwitcher = document.querySelector('.lang-switcher');
     const servicesSection = document.querySelector('.services');
+    const navEl = document.querySelector('nav');
 
     function updateHeader() {
       if (!servicesSection) return;
@@ -273,6 +275,7 @@
       const invert = rect.top < 80 && rect.bottom > 0;
       header.classList.toggle('inverted', invert);
       langSwitcher.classList.toggle('inverted', invert);
+      if (!navEl.classList.contains('open')) navEl.classList.toggle('inverted', invert);
     }
 
     window.addEventListener('scroll', updateHeader);
@@ -280,7 +283,6 @@
 
     // Mobile menu
     const menuToggle = document.querySelector('.menu-toggle');
-    const navEl = document.querySelector('nav');
     menuToggle.addEventListener('click', () => {
       menuToggle.classList.toggle('open');
       navEl.classList.toggle('open');
