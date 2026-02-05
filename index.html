@@ -176,6 +176,14 @@
     }
     .contact-link:hover { text-decoration: underline; }
 
+    .menu-toggle { display: none; flex-direction: column; gap: 4px; background: none; border: none; cursor: pointer; padding: 0.5rem; z-index: 201; }
+    .menu-toggle span { display: block; width: 18px; height: 1.5px; background: var(--black); transition: all 0.3s ease; }
+    header.inverted .menu-toggle span { background: var(--white); }
+    .menu-toggle.open span { background: var(--black); }
+    .menu-toggle.open span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
+    .menu-toggle.open span:nth-child(2) { opacity: 0; }
+    .menu-toggle.open span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
+
     @media (max-width: 768px) {
       header {
         padding: calc(0.9rem + env(safe-area-inset-top)) 1rem 0.75rem 1rem;
@@ -184,9 +192,11 @@
         -webkit-backdrop-filter: blur(10px);
       }
       header.inverted { background: rgba(10,10,10,0.8); }
-      nav { gap: 1rem; }
-      nav a { font-size: 0.6rem; }
-      .lang-switcher { top: calc(3.2rem + env(safe-area-inset-top)); right: 1rem; transform: none; }
+      .menu-toggle { display: flex; }
+      nav { position: fixed; top: 0; left: 0; right: 0; bottom: 0; flex-direction: column; justify-content: center; align-items: center; gap: 2rem; background: var(--white); z-index: 200; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+      nav.open { opacity: 1; pointer-events: auto; }
+      nav a { font-size: 1.1rem; letter-spacing: 0.15em; color: var(--black); }
+      .lang-switcher { top: calc(3.2rem + env(safe-area-inset-top)); right: 1rem; transform: none; z-index: 201; }
       section { padding: 7.5rem 1.25rem 5rem 1.25rem; min-height: auto; }
       .hero { padding-top: 9rem; }
       h1 { font-size: clamp(2.2rem, 9vw, 3.2rem); margin-bottom: 1.5rem; }
@@ -213,6 +223,7 @@
 
     <header>
       <a href="/" class="logo">Askus</a>
+      <button class="menu-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
       <nav>
         <a href="/consultancy/" data-i18n="nav.consultancy">AI Consultancy</a>
         <a href="/engineering/" data-i18n="nav.engineering">Engineering</a>
@@ -313,30 +324,34 @@
       },
 
       es: {
-        'nav.consultancy': 'Consultoría de IA',
+        'nav.consultancy': 'Consultoría IA',
         'nav.engineering': 'Ingeniería',
-        'nav.enablement': 'Habilitación de IA',
-        'nav.liechtenstein': 'Ventajas del sitio',
+        'nav.enablement': 'Capacitación IA',
+        'nav.liechtenstein': 'Ventajas de sede',
         'nav.contact': 'Contacto',
-        'hero.subtitle': 'Ventajas del sitio · Liechtenstein',
-        'hero.title': 'Precisión suiza. Estabilidad liechtensteiniana.',
-        'hero.intro': 'Salvaguardas legales, operativas y financieras únicas. Por qué la jurisdicción importa para IA y software.',
-        'hero.cta': 'Ponte en contacto',
-        'services.title': 'Ventajas para clientes',
-        'services.consultancy.title': 'Consultoría de IA',
-        'services.consultancy.desc': 'Estrategia, integración y gobernanza de IA. De la hoja de ruta al despliegue.',
+
+        'hero.subtitle': 'Vaduz, Liechtenstein',
+        'hero.title': 'Soberanía operativa.',
+        'hero.intro': 'Consultoría, ingeniería y formación para sistemas en producción.',
+        'hero.cta': 'Hablemos',
+
+        'services.title': 'Lo que ofrecemos',
+        'services.consultancy.title': 'Consultoría IA',
+        'services.consultancy.desc': 'Estrategia, integración y gobernanza de IA. Del plan de ruta al despliegue.',
         'services.engineering.title': 'Ingeniería',
-        'services.engineering.desc': 'Sistemas de alto rendimiento, seguridad e integración.',
-        'services.enablement.title': 'Habilitación de IA',
-        'services.enablement.desc': 'Formación en flujos de trabajo asistidos por IA para ingenieros. Patrones, herramientas y revisión.',
-        'services.liechtenstein.title': 'Ventajas del sitio',
-        'services.liechtenstein.desc': 'Soberanía de datos, protección de PI y acceso al mercado del EEE. La jurisdicción importa.',
-        'about.title': 'Por qué la jurisdicción importa',
-        'about.p1': 'Dónde está domiciliada tu consultora define tu exposición regulatoria y tu margen operativo.',
-        'about.p2': 'Membresía del EEE con integración económica suiza. Una de las jurisdicciones más estables de Europa.',
+        'services.engineering.desc': 'Sistemas de alto rendimiento, seguridad y trabajo de integración.',
+        'services.enablement.title': 'Capacitación IA',
+        'services.enablement.desc': 'Formación en flujos de trabajo asistidos por IA para ingenieros. Patrones, herramientas y prácticas de revisión.',
+        'services.liechtenstein.title': 'Ventajas de sede',
+        'services.liechtenstein.desc': 'Soberanía de datos, protección de propiedad intelectual y acceso al mercado del EEE. Por qué la jurisdicción importa.',
+
+        'about.title': 'Hecho para producción',
+        'about.p1': 'Trabajamos con equipos que necesitan sistemas que funcionen, escalen y mejoren bajo restricciones reales.',
+        'about.p2': 'Alcance claro. Resultados medibles. Documentación que sobrevive al traspaso.',
         'about.location': 'Vaduz, Liechtenstein',
+
         'footer.imprint': 'Aviso legal',
-        'footer.privacy': 'Política de privacidad'
+        'footer.privacy': 'Privacidad'
       },
 
       de: {
@@ -498,6 +513,20 @@
 
     window.addEventListener('scroll', updateHeader);
     updateHeader();
+
+    // Mobile menu
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navEl = document.querySelector('nav');
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('open');
+      navEl.classList.toggle('open');
+      document.body.style.overflow = navEl.classList.contains('open') ? 'hidden' : '';
+    });
+    navEl.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      menuToggle.classList.remove('open');
+      navEl.classList.remove('open');
+      document.body.style.overflow = '';
+    }));
 
     // Dot field
     const canvas = document.getElementById('dotfield');
