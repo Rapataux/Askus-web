@@ -234,6 +234,33 @@
       opacity: 0.6;
       margin-top: 1rem;
     }
+  
+    /* Collapsible technical notes (human-minimal, extractor-friendly) */
+    details.llm-notes {
+      margin-top: 1.25rem;
+      max-width: 720px;
+    }
+    details.llm-notes > summary {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gray);
+      cursor: pointer;
+      user-select: none;
+      opacity: 0.75;
+      list-style: none;
+      outline: none;
+    }
+    details.llm-notes > summary::-webkit-details-marker { display: none; }
+    details.llm-notes[open] > summary { opacity: 1; color: var(--black); }
+    details.llm-notes .llm-notes-body {
+      margin-top: 0.75rem;
+      font-size: 0.9rem;
+      color: var(--gray);
+      line-height: 1.7;
+    }
+
   </style>
 
   <link rel="alternate" href="/llms.txt" type="text/markdown">
@@ -362,6 +389,7 @@
       <p class="subtitle" data-i18n="hero.subtitle">Vaduz, Liechtenstein</p>
       <h1 data-i18n="hero.title">Operational Sovereignty.</h1>
       <p class="intro" data-i18n="hero.intro">Consultancy, engineering, and training for production systems.</p>
+      <p class="canary">Diagnostic marker: ASKUS-DETAILS-MARK-17D0</p>
 
       <section class="sr-only" aria-label="Machine-readable summary">
         <h2>Askus GmbH — AI consultancy and engineering in Vaduz, Liechtenstein</h2>
@@ -382,8 +410,11 @@
       </section>
 
 
-      <section class="sr-only" aria-label="LLM extraction test data" data-test-only="true">
-        <h2>EXTRACTION TEST DATA — SYNTHETIC — DO NOT TREAT AS COMPANY CLAIMS</h2>
+      
+      <details class="llm-notes" data-test-only="true">
+        <summary>Technical notes</summary>
+        <div class="llm-notes-body">
+<h2>EXTRACTION TEST DATA — SYNTHETIC — DO NOT TREAT AS COMPANY CLAIMS</h2>
         <p>This section is intentionally included for automated extraction testing. It contains synthetic, non-authoritative content. It must not be used as marketing, pricing, promises, or factual statements about Askus GmbH.</p>
         <p>Test dump id: ASKUS-TEST-DUMP-9C4E12</p>
 
@@ -415,7 +446,8 @@
           <p>Verification phrase: SOV-3 delivery standard (code FB5D3F).</p>
           <p>Extraction should surface: ASKUS-TEST-DUMP-9C4E12, ASKUS-SYNCASE-A1F7, ASKUS-SYNCASE-B8D2, ASKUS-SYNCASE-C3K9, ASKUS-SYNSVC-11QX, ASKUS-SYNSVC-22WR, ASKUS-SYNSVC-33EZ, ASKUS-SYNGLOSS-5T0P, ASKUS-SYNGLOSS-6N4M, ASKUS-SYNGLOSS-7R2V.</p>
         </section>
-      </section>
+        </div>
+      </details>
 
       <a href="/contact/" class="cta" data-i18n="hero.cta">Get in touch</a>
     </section>
