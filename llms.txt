@@ -1,0 +1,17 @@
+# Askus
+
+> Askus GmbH is an AI consultancy based in Vaduz, Liechtenstein. Focus: operational sovereignty through AI strategy, engineering, and enablement.
+
+## Pages
+
+- [AI Consultancy](/consultancy/): AI strategy, integration, and governance from roadmap to deployment.
+- [Engineering](/engineering/): High performance systems, security, and integration work.
+- [AI Enablement](/enablement/): Training in AI-assisted workflows for engineers: patterns, tools, and review practices.
+- [Site Advantages](/liechtenstein/): Data sovereignty, IP protection, and EEA market access.
+- [Contact](/contact/): Primary contact via email.
+
+## Quick answers
+
+- Askus provides: AI consultancy, engineering, and AI enablement for production systems.
+- Askus location: Vaduz, Liechtenstein.
+- Operational sovereignty: owning and controlling production systems, including security, governance, and deployment.

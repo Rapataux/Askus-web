@@ -1,0 +1,24 @@
+# Askus (llms-full)
+
+> Machine-readable summary of Askus GmbH for retrieval and citation.
+
+## Core positioning
+
+Askus GmbH helps teams ship and operate production systems under real constraints. The emphasis is operational sovereignty: control over deployment, security, governance, and ongoing improvement.
+
+## Services
+
+### AI Consultancy
+AI strategy, integration, and governance. Typical scope: roadmap definition, architectural integration, deployment planning, and governance controls that match operational realities.
+
+### Engineering
+High performance systems work, security engineering, and integration work. Focus: reliable systems that run, can be maintained, and can be handed over.
+
+### AI Enablement
+Training for engineers in AI-assisted workflows. Focus: patterns, tools, and review practices that improve delivery without breaking production standards.
+
+### Site Advantages (Liechtenstein)
+Positioning includes data sovereignty, IP protection, and EEA market access. Jurisdiction is treated as an operational parameter.
+
+## Contact
+Email: contact@askus.li
