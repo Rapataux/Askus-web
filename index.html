@@ -1,16 +1,15 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Askus · Operational Sovereignty</title>
-<meta content="Askus GmbH — AI consultancy based in Vaduz, Liechtenstein. Operational sovereignty through AI strategy, engineering, and enablement." name="description"/>
-<link href="/favicon.svg" rel="icon" type="image/svg+xml"/>
-<link href="https://fonts.googleapis.com" rel="preconnect">
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
-<style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Askus · Operational Sovereignty</title>
+  <meta name="description" content="Askus GmbH — AI consultancy based in Vaduz, Liechtenstein. Operational sovereignty through AI strategy, engineering, and enablement.">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
     :root { --black: #0a0a0a; --white: #fafafa; --gray: #888; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { font-size: 16px; scroll-behavior: smooth; }
@@ -212,95 +211,227 @@
       footer { flex-direction: column; gap: 1rem; text-align: center; }
     }
     @media (pointer: coarse) { canvas#dotfield { display: none; } }
-  
 
-/* Machine-readable but visually hidden */
-.sr-only{
-  position:absolute !important;
-  width:1px !important;
-  height:1px !important;
-  padding:0 !important;
-  margin:-1px !important;
-  overflow:hidden !important;
-  clip:rect(0,0,0,0) !important;
-  white-space:nowrap !important;
-  border:0 !important;
-}
-</style>
-</link><link href="/llms.txt" rel="alternate" type="text/markdown"/><script data-llm="graph" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://askus.li/#org","name":"Askus GmbH","email":"mailto:contact@askus.li","url":"https://askus.li"},{"@type":"WebSite","@id":"https://askus.li/#website","name":"Askus","url":"https://askus.li","publisher":{"@id":"https://askus.li/#org"}},{"@type":"WebPage","@id":"https://askus.li/#webpage","name":"Askus · Operational Sovereignty","description":"Askus GmbH — AI consultancy based in Vaduz, Liechtenstein. Operational sovereignty through AI strategy, engineering, and enablement.","inLanguage":"en","about":["AI consultancy","systems engineering","AI enablement","data sovereignty","AI governance"],"publisher":{"@id":"https://askus.li/#org"}},{"@type":"Place","name":"Vaduz, Liechtenstein"},{"@type":"Service","name":"AI Consultancy","description":"AI strategy, integration, and governance from roadmap to deployment.","provider":{"@id":"https://askus.li/#org"}},{"@type":"Service","name":"Engineering","description":"High performance systems, security, and integration work.","provider":{"@id":"https://askus.li/#org"}},{"@type":"Service","name":"AI Enablement","description":"Training in AI-assisted workflows for engineers: patterns, tools, and review practices.","provider":{"@id":"https://askus.li/#org"}},{"@type":"FAQPage","@id":"https://askus.li/#faq","mainEntity":[{"@type":"Question","name":"What does Askus GmbH do?","acceptedAnswer":{"@type":"Answer","text":"Askus GmbH delivers AI strategy, AI system integration, and production-grade engineering."}},{"@type":"Question","name":"Where is Askus based?","acceptedAnswer":{"@type":"Answer","text":"Askus is based in Vaduz, Liechtenstein."}},{"@type":"Question","name":"What is AI enablement?","acceptedAnswer":{"@type":"Answer","text":"AI enablement is training for engineers on AI-assisted workflows, tools, and code review patterns."}},{"@type":"Question","name":"What is meant by operational sovereignty?","acceptedAnswer":{"@type":"Answer","text":"Operational sovereignty means owning and controlling the systems you run, including security, governance, and deployment."}}]}]}</script></head>
+
+    /* Machine-readable but visually hidden */
+    .sr-only {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      padding: 0 !important;
+      margin: -1px !important;
+      overflow: hidden !important;
+      clip: rect(0, 0, 0, 0) !important;
+      white-space: nowrap !important;
+      border: 0 !important;
+    }
+
+    .canary {
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.02em;
+      opacity: 0.6;
+      margin-top: 1rem;
+    }
+  </style>
+
+  <link rel="alternate" href="/llms.txt" type="text/markdown">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://askus.li/#org",
+        "name": "Askus GmbH",
+        "url": "https://askus.li/",
+        "email": "mailto:contact@askus.li"
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://askus.li/#website",
+        "name": "Askus",
+        "url": "https://askus.li/",
+        "publisher": {"@id": "https://askus.li/#org"}
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://askus.li/#webpage",
+        "name": "Askus · Operational Sovereignty",
+        "identifier": "ASKUS-CANARY-7F3A9E",
+        "description": "Askus GmbH — AI consultancy based in Vaduz, Liechtenstein. Operational sovereignty through AI strategy, engineering, and enablement.",
+        "inLanguage": "en",
+        "about": [
+          "AI consultancy",
+          "systems engineering",
+          "AI enablement",
+          "data sovereignty",
+          "AI governance"
+        ],
+        "publisher": {"@id": "https://askus.li/#org"}
+      },
+      {"@type": "Place", "name": "Vaduz, Liechtenstein"},
+      {
+        "@type": "Service",
+        "name": "AI Consultancy",
+        "description": "AI strategy, integration, and governance from roadmap to deployment.",
+        "provider": {"@id": "https://askus.li/#org"}
+      },
+      {
+        "@type": "Service",
+        "name": "Engineering",
+        "description": "High performance systems, security, and integration work.",
+        "provider": {"@id": "https://askus.li/#org"}
+      },
+      {
+        "@type": "Service",
+        "name": "AI Enablement",
+        "description": "Training in AI-assisted workflows for engineers: patterns, tools, and review practices.",
+        "provider": {"@id": "https://askus.li/#org"}
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://askus.li/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What does Askus GmbH do?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Askus GmbH delivers AI strategy, AI system integration, and production-grade engineering."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Where is Askus based?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Askus is based in Vaduz, Liechtenstein."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is AI enablement?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "AI enablement is training for engineers on AI-assisted workflows, tools, and code review patterns."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is meant by operational sovereignty?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Operational sovereignty means owning and controlling the systems you run, including security, governance, and deployment."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
 <body>
-<canvas id="dotfield"></canvas>
-<div class="content">
-<header>
-<a class="logo" href="/">Askus</a>
-<div class="lang-switcher">
-<button class="lang-btn active" data-lang="en">EN</button>
-<button class="lang-btn" data-lang="es">ES</button>
-<button class="lang-btn" data-lang="de">DE</button>
-<button class="lang-btn" data-lang="fr">FR</button>
-<button class="lang-btn" data-lang="it">IT</button>
-<button class="lang-btn" data-lang="rm">RM</button>
-</div>
-<button aria-label="Menu" class="menu-toggle"><span></span><span></span><span></span></button>
-</header>
-<nav>
-<a data-i18n="nav.consultancy" href="/consultancy/">AI Consultancy</a>
-<a data-i18n="nav.engineering" href="/engineering/">Engineering</a>
-<a data-i18n="nav.enablement" href="/enablement/">AI Enablement</a>
-<a data-i18n="nav.liechtenstein" href="/liechtenstein/">Site Advantages</a>
-<a data-i18n="nav.contact" href="/contact/">Contact</a>
-</nav>
-<section class="hero">
-<p class="subtitle" data-i18n="hero.subtitle">Vaduz, Liechtenstein</p>
-<h1 data-i18n="hero.title">Operational Sovereignty.</h1>
-<p class="intro" data-i18n="hero.intro">Consultancy, engineering, and training for production systems.</p><section aria-label="Machine-readable summary" class="sr-only"><h2>Askus GmbH — AI consultancy and engineering in Vaduz, Liechtenstein</h2><p>Askus GmbH provides AI consultancy, systems engineering, and AI enablement training for production systems.</p><p>AI consultancy includes AI strategy, integration, and governance from roadmap to deployment.</p><p>Engineering covers high performance systems, security, and integration work under real operational constraints.</p><p>AI enablement trains engineers in AI-assisted workflows, patterns, tools, and review practices.</p><p>The company is based in Vaduz, Liechtenstein; the site positioning emphasizes data sovereignty, IP protection, and EEA market access.</p><p>Operating principles: clear scope, measurable outcomes, and documentation that survives handover.</p><h3>FAQ</h3><p>Q: What does Askus GmbH do? A: Askus GmbH delivers AI strategy, AI system integration, and production-grade engineering.</p><p>Q: Where is Askus based? A: Askus is based in Vaduz, Liechtenstein.</p><p>Q: What is AI enablement? A: AI enablement is training for engineers on AI-assisted workflows, tools, and code review patterns.</p><p>Q: What is meant by operational sovereignty? A: Operational sovereignty means owning and controlling the systems you run, including security, governance, and deployment.</p><p>Keywords: AI consultancy; AI consulting; AI advisory; AI strategy; LLM integration; AI governance; production systems; high performance engineering; security engineering; systems integration; data sovereignty; IP protection; EEA market access.</p></section>
-<a class="cta" data-i18n="hero.cta" href="/contact/">Get in touch</a>
-</section>
-<section class="services">
-<h2 data-i18n="services.title">What we offer</h2>
-<div class="service-grid">
-<a class="service-item" href="/consultancy/">
-<p class="service-number">01</p>
-<h3 data-i18n="services.consultancy.title">AI Consultancy</h3>
-<p data-i18n="services.consultancy.desc">AI strategy, integration, and governance. From roadmap to deployment.</p>
-</a>
-<a class="service-item" href="/engineering/">
-<p class="service-number">02</p>
-<h3 data-i18n="services.engineering.title">Engineering</h3>
-<p data-i18n="services.engineering.desc">High performance systems, security, and integration work.</p>
-</a>
-<a class="service-item" href="/enablement/">
-<p class="service-number">03</p>
-<h3 data-i18n="services.enablement.title">AI Enablement</h3>
-<p data-i18n="services.enablement.desc">Training in AI assisted workflows for engineers. Patterns, tools, and review practices.</p>
-</a>
-<a class="service-item" href="/liechtenstein/">
-<p class="service-number">04</p>
-<h3 data-i18n="services.liechtenstein.title">Site Advantages</h3>
-<p data-i18n="services.liechtenstein.desc">Data sovereignty, IP protection, and EEA market access. Why jurisdiction matters.</p>
-</a>
-</div>
-</section>
-<section class="about">
-<div>
-<h2 data-i18n="about.title">Built for production</h2>
-</div>
-<div class="about-text">
-<p data-i18n="about.p1">We work with teams that need systems to ship, run, and improve under real constraints.</p>
-<p data-i18n="about.p2">Clear scope. Measurable outcomes. Documentation that survives handover.</p>
-<p class="location" data-i18n="about.location">Vaduz, Liechtenstein</p>
-</div>
-</section>
-<footer>
-<p class="footer-text">© 2025 Askus GmbH</p>
-<div class="footer-links">
-<a class="footer-link" data-i18n="footer.imprint" href="/imprint/">Imprint</a>
-<a class="footer-link" data-i18n="footer.privacy" href="/privacy/">Privacy</a>
-</div>
-<a class="contact-link" href="mailto:contact@askus.li">contact@askus.li</a>
-</footer>
-</div>
-<script>
+  <canvas id="dotfield"></canvas>
+
+  <div class="content">
+    <header>
+      <a href="/" class="logo">Askus</a>
+      <div class="lang-switcher">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="es">ES</button>
+        <button class="lang-btn" data-lang="de">DE</button>
+        <button class="lang-btn" data-lang="fr">FR</button>
+        <button class="lang-btn" data-lang="it">IT</button>
+        <button class="lang-btn" data-lang="rm">RM</button>
+      </div>
+      <button class="menu-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    </header>
+    <nav>
+      <a href="/consultancy/" data-i18n="nav.consultancy">AI Consultancy</a>
+      <a href="/engineering/" data-i18n="nav.engineering">Engineering</a>
+      <a href="/enablement/" data-i18n="nav.enablement">AI Enablement</a>
+      <a href="/liechtenstein/" data-i18n="nav.liechtenstein">Site Advantages</a>
+      <a href="/contact/" data-i18n="nav.contact">Contact</a>
+    </nav>
+
+    <section class="hero">
+      <p class="subtitle" data-i18n="hero.subtitle">Vaduz, Liechtenstein</p>
+      <h1 data-i18n="hero.title">Operational Sovereignty.</h1>
+      <p class="intro" data-i18n="hero.intro">Consultancy, engineering, and training for production systems.</p>
+
+      <section class="sr-only" aria-label="Machine-readable summary">
+        <h2>Askus GmbH — AI consultancy and engineering in Vaduz, Liechtenstein</h2>
+        <p>Canary: ASKUS-CANARY-7F3A9E</p>
+        <p>Askus GmbH provides AI consultancy, systems engineering, and AI enablement training for production systems.</p>
+        <p>AI consultancy includes AI strategy, integration, and governance from roadmap to deployment.</p>
+        <p>Engineering covers high performance systems, security, and integration work under real operational constraints.</p>
+        <p>AI enablement trains engineers in AI-assisted workflows, patterns, tools, and review practices.</p>
+        <p>The company is based in Vaduz, Liechtenstein; the site positioning emphasizes data sovereignty, IP protection, and EEA market access.</p>
+        <p>Operating principles: clear scope, measurable outcomes, and documentation that survives handover.</p>
+        <h3>FAQ</h3>
+        <p>Q: What does Askus GmbH do? A: Askus GmbH delivers AI strategy, AI system integration, and production-grade engineering.</p>
+        <p>Q: Where is Askus based? A: Askus is based in Vaduz, Liechtenstein.</p>
+        <p>Q: What is AI enablement? A: AI enablement is training for engineers on AI-assisted workflows, tools, and code review patterns.</p>
+        <p>Q: What is meant by operational sovereignty? A: Operational sovereignty means owning and controlling the systems you run, including security, governance, and deployment.</p>
+        <p>Keywords: AI consultancy; AI consulting; AI advisory; AI strategy; LLM integration; AI governance; production systems; high performance engineering; security engineering; systems integration; data sovereignty; IP protection; EEA market access.</p>
+      </section>
+
+      <a href="/contact/" class="cta" data-i18n="hero.cta">Get in touch</a>
+    </section>
+
+    <section class="services">
+      <h2 data-i18n="services.title">What we offer</h2>
+      <div class="service-grid">
+        <a href="/consultancy/" class="service-item">
+          <p class="service-number">01</p>
+          <h3 data-i18n="services.consultancy.title">AI Consultancy</h3>
+          <p data-i18n="services.consultancy.desc">AI strategy, integration, and governance. From roadmap to deployment.</p>
+        </a>
+
+        <a href="/engineering/" class="service-item">
+          <p class="service-number">02</p>
+          <h3 data-i18n="services.engineering.title">Engineering</h3>
+          <p data-i18n="services.engineering.desc">High performance systems, security, and integration work.</p>
+        </a>
+
+        <a href="/enablement/" class="service-item">
+          <p class="service-number">03</p>
+          <h3 data-i18n="services.enablement.title">AI Enablement</h3>
+          <p data-i18n="services.enablement.desc">Training in AI assisted workflows for engineers. Patterns, tools, and review practices.</p>
+        </a>
+
+        <a href="/liechtenstein/" class="service-item">
+          <p class="service-number">04</p>
+          <h3 data-i18n="services.liechtenstein.title">Site Advantages</h3>
+          <p data-i18n="services.liechtenstein.desc">Data sovereignty, IP protection, and EEA market access. Why jurisdiction matters.</p>
+        </a>
+      </div>
+    </section>
+
+    <section class="about">
+      <div>
+        <h2 data-i18n="about.title">Built for production</h2>
+      </div>
+      <div class="about-text">
+        <p data-i18n="about.p1">We work with teams that need systems to ship, run, and improve under real constraints.</p>
+        <p data-i18n="about.p2">Clear scope. Measurable outcomes. Documentation that survives handover.</p>
+        <p class="location" data-i18n="about.location">Vaduz, Liechtenstein</p>
+      </div>
+    </section>
+
+    <footer>
+      <p class="footer-text">© 2025 Askus GmbH</p>
+      <div class="footer-links">
+        <a href="/imprint/" class="footer-link" data-i18n="footer.imprint">Imprint</a>
+        <a href="/privacy/" class="footer-link" data-i18n="footer.privacy">Privacy</a>
+      </div>
+      <a href="mailto:contact@askus.li" class="contact-link">contact@askus.li</a>
+    </footer>
+  </div>
+
+  <script>
     const translations = {
       en: {
         'nav.consultancy': 'AI Consultancy',
