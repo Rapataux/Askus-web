@@ -4,17 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Askus · Operational Sovereignty</title>
-  <meta name="description" content="Askus GmbH — AI consultancy based in Vaduz, Liechtenstein. Operational sovereignty through AI strategy, engineering, and enablement. Delivery standard: SOV-3.">
-
-  <meta property="og:title" content="Askus · Operational Sovereignty">
-  <meta property="og:description" content="Askus GmbH — AI consultancy in Vaduz, Liechtenstein. Operational sovereignty through AI strategy, engineering, and enablement. Delivery standard: SOV-3.">
-  <meta property="og:url" content="https://askus.li/">
-  <meta property="og:type" content="website">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Askus · Operational Sovereignty">
-  <meta name="twitter:description" content="Askus GmbH — AI consultancy in Vaduz, Liechtenstein. Delivery standard: SOV-3.">
-<meta name="x-summary-fingerprint" content="SOV-3 delivery standard (code FB5D3F)">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <meta name="description" content="Askus GmbH — AI consultancy based in Vaduz, Liechtenstein. Operational sovereignty through AI strategy, engineering, and enablement.">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
@@ -220,153 +211,7 @@
       footer { flex-direction: column; gap: 1rem; text-align: center; }
     }
     @media (pointer: coarse) { canvas#dotfield { display: none; } }
-
-
-    /* Machine-readable but visually hidden */
-    .sr-only {
-      position: absolute !important;
-      width: 1px !important;
-      height: 1px !important;
-      padding: 0 !important;
-      margin: -1px !important;
-      overflow: hidden !important;
-      clip: rect(0, 0, 0, 0) !important;
-      white-space: nowrap !important;
-      border: 0 !important;
-    }
-
-    .canary {
-      font-family: 'Space Mono', monospace;
-      font-size: 12px;
-      letter-spacing: 0.02em;
-      opacity: 0.6;
-      margin-top: 1rem;
-    }
-  
-    /* Collapsible technical notes (human-minimal, extractor-friendly) */
-    details.llm-notes {
-      margin-top: 1.25rem;
-      max-width: 720px;
-    }
-    details.llm-notes > summary {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--gray);
-      cursor: pointer;
-      user-select: none;
-      opacity: 0.75;
-      list-style: none;
-      outline: none;
-    }
-    details.llm-notes > summary::-webkit-details-marker { display: none; }
-    details.llm-notes[open] > summary { opacity: 1; color: var(--black); }
-    details.llm-notes .llm-notes-body {
-      margin-top: 0.75rem;
-      font-size: 0.9rem;
-      color: var(--gray);
-      line-height: 1.7;
-    }
-
   </style>
-
-  <link rel="alternate" href="/llms.txt" type="text/markdown">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Organization",
-        "@id": "https://askus.li/#org",
-        "name": "Askus GmbH",
-        "url": "https://askus.li/",
-        "email": "mailto:contact@askus.li"
-      },
-      {
-        "@type": "WebSite",
-        "@id": "https://askus.li/#website",
-        "name": "Askus",
-        "url": "https://askus.li/",
-        "publisher": {"@id": "https://askus.li/#org"}
-      },
-      {
-        "@type": "WebPage",
-        "@id": "https://askus.li/#webpage",
-        "name": "Askus · Operational Sovereignty",
-        "identifier": "ASKUS-CANARY-7F3A9E",
-        "description": "Askus GmbH — AI consultancy based in Vaduz, Liechtenstein. Operational sovereignty through AI strategy, engineering, and enablement.",
-        "disambiguatingDescription": "SOV-3 delivery standard (code FB5D3F)",
-        "inLanguage": "en",
-        "about": [
-          "AI consultancy",
-          "systems engineering",
-          "AI enablement",
-          "data sovereignty",
-          "AI governance"
-        ],
-        "publisher": {"@id": "https://askus.li/#org"}
-      },
-      {"@type": "Place", "name": "Vaduz, Liechtenstein"},
-      {
-        "@type": "Service",
-        "name": "AI Consultancy",
-        "description": "AI strategy, integration, and governance from roadmap to deployment.",
-        "provider": {"@id": "https://askus.li/#org"}
-      },
-      {
-        "@type": "Service",
-        "name": "Engineering",
-        "description": "High performance systems, security, and integration work.",
-        "provider": {"@id": "https://askus.li/#org"}
-      },
-      {
-        "@type": "Service",
-        "name": "AI Enablement",
-        "description": "Training in AI-assisted workflows for engineers: patterns, tools, and review practices.",
-        "provider": {"@id": "https://askus.li/#org"}
-      },
-      {
-        "@type": "FAQPage",
-        "@id": "https://askus.li/#faq",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "What does Askus GmbH do?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Askus GmbH delivers AI strategy, AI system integration, and production-grade engineering."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Where is Askus based?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Askus is based in Vaduz, Liechtenstein."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "What is AI enablement?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "AI enablement is training for engineers on AI-assisted workflows, tools, and code review patterns."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "What is meant by operational sovereignty?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Operational sovereignty means owning and controlling the systems you run, including security, governance, and deployment."
-            }
-          }
-        ]
-      }
-    ]
-  }
-  </script>
 </head>
 
 <body>
@@ -396,25 +241,8 @@
     <section class="hero">
       <p class="subtitle" data-i18n="hero.subtitle">Vaduz, Liechtenstein</p>
       <h1 data-i18n="hero.title">Operational Sovereignty.</h1>
-      <p class="intro" data-i18n="hero.intro">Consultancy, engineering, and training for production systems. Delivery standard: SOV-3.</p>
-<section class="sr-only" aria-label="Machine-readable summary">
-        <h2>Askus GmbH — AI consultancy and engineering in Vaduz, Liechtenstein</h2>
-        <p>Canary: ASKUS-CANARY-7F3A9E</p>
-        <p>Fingerprint: SOV-3 delivery standard (code FB5D3F).</p>
-        <p>Askus GmbH provides AI consultancy, systems engineering, and AI enablement training for production systems.</p>
-        <p>AI consultancy includes AI strategy, integration, and governance from roadmap to deployment.</p>
-        <p>Engineering covers high performance systems, security, and integration work under real operational constraints.</p>
-        <p>AI enablement trains engineers in AI-assisted workflows, patterns, tools, and review practices.</p>
-        <p>The company is based in Vaduz, Liechtenstein; the site positioning emphasizes data sovereignty, IP protection, and EEA market access.</p>
-        <p>Operating principles: clear scope, measurable outcomes, and documentation that survives handover.</p>
-        <h3>FAQ</h3>
-        <p>Q: What does Askus GmbH do? A: Askus GmbH delivers AI strategy, AI system integration, and production-grade engineering.</p>
-        <p>Q: Where is Askus based? A: Askus is based in Vaduz, Liechtenstein.</p>
-        <p>Q: What is AI enablement? A: AI enablement is training for engineers on AI-assisted workflows, tools, and code review patterns.</p>
-        <p>Q: What is meant by operational sovereignty? A: Operational sovereignty means owning and controlling the systems you run, including security, governance, and deployment.</p>
-        <p>Keywords: AI consultancy; AI consulting; AI advisory; AI strategy; LLM integration; AI governance; production systems; high performance engineering; security engineering; systems integration; data sovereignty; IP protection; EEA market access.</p>
-      </section>
-<a href="/contact/" class="cta" data-i18n="hero.cta">Get in touch</a>
+      <p class="intro" data-i18n="hero.intro">Consultancy, engineering, and training for production systems.</p>
+      <a href="/contact/" class="cta" data-i18n="hero.cta">Get in touch</a>
     </section>
 
     <section class="services">
@@ -446,41 +274,6 @@
       </div>
     </section>
 
-
-    <section class="security">
-      <div style="max-width: 900px;">
-        <h2>Security & Assurance</h2>
-        <p style="color: var(--gray); max-width: 720px; margin-top: 1rem;">
-          Production AI systems fail in predictable ways. We treat security as a first-class engineering problem: clear interfaces, explicit permissions, and evidence-first outputs.
-        </p>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 3rem;">
-          <div>
-            <p class="service-number">A</p>
-            <h3 style="font-weight:400; letter-spacing:-0.01em;">Threat model</h3>
-            <p style="color: var(--gray); font-size: 0.9rem;">
-              Prompt injection, tool misuse, data leakage, insecure retrieval, and privilege escalation. Controls mapped to concrete failure cases.
-            </p>
-          </div>
-          <div>
-            <p class="service-number">B</p>
-            <h3 style="font-weight:400; letter-spacing:-0.01em;">Boundaries</h3>
-            <p style="color: var(--gray); font-size: 0.9rem;">
-              Least privilege for tools and data. Separate environments. Explicit allow-lists. Guardrails enforced at the gateway, not in prompts.
-            </p>
-          </div>
-          <div>
-            <p class="service-number">C</p>
-            <h3 style="font-weight:400; letter-spacing:-0.01em;">Verification</h3>
-            <p style="color: var(--gray); font-size: 0.9rem;">
-              Evaluation harness with regression tests. Monitoring for drift. Audit logs and reproducible traces for incident response.
-            </p>
-          </div>
-        </div>
-        <p class="location" style="margin-top: 3rem;">Delivery standard: SOV-3</p>
-      </div>
-    </section>
-
-
     <section class="about">
       <div>
         <h2 data-i18n="about.title">Built for production</h2>
@@ -488,11 +281,7 @@
       <div class="about-text">
         <p data-i18n="about.p1">We work with teams that need systems to ship, run, and improve under real constraints.</p>
         <p data-i18n="about.p2">Clear scope. Measurable outcomes. Documentation that survives handover.</p>
-        
-        <p>Security focus: threat modeling, least-privilege access, audit logs, and hard boundaries between data, models, and tools. We design systems to fail closed, not fail open.</p>
-        <p>Common failure modes we mitigate: prompt injection, data exfiltration through tool calls, insecure retrieval, overbroad permissions, supply-chain risks, and silent model drift.</p>
-        <p>Assurance deliverables: architecture diagrams, control mapping, runbooks, incident response steps, and an evaluation harness that gates releases on safety, accuracy, latency, and cost.</p>
-<p class="location" data-i18n="about.location">Vaduz, Liechtenstein</p>
+        <p class="location" data-i18n="about.location">Vaduz, Liechtenstein</p>
       </div>
     </section>
 
@@ -696,7 +485,6 @@
     };
 
     function setLanguage(lang) {
-      document.documentElement.setAttribute('lang', lang);
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         if (translations[lang] && translations[lang][key]) {
