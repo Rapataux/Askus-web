@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MindGap · Askus</title>
+  <meta name="description" content="AI Maturity Assessment. Find out where you actually stand.">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --black: #0a0a0a; --white: #fafafa; --gray: #888; --border: rgba(0,0,0,0.1); --error: #d32f2f; --success: #2e7d32; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background: var(--white); color: var(--black); line-height: 1.6; overflow-x: hidden; }
+
+    canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+    .content { position: relative; z-index: 1; }
+
+    header { position: fixed; top: 0; left: 0; right: 0; padding: 2rem 3rem; display: flex; justify-content: space-between; align-items: center; z-index: 100; transition: color 0.3s ease; pointer-events: none; }
+    header > * { pointer-events: auto; }
+    header.inverted .logo { color: var(--white); }
+    nav.inverted a { color: var(--white); }
+    .logo { font-family: 'Space Mono', monospace; font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--black); text-decoration: none; transition: color 0.3s ease; }
+    .logo:hover { opacity: 0.5; }
+    .lang-switcher { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: flex; gap: 0.5rem; transition: opacity 0.3s ease; }
+    header.inverted .lang-btn { color: var(--white); }
+    .lang-btn { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--black); background: none; border: none; padding: 0.3rem 0.5rem; cursor: pointer; opacity: 0.5; transition: opacity 0.3s ease, color 0.3s ease; }
+    .lang-btn:hover, .lang-btn.active { opacity: 1; }
+    .lang-btn.active { text-decoration: underline; text-underline-offset: 3px; }
+    nav { position: fixed; top: 0; right: 0; padding: 2rem 3rem; display: flex; gap: 2rem; z-index: 100; pointer-events: auto; }
+    nav a { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--black); text-decoration: none; transition: opacity 0.3s ease, color 0.3s ease; }
+    nav a:hover { opacity: 0.5; }
+    nav a.active { text-decoration: underline; text-underline-offset: 4px; }
+
+    section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 8rem 3rem; position: relative; z-index: 2; }
+    .hero { align-items: flex-start; padding-top: 12rem; }
+    .subtitle { font-family: 'Space Mono', monospace; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray); margin-bottom: 1rem; }
+    h1 { font-weight: 400; font-size: clamp(3rem, 8vw, 7rem); line-height: 1.05; letter-spacing: -0.03em; max-width: 900px; margin-bottom: 3rem; }
+    .intro { max-width: 480px; font-size: 1.1rem; color: var(--gray); margin-bottom: 4rem; }
+    .cta { display: inline-flex; align-items: center; gap: 1rem; font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--black); text-decoration: none; padding: 1rem 0; border-bottom: 1px solid var(--black); transition: gap 0.3s ease; }
+    .cta:hover { gap: 1.5rem; }
+    .cta::after { content: '→'; }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 0.35rem 0.4rem;
+      border: none;
+      border-radius: 0;
+      background: transparent;
+      -webkit-appearance: none;
+      appearance: none;
+      cursor: pointer;
+      animation: hint-float 3.8s ease-in-out infinite;
+      transition: opacity 0.25s ease;
+    }
+    .scroll-hint:hover { opacity: 0.72; }
+    .scroll-hint:focus-visible { outline: 2px solid rgba(10, 10, 10, 0.45); outline-offset: 3px; }
+    .scroll-hint-glyph {
+      display: block;
+      width: 1.9rem;
+      height: 1.1rem;
+    }
+    .scroll-hint-glyph polyline {
+      fill: none;
+      stroke: rgba(10, 10, 10, 0.52);
+      stroke-width: 1.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    @keyframes hint-float { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(9px); } }
+    .services { background: var(--black); color: var(--white); }
+    .services h2 { font-weight: 400; font-size: clamp(2rem, 5vw, 4rem); letter-spacing: -0.02em; margin-bottom: 4rem; }
+    .service-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: rgba(255,255,255,0.1); width: 100%; }
+    .service-item { background: var(--black); padding: 3rem; }
+    .service-number { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.2em; color: var(--gray); margin-bottom: 1.5rem; }
+    .service-item h3 { font-weight: 400; font-size: 1.5rem; letter-spacing: -0.01em; margin-bottom: 1rem; }
+    .service-item p { font-size: 0.9rem; color: var(--gray); line-height: 1.7; }
+
+    .about { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+    .about h2 { font-weight: 400; font-size: clamp(2rem, 5vw, 3.5rem); letter-spacing: -0.02em; line-height: 1.2; }
+    .about-text { color: var(--gray); font-size: 1rem; max-width: 500px; }
+    .about-text p { margin-bottom: 1.5rem; }
+    .location { font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; margin-top: 2rem; color: var(--black); }
+
+    /* MindGap Content Sections */
+    .mindgap-content {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 24px;
+      pointer-events: none;
+    }
+
+    .mg-section {
+      width: 100%;
+      max-width: 680px;
+      margin-bottom: 60vh;
+      padding: 3rem;
+      background: rgba(250,250,250,0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid var(--border);
+      pointer-events: auto;
+    }
+    .mg-section:last-child { margin-bottom: 20vh; }
+
+    .mg-section h2 { font-family: 'Space Mono', monospace; font-size: 1rem; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1.5rem; border-bottom: 1px solid var(--black); padding-bottom: 0.5rem; display: inline-block; font-weight: 700; }
+    .mg-section p { margin-bottom: 1rem; color: #333; }
+
+    .deliverables-list { list-style: none; margin-top: 1rem; }
+    .deliverables-list li { display: flex; gap: 1rem; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
+    .deliverables-list li:last-child { border-bottom: none; }
+    .num { flex-shrink: 0; font-family: 'Space Mono', monospace; font-size: 0.75rem; background: var(--black); color: var(--white); width: 1.5rem; height: 1.5rem; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
+
+    .steps { display: flex; flex-direction: column; gap: 1.5rem; }
+    .step { display: flex; gap: 1rem; }
+    .step-icon { font-family: 'Space Mono', monospace; font-size: 1.2rem; }
+
+    .form-group { margin-bottom: 1.5rem; }
+    .mg-section label { display: block; font-family: 'Space Mono', monospace; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 0.5rem; letter-spacing: 0.05em; }
+    .mg-section input[type="text"], .mg-section input[type="email"] { width: 100%; background: transparent; border: none; border-bottom: 1px solid var(--black); border-radius: 0; color: var(--black); font-family: 'Helvetica Neue', sans-serif; font-size: 1rem; padding: 0.5rem 0; outline: none; transition: border-color 0.2s; }
+    .mg-section input:focus { border-bottom-width: 2px; }
+    .mg-section input::placeholder { color: var(--gray); opacity: 0.5; }
+
+    .btn-submit { width: 100%; background: var(--black); color: var(--white); border: none; font-family: 'Space Mono', monospace; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; padding: 1rem; cursor: pointer; transition: opacity 0.2s; margin-top: 1rem; }
+    .btn-submit:hover:not(:disabled) { opacity: 0.8; }
+    .btn-submit:disabled { opacity: 0.3; cursor: not-allowed; }
+
+    .form-msg { font-family: 'Space Mono', monospace; font-size: 0.85rem; margin-top: 1rem; text-align: center; }
+    .error-msg { color: var(--error); }
+    .success-msg { color: var(--success); }
+
+    [hidden] { display: none !important; }
+
+    footer { padding: 3rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(0,0,0,0.1); background: var(--white); position: relative; z-index: 10; pointer-events: auto; }
+    .footer-text { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; color: var(--gray); }
+    .footer-links { display: flex; gap: 2rem; }
+    .footer-link { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; color: var(--gray); text-decoration: none; text-transform: uppercase; }
+    .footer-link:hover { color: var(--black); }
+    .contact-link { font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 0.1em; color: var(--black); text-decoration: none; }
+    .contact-link:hover { text-decoration: underline; }
+
+    .menu-toggle { display: none; flex-direction: column; gap: 4px; background: none; border: none; cursor: pointer; padding: 0.5rem; z-index: 201; pointer-events: auto; }
+    .menu-toggle span { display: block; width: 18px; height: 1.5px; background: var(--black); transition: all 0.3s ease; }
+    header.inverted .menu-toggle span { background: var(--white); }
+    .menu-toggle.open span { background: var(--black); }
+    .menu-toggle.open span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
+    .menu-toggle.open span:nth-child(2) { opacity: 0; }
+    .menu-toggle.open span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
+
+    @media (max-width: 768px) {
+      header { padding: calc(0.9rem + env(safe-area-inset-top)) 1rem 0.75rem 1rem; background: rgba(250,250,250,0.9); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); z-index: 300; }
+      header.inverted { background: rgba(10,10,10,0.8); }
+      header.menu-open { background: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; }
+      header.menu-open .logo { color: var(--black); }
+      header.menu-open .lang-switcher { opacity: 0; pointer-events: none; }
+      .lang-switcher { position: static; transform: none; }
+      .menu-toggle { display: flex; }
+      nav { top: 0; left: 0; right: 0; bottom: 0; padding: 0; flex-direction: column; justify-content: center; align-items: center; gap: 2rem; background: var(--white); z-index: 200; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+      nav.open { opacity: 1; pointer-events: auto; }
+      nav.open a { font-size: 1.1rem; letter-spacing: 0.15em; color: var(--black); }
+      section { padding: 7.5rem 1.25rem 5rem 1.25rem; min-height: auto; }
+      .hero { padding-top: 9rem; }
+      h1 { font-size: clamp(2.2rem, 9vw, 3.2rem); margin-bottom: 1.5rem; }
+      .intro { font-size: 1rem; margin-bottom: 2.25rem; }
+      .about { grid-template-columns: 1fr; gap: 3rem; }
+      .mg-section { padding: 2rem 1.5rem; margin-bottom: 50vh; border-left: none; border-right: none; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="dotfield"></canvas>
+
+  <div class="content">
+    <header>
+      <a href="/" class="logo">Askus</a>
+      <div class="lang-switcher">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="es">ES</button>
+        <button class="lang-btn" data-lang="de">DE</button>
+        <button class="lang-btn" data-lang="fr">FR</button>
+        <button class="lang-btn" data-lang="it">IT</button>
+        <button class="lang-btn" data-lang="rm">RM</button>
+      </div>
+      <button class="menu-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    </header>
+        <nav>
+      <a href="/consultancy/" data-i18n="nav.consultancy">AI Consultancy</a>
+      <a href="/MindGap/" class="active" data-i18n="nav.assessment">AI Assessment</a>
+      <a href="/enablement/" data-i18n="nav.enablement">AI Enablement</a>
+      <a href="/engineering/" data-i18n="nav.engineering">Engineering</a>
+      <a href="/contact/" data-i18n="nav.contact">Contact</a>
+    </nav>
+
+    <section class="hero">
+      <p class="subtitle" data-i18n="hero.subtitle">AI Readiness Assessment</p>
+      <h1 data-i18n="hero.title">Find Your Level.</h1>
+      <p class="intro" data-i18n="hero.intro">A 15-minute diagnostic that maps your organisation's AI capabilities to a clear maturity framework. Identify gaps. Prioritise action.</p>
+      <a href="#mindgap-content" class="cta" data-i18n="hero.cta">Take the assessment</a>
+      <button type="button" class="scroll-hint" aria-label="Scroll down">
+        <svg class="scroll-hint-glyph" viewBox="0 0 26 14" aria-hidden="true" focusable="false">
+          <polyline points="3,3 13,11 23,3"></polyline>
+        </svg>
+      </button>
+    </section>
+
+    <section class="services" id="services">
+      <h2 data-i18n="levels.title">The Levels of AI Maturity</h2>
+      <div class="service-grid">
+        <div class="service-item">
+          <p class="service-number">L0</p>
+          <h3 data-i18n="levels.l0.title">Lookup</h3>
+          <p data-i18n="levels.l0.desc">AI as search engine. Query-response interactions for information retrieval. No generation, no workflow integration.</p>
+        </div>
+        <div class="service-item">
+          <p class="service-number">L1</p>
+          <h3 data-i18n="levels.l1.title">Autocomplete</h3>
+          <p data-i18n="levels.l1.desc">Human-led, AI-assisted. You write, the model suggests. Manual prompting, low autonomy, reactive support on demand.</p>
+        </div>
+        <div class="service-item">
+          <p class="service-number">L2</p>
+          <h3 data-i18n="levels.l2.title">Bottleneck</h3>
+          <p data-i18n="levels.l2.desc">AI generates, humans verify. High-volume output with mandatory review of every result. Scale limited by approval capacity and trust bandwidth.</p>
+        </div>
+        <div class="service-item">
+          <p class="service-number">L3</p>
+          <h3 data-i18n="levels.l3.title">Policy</h3>
+          <p data-i18n="levels.l3.desc">Human governs, agent executes. Rules-based delegation where humans set constraints and AI operates within them.</p>
+        </div>
+        <div class="service-item">
+          <p class="service-number">L4</p>
+          <h3 data-i18n="levels.l4.title">Vision</h3>
+          <p data-i18n="levels.l4.desc">Humans define success, agents deliver. Outcome-oriented delegation with human-set metrics and autonomous AI execution.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="about" id="about">
+      <div>
+        <h2 data-i18n="about.title">The Technology Is Ready. Are You?</h2>
+      </div>
+      <div class="about-text">
+        <p data-i18n="about.p1">Today's AI operates at Level 4. Autonomous execution against defined outcomes. Meanwhile, most organisations remain structured for Levels 0 through 2 — manual prompting, human review of every output, approval bottlenecks that constrain scale.</p>
+        <p data-i18n="about.p2">The gap between capability and adoption is not technical. It is organisational. MindGap measures that distance.</p>
+        <p class="location">Askus GmbH · Liechtenstein</p>
+      </div>
+    </section>
+
+    <div class="mindgap-content" id="mindgap-content">
+      <div class="mg-section">
+        <h2>The Problem</h2>
+        <p>Most organisations lack a reliable method for evaluating their AI readiness. Strategic decisions are made on incomplete information, leading to misallocated resources, redundant tooling, and initiatives that fail to deliver measurable value.</p>
+        <p>MindGap is a structured 15-minute AI maturity assessment that provides an objective baseline. The output includes a maturity level (L0–L4), a gap analysis identifying capability deficits, and a 30-day implementation framework.</p>
+      </div>
+
+      <div class="mg-section">
+        <h2>What You Get</h2>
+        <ul class="deliverables-list">
+          <li>
+            <span class="num">1</span>
+            <div><strong>AI Maturity Level</strong><br>Exactly where your organisation sits on the L0–L4 scale, with honest context.</div>
+          </li>
+          <li>
+            <span class="num">2</span>
+            <div><strong>Gap Matrix</strong><br>The three specific capabilities you are missing that block the next level.</div>
+          </li>
+          <li>
+            <span class="num">3</span>
+            <div><strong>False Assumptions</strong><br>The beliefs currently costing you time and money, named plainly.</div>
+          </li>
+          <li>
+            <span class="num">4</span>
+            <div><strong>30-Day Experiment</strong><br>One focused sprint you can start next week to prove the concept internally.</div>
+          </li>
+          <li>
+            <span class="num">5</span>
+            <div><strong>Communication Script</strong><br>Exact language to brief leadership, get buy-in, and move fast.</div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="mg-section">
+        <h2>How It Works</h2>
+        <div class="steps">
+          <div class="step">
+            <span class="step-icon">01</span>
+            <div><strong>Request your invite</strong><br>Fill in the form below. We review requests daily and send your personalised invite link within 24 hours.</div>
+          </div>
+          <div class="step">
+            <span class="step-icon">02</span>
+            <div><strong>Complete the assessment</strong><br>Complete a structured sequence of scenario-based questions designed to evaluate current capabilities and operational maturity.</div>
+          </div>
+          <div class="step">
+            <span class="step-icon">03</span>
+            <div><strong>Receive your diagnostic</strong><br>Instantly get your full report with level, gaps, assumptions, experiment, and communication script.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mg-section" id="form-container">
+        <div id="req-form-wrap">
+          <h2>Close The MindGap</h2>
+          <form id="req-form" novalidate>
+            <div class="form-group">
+              <label for="req-name">Full Name</label>
+              <input id="req-name" type="text" placeholder="Jane Smith" autocomplete="name" required />
+            </div>
+            <div class="form-group">
+              <label for="req-email">Work Email</label>
+              <input id="req-email" type="email" placeholder="jane@company.com" autocomplete="email" required />
+            </div>
+            <div class="form-group">
+              <label for="req-company">Company</label>
+              <input id="req-company" type="text" placeholder="Acme Corp" autocomplete="organization" required />
+            </div>
+            <div class="form-msg error-msg" id="req-error" hidden></div>
+            <button type="submit" class="btn-submit" id="req-submit">Submit Request</button>
+          </form>
+        </div>
+
+        <div id="req-success" hidden>
+          <h2>Confirmed</h2>
+          <p>We review requests daily. Expect your personal invite link within 24 hours.</p>
+        </div>
+
+        <div id="req-already" hidden>
+          <h2>Status Active</h2>
+          <p>We already have a request from this email address. Check your inbox for your invite link, or contact us if you have not received it.</p>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p class="footer-text">© 2025 Askus GmbH</p>
+      <div class="footer-links">
+        <a href="/imprint/" class="footer-link" data-i18n="footer.imprint">Imprint</a>
+        <a href="/privacy/" class="footer-link" data-i18n="footer.privacy">Privacy</a>
+      </div>
+      <a href="mailto:contact@askus.li" class="contact-link">contact@askus.li</a>
+    </footer>
+  </div>
+
+<script>
+    const translations = {
+      en: {
+        'nav.consultancy': 'AI Consultancy', 'nav.assessment': 'AI Assessment', 'nav.engineering': 'Engineering', 'nav.enablement': 'AI Enablement', 'nav.contact': 'Contact',
+        'hero.subtitle': 'AI Readiness Assessment',
+        'hero.title': 'Find Your Level.',
+        'hero.intro': 'A 15-minute diagnostic that maps your organisation's AI capabilities to a clear maturity framework. Identify gaps. Prioritise action.',
+        'hero.cta': 'Take the assessment',
+        'levels.title': 'The Levels of AI Maturity',
+        'levels.l0.title': 'Lookup', 'levels.l0.desc': 'AI as search engine. Query-response interactions for information retrieval. No generation, no workflow integration.',
+        'levels.l1.title': 'Autocomplete', 'levels.l1.desc': 'Human-led, AI-assisted. You write, the model suggests. Manual prompting, low autonomy, reactive support on demand.',
+        'levels.l2.title': 'Bottleneck', 'levels.l2.desc': 'AI generates, humans verify. High-volume output with mandatory review of every result. Scale limited by approval capacity and trust bandwidth.',
+        'levels.l3.title': 'Policy', 'levels.l3.desc': 'Human governs, agent executes. Rules-based delegation where humans set constraints and AI operates within them.',
+        'levels.l4.title': 'Vision', 'levels.l4.desc': 'Humans define success, agents deliver. Outcome-oriented delegation with human-set metrics and autonomous AI execution.',
+        'about.title': 'The Technology Is Ready. Are You?',
+        'about.p1': 'Today's AI operates at Level 4. Autonomous execution against defined outcomes. Meanwhile, most organisations remain structured for Levels 0 through 2 — manual prompting, human review of every output, approval bottlenecks that constrain scale.',
+        'about.p2': 'The gap between capability and adoption is not technical. It is organisational. MindGap measures that distance.',
+        'footer.imprint': 'Imprint', 'footer.privacy': 'Privacy'
+      },
+      es: {
+        'nav.consultancy': 'Consultoría IA', 'nav.assessment': 'Evaluación IA', 'nav.engineering': 'Ingeniería', 'nav.enablement': 'Capacitación IA', 'nav.contact': 'Contacto',
+        'hero.subtitle': 'Evaluación de Madurez IA',
+        'hero.title': 'Encuentra tu nivel.',
+        'hero.intro': 'Un diagnóstico de 15 minutos que mapea las capacidades de IA de tu organización en un marco de madurez claro. Identifica brechas. Prioriza acciones.',
+        'hero.cta': 'Realizar evaluación',
+        'levels.title': 'Los Niveles de Madurez en IA',
+        'levels.l0.title': 'Consulta', 'levels.l0.desc': 'IA como buscador. Interacciones de pregunta-respuesta para recuperar información. Sin generación, sin integración en flujos de trabajo.',
+        'levels.l1.title': 'Autocompletado', 'levels.l1.desc': 'Liderado por humanos, asistido por IA. Tú escribes, el modelo sugiere. Prompts manuales, baja autonomía, soporte reactivo bajo demanda.',
+        'levels.l2.title': 'Cuello de botella', 'levels.l2.desc': 'La IA genera, los humanos verifican. Alto volumen de producción con revisión obligatoria de cada resultado. Escala limitada por capacidad de aprobación y confianza.',
+        'levels.l3.title': 'Política', 'levels.l3.desc': 'El humano gobierna, el agente ejecuta. Delegación basada en reglas donde los humanos definen restricciones y la IA opera dentro de ellas.',
+        'levels.l4.title': 'Visión', 'levels.l4.desc': 'Los humanos definen el éxito, los agentes entregan. Delegación orientada a resultados con métricas definidas por humanos y ejecución autónoma de IA.',
+        'about.title': 'La tecnología está lista. ¿Y tú?',
+        'about.p1': 'La IA actual opera en Nivel 4. Ejecución autónoma hacia resultados definidos. Mientras tanto, la mayoría de las organizaciones siguen estructuradas para Niveles 0 a 2 — prompts manuales, revisión humana de cada salida, cuellos de botella de aprobación que limitan la escala.',
+        'about.p2': 'La brecha entre capacidad y adopción no es técnica. Es organizacional. MindGap mide esa distancia.',
+        'footer.imprint': 'Aviso legal', 'footer.privacy': 'Privacidad'
+      },
+      de: {
+        'nav.consultancy': 'KI-Beratung', 'nav.assessment': 'KI-Assessment', 'nav.engineering': 'Engineering', 'nav.enablement': 'KI-Befähigung', 'nav.contact': 'Kontakt',
+        'hero.subtitle': 'KI-Reifegrad-Assessment',
+        'hero.title': 'Finde dein Level.',
+        'hero.intro': 'Eine 15-minütige Diagnose, die die KI-Fähigkeiten deiner Organisation in einem klaren Reifegradmodell abbildet. Lücken erkennen. Prioritäten setzen.',
+        'hero.cta': 'Assessment starten',
+        'levels.title': 'Die Stufen der KI-Reife',
+        'levels.l0.title': 'Suche', 'levels.l0.desc': 'KI als Suchmaschine. Frage-Antwort-Interaktionen zur Informationsbeschaffung. Keine Generierung, keine Workflow-Integration.',
+        'levels.l1.title': 'Autovervollständigung', 'levels.l1.desc': 'Menschengeführt, KI-unterstützt. Du schreibst, das Modell schlägt vor. Manuelle Prompts, geringe Autonomie, reaktive Unterstützung auf Abruf.',
+        'levels.l2.title': 'Engpass', 'levels.l2.desc': 'KI generiert, Menschen prüfen. Hoher Output mit obligatorischer Überprüfung jedes Ergebnisses. Skalierung begrenzt durch Freigabekapazität und Vertrauensbudget.',
+        'levels.l3.title': 'Richtlinie', 'levels.l3.desc': 'Der Mensch steuert, der Agent führt aus. Regelbasierte Delegation, bei der Menschen Grenzen setzen und KI innerhalb dieser operiert.',
+        'levels.l4.title': 'Vision', 'levels.l4.desc': 'Menschen definieren Erfolg, Agenten liefern. Ergebnisorientierte Delegation mit menschlich definierten Metriken und autonomer KI-Ausführung.',
+        'about.title': 'Die Technologie ist bereit. Bist du es auch?',
+        'about.p1': 'Heutige KI operiert auf Level 4. Autonome Ausführung gegen definierte Ergebnisse. Die meisten Organisationen sind jedoch noch für Level 0 bis 2 strukturiert — manuelle Prompts, menschliche Überprüfung jeder Ausgabe, Freigabe-Engpässe, die Skalierung verhindern.',
+        'about.p2': 'Die Lücke zwischen Fähigkeit und Adoption ist nicht technisch. Sie ist organisatorisch. MindGap misst diese Distanz.',
+        'footer.imprint': 'Impressum', 'footer.privacy': 'Datenschutz'
+      },
+      fr: {
+        'nav.consultancy': 'Conseil IA', 'nav.assessment': 'Évaluation IA', 'nav.engineering': 'Ingénierie', 'nav.enablement': 'Formation IA', 'nav.contact': 'Contact',
+        'hero.subtitle': 'Évaluation de Maturité IA',
+        'hero.title': 'Trouvez votre niveau.',
+        'hero.intro': 'Un diagnostic de 15 minutes qui cartographie les capacités IA de votre organisation dans un cadre de maturité clair. Identifiez les écarts. Priorisez les actions.',
+        'hero.cta': 'Passer l\'évaluation',
+        'levels.title': 'Les Niveaux de Maturité IA',
+        'levels.l0.title': 'Recherche', 'levels.l0.desc': 'L\'IA comme moteur de recherche. Interactions question-réponse pour la récupération d\'informations. Pas de génération, pas d\'intégration aux flux de travail.',
+        'levels.l1.title': 'Autocomplétion', 'levels.l1.desc': 'Dirigé par l\'humain, assisté par l\'IA. Vous écrivez, le modèle suggère. Prompts manuels, faible autonomie, support réactif à la demande.',
+        'levels.l2.title': 'Goulot', 'levels.l2.desc': 'L\'IA génère, les humains vérifient. Production à haut volume avec révision obligatoire de chaque résultat. Échelle limitée par la capacité d\'approbation et la bande passante de confiance.',
+        'levels.l3.title': 'Politique', 'levels.l3.desc': 'L\'humain gouverne, l\'agent exécute. Délégation basée sur des règles où les humains définissent les contraintes et l\'IA opère dans ce cadre.',
+        'levels.l4.title': 'Vision', 'levels.l4.desc': 'Les humains définissent le succès, les agents livrent. Délégation orientée résultats avec métriques définies par les humains et exécution IA autonome.',
+        'about.title': 'La technologie est prête. Et vous ?',
+        'about.p1': 'L\'IA d\'aujourd\'hui opère au Niveau 4. Exécution autonome vers des résultats définis. Pendant ce temps, la plupart des organisations restent structurées pour les Niveaux 0 à 2 — prompts manuels, révision humaine de chaque sortie, goulots d\'approbation qui limitent l\'échelle.',
+        'about.p2': 'L\'écart entre capacité et adoption n\'est pas technique. Il est organisationnel. MindGap mesure cette distance.',
+        'footer.imprint': 'Mentions légales', 'footer.privacy': 'Confidentialité'
+      },
+      it: {
+        'nav.consultancy': 'Consulenza IA', 'nav.assessment': 'Valutazione IA', 'nav.engineering': 'Ingegneria', 'nav.enablement': 'Formazione IA', 'nav.contact': 'Contatto',
+        'hero.subtitle': 'Valutazione Maturità IA',
+        'hero.title': 'Trova il tuo livello.',
+        'hero.intro': 'Una diagnosi di 15 minuti che mappa le capacità IA della tua organizzazione in un framework di maturità chiaro. Identifica i gap. Prioritizza le azioni.',
+        'hero.cta': 'Fai la valutazione',
+        'levels.title': 'I Livelli di Maturità IA',
+        'levels.l0.title': 'Ricerca', 'levels.l0.desc': 'IA come motore di ricerca. Interazioni domanda-risposta per il recupero di informazioni. Nessuna generazione, nessuna integrazione nei flussi di lavoro.',
+        'levels.l1.title': 'Autocompletamento', 'levels.l1.desc': 'Guidato dall\'umano, assistito dall\'IA. Tu scrivi, il modello suggerisce. Prompt manuali, bassa autonomia, supporto reattivo su richiesta.',
+        'levels.l2.title': 'Collo di bottiglia', 'levels.l2.desc': 'L\'IA genera, gli umani verificano. Output ad alto volume con revisione obbligatoria di ogni risultato. Scala limitata dalla capacità di approvazione e dalla larghezza di banda della fiducia.',
+        'levels.l3.title': 'Policy', 'levels.l3.desc': 'L\'umano governa, l\'agente esegue. Delega basata su regole dove gli umani definiscono i vincoli e l\'IA opera al loro interno.',
+        'levels.l4.title': 'Visione', 'levels.l4.desc': 'Gli umani definiscono il successo, gli agenti consegnano. Delega orientata ai risultati con metriche definite dagli umani ed esecuzione IA autonoma.',
+        'about.title': 'La tecnologia è pronta. E tu?',
+        'about.p1': 'L\'IA di oggi opera al Livello 4. Esecuzione autonoma verso risultati definiti. Nel frattempo, la maggior parte delle organizzazioni rimane strutturata per i Livelli 0-2 — prompt manuali, revisione umana di ogni output, colli di bottiglia di approvazione che limitano la scala.',
+        'about.p2': 'Il divario tra capacità e adozione non è tecnico. È organizzativo. MindGap misura quella distanza.',
+        'footer.imprint': 'Impronta', 'footer.privacy': 'Privacy'
+      },
+      rm: {
+        'nav.consultancy': 'Cussegliaziun IA', 'nav.assessment': 'Evaluaziun IA', 'nav.engineering': 'Ingenieria', 'nav.enablement': 'Furmaziun IA', 'nav.contact': 'Contact',
+        'hero.subtitle': 'Evaluaziun da Maturitad IA',
+        'hero.title': 'Chatta tes nivel.',
+        'hero.intro': 'Ina diagnostica da 15 minutas che cartographescha las capacitads IA da tia organisaziun en in model da maturitad cler. Identifitgescha gaps. Prioritisescha acziuns.',
+        'hero.cta': 'Far l\'evaluaziun',
+        'levels.title': 'Ils Nivels da Maturitad IA',
+        'levels.l0.title': 'Tschertga', 'levels.l0.desc': 'IA sco maschina da tschertgar. Interacziuns dumonda-resposta per recuperar infurmaziuns. Nagina generaziun, nagina integraziun en workflows.',
+        'levels.l1.title': 'Autocumplettaziun', 'levels.l1.desc': 'Manà dad umans, assistì da IA. Ti scrivs, il model propona. Prompts manuals, bassa autonomia, sustegn reactiv sin dumonda.',
+        'levels.l2.title': 'Cul da buttiglia', 'levels.l2.desc': 'IA generescha, umans verifitgeschan. Output dad aut volumen cun revisiun obligatorica da mintga resultat. Scala limitada da capacitad d\'approvaziun e larghezza da banda da fidanza.',
+        'levels.l3.title': 'Directiva', 'levels.l3.desc': 'L\'uman guverna, l\'agent exequescha. Delegaziun basada sin reglas nua che umans defineschan restricziuns e IA opera entaifer quellas.',
+        'levels.l4.title': 'Visiun', 'levels.l4.desc': 'Umans defineschan success, agents furneschan. Delegaziun orientada a resultats cun metricas definidas dad umans ed execuziun IA autonoma.',
+        'about.title': 'La tecnologia è pronta. E ti?',
+        'about.p1': 'L\'IA dad oz opera al Nivel 4. Execuziun autonoma vers resultats definids. Entant, la gronda part da las organisaziuns resta structurada per Nivels 0 fin 2 — prompts manuals, revisiun umana da mintga output, culs da buttiglia d\'approvaziun che limiteschan la scala.',
+        'about.p2': 'Il gap tranter capacitad ed adopziun n\'è betg tecnic. El è organisatoric. MindGap mesira quella distanza.',
+        'footer.imprint': 'Impressum', 'footer.privacy': 'Protecziun da datas'
+      }
+    };
+
+    function setLanguage(lang) {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[lang] && translations[lang][key]) {
+          el.textContent = translations[lang][key];
+        }
+      });
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+      });
+      localStorage.setItem('askus-lang', lang);
+    }
+
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+    });
+
+    const savedLang = localStorage.getItem('askus-lang') || 'en';
+    setLanguage(savedLang);
+
+    const header = document.querySelector('header');
+    const servicesSection = document.querySelector('.services');
+    const navEl = document.querySelector('nav');
+
+    function updateHeader() {
+      if (!servicesSection) return;
+      const rect = servicesSection.getBoundingClientRect();
+      const invert = rect.top < 80 && rect.bottom > 0;
+      header.classList.toggle('inverted', invert);
+      if (!navEl.classList.contains('open')) navEl.classList.toggle('inverted', invert);
+    }
+
+    window.addEventListener('scroll', updateHeader);
+    updateHeader();
+
+    const menuToggle = document.querySelector('.menu-toggle');
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('open');
+      navEl.classList.toggle('open');
+      header.classList.toggle('menu-open');
+      document.body.style.overflow = navEl.classList.contains('open') ? 'hidden' : '';
+    });
+    navEl.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      menuToggle.classList.remove('open');
+      navEl.classList.remove('open');
+      header.classList.remove('menu-open');
+      document.body.style.overflow = '';
+    }));
+
+    const scrollHintBtn = document.querySelector('.scroll-hint');
+    if (scrollHintBtn) {
+      scrollHintBtn.addEventListener('click', () => {
+        window.scrollBy({
+          top: Math.max(window.innerHeight * 0.55, 320),
+          behavior: 'smooth'
+        });
+      });
+    }
+
+    const form    = document.getElementById('req-form');
+    const submit  = document.getElementById('req-submit');
+    const errEl   = document.getElementById('req-error');
+    const success = document.getElementById('req-success');
+    const already = document.getElementById('req-already');
+    const wrap    = document.getElementById('req-form-wrap');
+
+    function showError(msg) { errEl.textContent = msg; errEl.hidden = false; }
+    function clearError() { errEl.textContent = ''; errEl.hidden = true; }
+
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      clearError();
+
+      const name    = document.getElementById('req-name').value.trim();
+      const email   = document.getElementById('req-email').value.trim();
+      const company = document.getElementById('req-company').value.trim();
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!name || !email || !company) {
+        showError('All fields are required.');
+        return;
+      }
+
+      if (!emailRegex.test(email)) {
+        showError('Invalid email format.');
+        return;
+      }
+
+      submit.disabled = true;
+      submit.textContent = 'Processing...';
+
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 8000);
+
+      try {
+        const resp = await fetch('/api/request', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, company }),
+          signal: controller.signal
+        });
+
+        clearTimeout(timeoutId);
+
+        if (resp.status === 201) {
+          wrap.hidden = true; success.hidden = false; return;
+        }
+        if (resp.status === 409) {
+          wrap.hidden = true; already.hidden = false; return;
+        }
+        if (resp.status === 400) {
+          const contentType = resp.headers.get("content-type");
+          if (contentType && contentType.includes("application/json")) {
+            const data = await resp.json();
+            showError(data.message || 'Input validation failed.');
+          } else {
+            const text = await resp.text();
+            showError(text || 'Input validation failed.');
+          }
+          return;
+        }
+        showError('Server communication failure.');
+      } catch (err) {
+        if (err.name === 'AbortError') {
+          showError('Request timed out.');
+        } else {
+          showError('Network connectivity error.');
+        }
+      } finally {
+        submit.disabled = false;
+        submit.textContent = 'Submit Request';
+      }
+    });
+
+    const canvas = document.getElementById('dotfield');
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    let dots = [];
+    let dotAssignments = [];
+    let baseTextPositions = [];
+    let convergenceOffset = 0;
+    let mouse = { x: -1000, y: -1000 };
+
+    const DOT_SPACING = 24;
+    const DOT_RADIUS = 1.2;
+    const INFLUENCE_RADIUS = 130;
+    const MAX_DISPLACEMENT = 28;
+
+    const mindgapContent = document.getElementById('mindgap-content');
+    const formContainer = document.getElementById('form-container');
+
+    function sampleTextPositions(fontSize) {
+      const offscreen = document.createElement('canvas');
+      const offCtx = offscreen.getContext('2d');
+      offscreen.width = width;
+      offscreen.height = height;
+
+      offCtx.fillStyle = 'white';
+      offCtx.fillRect(0, 0, width, height);
+
+      offCtx.font = `900 ${fontSize}px "Helvetica Neue", Helvetica, Arial, sans-serif`;
+      offCtx.fillStyle = 'black';
+      offCtx.textBaseline = 'middle';
+
+      const mind = 'Mind';
+      const gap = 'Gap';
+      const mindWidth = offCtx.measureText(mind).width;
+      const gapWidth = offCtx.measureText(gap).width;
+
+      const sectionWidth = Math.min(680, width - 48);
+      const sectionLeft = (width - sectionWidth) / 2;
+      const sectionRight = sectionLeft + sectionWidth;
+
+      const padding = Math.min(40, width * 0.05);
+      const mindEndX = sectionLeft - padding;
+      const gapStartX = sectionRight + padding;
+
+      const spacing = gapStartX - mindEndX;
+      const targetSpacing = fontSize * 0.15;
+      convergenceOffset = (spacing - targetSpacing) / 2;
+
+      const startX = mindEndX - mindWidth;
+      const startY = height / 2;
+
+      offCtx.fillText(mind, startX, startY);
+      offCtx.fillText(gap, gapStartX, startY);
+
+      const splitThreshold = mindEndX + (spacing / 2);
+
+      const imageData = offCtx.getImageData(0, 0, width, height);
+      const pixels = imageData.data;
+      const positions = [];
+      const step = Math.max(6, Math.floor(fontSize / 18));
+
+      for (let y = 0; y < height; y += step) {
+        for (let x = 0; x < width; x += step) {
+          const i = (y * width + x) * 4;
+          if (pixels[i] < 128) {
+            positions.push({ x, y, isGap: x > splitThreshold });
+          }
+        }
+      }
+      return positions;
+    }
+
+    function resize() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+
+      const fontSize = Math.min(width * 0.18, 200);
+      baseTextPositions = sampleTextPositions(fontSize);
+      initDots();
+    }
+
+    function initDots() {
+      dots = [];
+      const cols = Math.ceil(width / DOT_SPACING) + 1;
+      const rows = Math.ceil(height / DOT_SPACING) + 1;
+
+      for (let i = 0; i < cols; i++) {
+        for (let j = 0; j < rows; j++) {
+          dots.push({
+            originX: i * DOT_SPACING,
+            originY: j * DOT_SPACING,
+            x: i * DOT_SPACING,
+            y: j * DOT_SPACING
+          });
+        }
+      }
+
+      dotAssignments = dots.map((_, i) => i);
+      for (let i = dotAssignments.length - 1; i > 0; i--) {
+        const j = Math.floor((Math.sin(i * 9999) * 0.5 + 0.5) * (i + 1));
+        [dotAssignments[i], dotAssignments[j]] = [dotAssignments[j], dotAssignments[i]];
+      }
+    }
+
+    function easeInOutQuart(t) {
+      return t < 0.5 ? 8 * t * t * t * t : 1 - Math.pow(-2 * t + 2, 4) / 2;
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, width, height);
+
+      const vh = window.innerHeight;
+      const zoneRect = mindgapContent.getBoundingClientRect();
+      const zoneTop = zoneRect.top;
+      
+      let formRaw = (vh - zoneTop) / (vh * 0.8);
+      const formProgress = easeInOutQuart(Math.max(0, Math.min(formRaw, 1)));
+
+      let closeRaw = 0;
+      if (formContainer) {
+        const formRect = formContainer.getBoundingClientRect();
+        closeRaw = (vh - formRect.top) / (vh * 0.6);
+      }
+      const closeProgress = easeInOutQuart(Math.max(0, Math.min(closeRaw, 1)));
+
+      const currentGapOffset = convergenceOffset * closeProgress;
+
+      for (let i = 0; i < dots.length; i++) {
+        const dot = dots[i];
+        const assignmentIndex = dotAssignments[i];
+        const hasTarget = assignmentIndex < baseTextPositions.length;
+
+        let drawX, drawY, alpha;
+
+        if (hasTarget && formProgress > 0) {
+          const target = baseTextPositions[assignmentIndex];
+
+          let targetX = target.x;
+          if (target.isGap) {
+            targetX -= currentGapOffset;
+          } else {
+            targetX += currentGapOffset;
+          }
+
+          drawX = dot.originX + (targetX - dot.originX) * formProgress;
+          drawY = dot.originY + (target.y - dot.originY) * formProgress;
+          alpha = 0.1 + formProgress * 0.8;
+        } else {
+          const dx = mouse.x - dot.originX;
+          const dy = mouse.y - dot.originY;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          drawX = dot.originX;
+          drawY = dot.originY;
+
+          if (dist < INFLUENCE_RADIUS) {
+            const force = (1 - dist / INFLUENCE_RADIUS) * MAX_DISPLACEMENT;
+            const angle = Math.atan2(dy, dx);
+            drawX -= Math.cos(angle) * force;
+            drawY -= Math.sin(angle) * force;
+          }
+
+          alpha = 0.1 * Math.max(0, 1 - formProgress * 1.5);
+        }
+
+        dot.x += (drawX - dot.x) * 0.12;
+        dot.y += (drawY - dot.y) * 0.12;
+
+        if (alpha > 0.01) {
+          ctx.beginPath();
+          ctx.arc(dot.x, dot.y, DOT_RADIUS, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(0,0,0,${alpha})`;
+          ctx.fill();
+        }
+      }
+
+      requestAnimationFrame(draw);
+    }
+
+    document.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
+    document.addEventListener('mouseleave', () => { mouse.x = -1000; mouse.y = -1000; });
+    window.addEventListener('resize', resize);
+
+    resize();
+    draw();
+  </script>
+</body>
+</html>
+
+
+
+
+
+
