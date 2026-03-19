@@ -10,18 +10,19 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    :root { --black: #0a0a0a; --white: #fafafa; --gray: #888; --border: rgba(0,0,0,0.1); --error: #d32f2f; --success: #2e7d32; --bg: var(--white); --fg: var(--black); --muted: var(--gray); }
-    [data-theme="dark"] { --bg: #1c1b19; --fg: #e8e4de; --white: #e8e4de; --black: #1c1b19; --gray: #9a958d; --muted: #9a958d; --border: rgba(255,255,255,0.08); --error: #f87171; --success: #6ee7b7; }
+    :root { --black: #0a0a0a; --white: #fafafa; --gray: #888; --border: rgba(0,0,0,0.1); --error: #d32f2f; --success: #2e7d32; --bg: var(--white); --fg: var(--black); --muted: var(--gray); --dot-color: 0,0,0; }
+    [data-theme="dark"] { --bg: #1c1b19; --fg: #e8e4de; --white: #e8e4de; --black: #1c1b19; --gray: #9a958d; --muted: #9a958d; --border: rgba(255,255,255,0.08); --error: #f87171; --success: #6ee7b7; --dot-color: 232,228,222; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { font-size: 16px; scroll-behavior: smooth; }
     body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background: var(--bg); color: var(--fg); line-height: 1.6; overflow-x: hidden; transition: background 0.3s ease, color 0.3s ease; }
 
     /* Split Architecture */
-    .runtime-environment { position: fixed; top: 0; left: 0; width: 45%; height: 100vh; background: #0a0a0a; border-right: 1px solid #222; z-index: 0; padding: 8rem 3rem 3rem; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; }
-    .content-environment { position: relative; margin-left: 45%; width: 55%; z-index: 1; background: var(--bg); min-height: 100vh; }
+    .runtime-environment { position: fixed; top: 0; left: 0; width: 45%; height: 100vh; background: #0a0a0a; border-right: 1px solid #222; z-index: 2; padding: 8rem 3rem 3rem; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; }
+    .content-environment { position: relative; margin-left: 45%; width: 55%; z-index: 2; background: rgba(250,250,250,0.85); min-height: 100vh; }
+    [data-theme="dark"] .content-environment { background: rgba(28,27,25,0.85); }
     .content-shell { width: min(100%, 760px); margin: 0 auto; }
 
-    header { position: fixed; top: 0; left: 0; right: 0; padding: 2rem 3rem; display: flex; justify-content: space-between; align-items: center; z-index: 100; transition: color 0.3s ease, background 0.3s ease; mix-blend-mode: difference; color: var(--white); pointer-events: none; }
+    header { position: fixed; top: 0; left: 0; right: 0; padding: 2rem 3rem; display: flex; justify-content: space-between; align-items: center; z-index: 100; transition: color 0.3s ease, background 0.3s ease; mix-blend-mode: difference; color: #fafafa; pointer-events: none; }
     header > * { pointer-events: auto; }
     header.menu-open { background: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; }
     .logo { font-family: 'Space Mono', monospace; font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase; text-decoration: none; font-weight: 700; color: inherit; transition: color 0.3s ease; }
@@ -40,13 +41,17 @@
     .menu-toggle.open span:nth-child(2) { opacity: 0; }
     .menu-toggle.open span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
 
+    /* Reactive Dots Grid */
+    #dotfield { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 3; pointer-events: none; }
+    @media (pointer: coarse) { #dotfield { display: none; } }
+
     /* Runtime Terminal CSS */
-    .runtime-sigil { margin-top: 1rem; flex: 1; min-height: 0; display: flex; align-items: stretch; }
+    .runtime-sigil { margin-top: 1rem; flex: 1; min-height: 0; display: flex; align-items: stretch; position: relative; z-index: 4; }
     .ascii-logo { font-family: 'Courier New', Consolas, monospace; font-size: clamp(0.5rem, 1.1vw, 1.2rem); line-height: 1; letter-spacing: 0.05em; color: var(--white); white-space: pre; user-select: none; margin: 0; width: 100%; height: 100%; overflow: hidden; display: flex; align-items: center; justify-content: center; }
     .ascii-bright { color: rgba(250,250,250,0.96); }
     .ascii-mid { color: rgba(186,186,186,0.72); }
     .ascii-dim { color: rgba(110,110,110,0.54); }
-    .runtime-footer { margin-top: auto; }
+    .runtime-footer { margin-top: auto; position: relative; z-index: 4; }
     .terminal-header { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray); margin-bottom: 2rem; border-bottom: 1px solid #333; padding-bottom: 0.5rem; }
     .terminal-log { font-family: 'Space Mono', monospace; font-size: 0.7rem; line-height: 1.8; color: var(--white); display: flex; flex-direction: column; gap: 0.25rem; }
     .log-entry { display: flex; gap: 1rem; opacity: 0; transform: translateY(10px); animation: logIn 0.3s forwards; }
@@ -57,7 +62,7 @@
     @keyframes logIn { to { opacity: 1; transform: translateY(0); } }
 
     /* Narrative Content */
-    .section { padding: 7rem 4rem; border-bottom: 1px solid var(--border); }
+    .section { padding: 7rem 4rem; border-bottom: 1px solid var(--border); position: relative; z-index: 4; }
     .section:last-of-type { border-bottom: none; }
     
     .hero-section { padding-top: 9rem; }
@@ -102,7 +107,7 @@
 
     [hidden] { display: none !important; }
 
-    footer { padding: 3rem 4rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); background: var(--bg); }
+    footer { padding: 3rem 4rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); background: var(--bg); position: relative; z-index: 4; }
     .footer-links { display: flex; gap: 2rem; }
     .footer-text, .footer-link { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; color: var(--muted); text-decoration: none; text-transform: uppercase; }
     .footer-link:hover { color: var(--fg); }
@@ -162,6 +167,8 @@
     <a href="/contact/" data-i18n="nav.contact">Contact</a>
   </nav>
 
+  <canvas id="dotfield"></canvas>
+
   <div class="runtime-environment">
     <div class="runtime-sigil" aria-hidden="true">
       <pre class="ascii-logo" id="asciiLogo"></pre>
@@ -174,7 +181,7 @@
   </div>
 
   <div class="content-environment">
-    
+
     <div class="section hero-section">
       <div class="content-shell">
         <span class="hero-tag">Solutions</span>
@@ -288,32 +295,96 @@
       "<span class='log-success'>[PASS]</span> Query latency reduced by 14%."
     ];
 
-    const translations = {
-      en: {
-        'nav.consultancy': 'AI Consultancy', 'nav.assessment': 'AI Assessment', 'nav.solutions': 'Solutions', 'nav.engineering': 'Engineering', 'nav.contact': 'Contact'
-      },
-      es: {
-        'nav.consultancy': 'Consultoría IA', 'nav.assessment': 'AI Assessment', 'nav.solutions': 'Soluciones', 'nav.engineering': 'Engineering', 'nav.contact': 'Contacto'
-      },
-      de: {
-        'nav.consultancy': 'KI-Beratung', 'nav.assessment': 'AI Assessment', 'nav.solutions': 'Lösungen', 'nav.engineering': 'Engineering', 'nav.contact': 'Kontakt'
-      },
-      fr: {
-        'nav.consultancy': 'Conseil IA', 'nav.assessment': 'AI Assessment', 'nav.solutions': 'Solutions', 'nav.engineering': 'Engineering', 'nav.contact': 'Contact'
-      },
-      it: {
-        'nav.consultancy': 'Consulenza IA', 'nav.assessment': 'AI Assessment', 'nav.solutions': 'Soluzioni', 'nav.engineering': 'Engineering', 'nav.contact': 'Contatto'
-      },
-      rm: {
-        'nav.consultancy': 'Cussegliaziun IA', 'nav.assessment': 'AI Assessment', 'nav.solutions': 'Soluziuns', 'nav.engineering': 'Engineering', 'nav.contact': 'Contact'
+    // --- Dot Field ---
+    const canvas = document.getElementById('dotfield');
+    const ctx = canvas.getContext('2d');
+    let width, height, dots = [];
+    let mouse = { x: -1000, y: -1000 };
+    const TARGET_DOT_COLUMNS = 82;
+    const DOT_RADIUS = 1.2;
+    const INFLUENCE_RADIUS = 130;
+    const MAX_DISPLACEMENT = 28;
+    let dotSpacing = 24;
+
+    function resize() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+      dotSpacing = width / Math.max(1, TARGET_DOT_COLUMNS - 1);
+      dots = [];
+      const cols = TARGET_DOT_COLUMNS;
+      const rows = Math.ceil(height / dotSpacing) + 1;
+      for (let i = 0; i < cols; i++) {
+        for (let j = 0; j < rows; j++) {
+          dots.push({ baseX: i * dotSpacing, baseY: j * dotSpacing, x: i * dotSpacing, y: j * dotSpacing });
+        }
       }
+    }
+
+    function draw() {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      const runtimeWidth = document.querySelector('.runtime-environment').getBoundingClientRect().width;
+      ctx.clearRect(0, 0, width, height);
+      for (const dot of dots) {
+        const dx = mouse.x - dot.baseX;
+        const dy = mouse.y - dot.baseY;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        let targetX = dot.baseX, targetY = dot.baseY;
+
+        if (dist < INFLUENCE_RADIUS) {
+          const force = (1 - dist / INFLUENCE_RADIUS) * MAX_DISPLACEMENT;
+          const angle = Math.atan2(dy, dx);
+          targetX -= Math.cos(angle) * force;
+          targetY -= Math.sin(angle) * force;
+        }
+
+        dot.x += (targetX - dot.x) * 0.12;
+        dot.y += (targetY - dot.y) * 0.12;
+
+        ctx.beginPath();
+        ctx.arc(dot.x, dot.y, DOT_RADIUS, 0, Math.PI * 2);
+        if (dot.baseX < runtimeWidth) {
+          ctx.fillStyle = isDark
+            ? 'rgba(232,228,222,0.34)'
+            : 'rgba(250,250,250,0.34)';
+        } else {
+          ctx.fillStyle = isDark
+            ? 'rgba(232,228,222,0.18)'
+            : 'rgba(10,10,10,0.1)';
+        }
+        ctx.fill();
+      }
+
+      requestAnimationFrame(draw);
+    }
+
+    document.addEventListener('mousemove', (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    });
+
+    document.addEventListener('mouseleave', () => {
+      mouse.x = -1000;
+      mouse.y = -1000;
+    });
+
+    window.addEventListener('resize', resize);
+    resize();
+    draw();
+
+    const translations = {
+      en: { 'nav.consultancy': 'AI Consultancy', 'nav.assessment': 'AI Assessment', 'nav.solutions': 'Solutions', 'nav.engineering': 'Engineering', 'nav.contact': 'Contact' },
+      es: { 'nav.consultancy': 'Consultoría IA', 'nav.assessment': 'AI Assessment', 'nav.solutions': 'Soluciones', 'nav.engineering': 'Engineering', 'nav.contact': 'Contacto' },
+      de: { 'nav.consultancy': 'KI-Beratung', 'nav.assessment': 'AI Assessment', 'nav.solutions': 'Lösungen', 'nav.engineering': 'Engineering', 'nav.contact': 'Kontakt' },
+      fr: { 'nav.consultancy': 'Conseil IA', 'nav.assessment': 'AI Assessment', 'nav.solutions': 'Solutions', 'nav.engineering': 'Engineering', 'nav.contact': 'Contact' },
+      it: { 'nav.consultancy': 'Consulenza IA', 'nav.assessment': 'AI Assessment', 'nav.solutions': 'Soluzioni', 'nav.engineering': 'Engineering', 'nav.contact': 'Contatto' },
+      rm: { 'nav.consultancy': 'Cussegliaziun IA', 'nav.assessment': 'AI Assessment', 'nav.solutions': 'Soluziuns', 'nav.engineering': 'Engineering', 'nav.contact': 'Contact' }
     };
 
-const asciiArt = `
-  ___  ___ ___ ___   _ _____ ___  ___    
- / _ \\| _ \\ __| _ \\ /_\\_   _/ _ \\| _ \\  
-| (_) |  _/ _||   // _ \\| || (_) |   / 
- \\___/|_| |___|_|_\\_/ \\_\\_| \\___/|_|_\\\.AI`;
+    const asciiArt = `
+  ___  ___ ___ ___   _ _____ ___  ___       
+ / _ \\| _ \\ __| _ \\ /_\\_   _/ _ \\| _ \\ 
+| (_) |  _/ _||   // _ \\| || (_) |   /
+ \\___/|_| |___|_|_\\_/ \\_\\_| \\___/|_|_\\ .AI`;
 
     function renderAsciiField() {
       if (!asciiLogo) return;
@@ -325,21 +396,13 @@ const asciiArt = `
     function setLanguage(lang) {
       document.querySelectorAll('[data-i18n]').forEach(function(el) {
         const key = el.getAttribute('data-i18n');
-        if (translations[lang] && translations[lang][key]) {
-          el.textContent = translations[lang][key];
-        }
+        if (translations[lang] && translations[lang][key]) { el.textContent = translations[lang][key]; }
       });
-      document.querySelectorAll('.lang-btn').forEach(function(btn) {
-        btn.classList.toggle('active', btn.dataset.lang === lang);
-      });
+      document.querySelectorAll('.lang-btn').forEach(function(btn) { btn.classList.toggle('active', btn.dataset.lang === lang); });
       localStorage.setItem('askus-lang', lang);
     }
 
-    document.querySelectorAll('.lang-btn').forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        setLanguage(btn.dataset.lang);
-      });
-    });
+    document.querySelectorAll('.lang-btn').forEach(function(btn) { btn.addEventListener('click', function() { setLanguage(btn.dataset.lang); }); });
 
     function setTheme(theme) {
       document.documentElement.setAttribute('data-theme', theme);
@@ -372,88 +435,47 @@ const asciiArt = `
         header.classList.toggle('menu-open');
         document.body.style.overflow = siteNav.classList.contains('open') ? 'hidden' : '';
       });
-
-      siteNav.querySelectorAll('a').forEach(function(link) {
-        link.addEventListener('click', closeMenu);
-      });
-
-      window.addEventListener('resize', function() {
-        if (window.innerWidth > 768) {
-          closeMenu();
-        }
-      });
+      siteNav.querySelectorAll('a').forEach(function(link) { link.addEventListener('click', closeMenu); });
+      window.addEventListener('resize', function() { if (window.innerWidth > 768) { closeMenu(); } });
     }
 
     renderAsciiField();
-
-    const savedLang = localStorage.getItem('askus-lang') || 'en';
-    setLanguage(savedLang);
-
-    const savedTheme = localStorage.getItem('askus-theme') ||
-      (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    setTheme(savedTheme);
-
+    setLanguage(localStorage.getItem('askus-lang') || 'en');
+    setTheme(localStorage.getItem('askus-theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
     window.addEventListener('resize', renderAsciiField);
     
     function addLogLine() {
       const entry = document.createElement('div');
       entry.className = 'log-entry';
-      
-      const now = new Date();
-      const timeStr = now.toISOString().split('T')[1].substring(0, 12);
-      
+      const timeStr = new Date().toISOString().split('T')[1].substring(0, 12);
       entry.innerHTML = `<span class="log-time">[${timeStr}]</span> <span class="log-action">${logs[logIndex]}</span>`;
       terminalLog.appendChild(entry);
-      
-      // Keep only last 10 lines to prevent DOM bloat
-      if (terminalLog.children.length > 10) {
-        terminalLog.removeChild(terminalLog.firstChild);
-      }
-      
+      if (terminalLog.children.length > 10) { terminalLog.removeChild(terminalLog.firstChild); }
       logIndex = (logIndex + 1) % logs.length;
-      
-      // Variable delay between 800ms and 3500ms for realism
-      const nextDelay = Math.random() * 2700 + 800;
-      setTimeout(addLogLine, nextDelay);
+      setTimeout(addLogLine, Math.random() * 2700 + 800);
     }
     
     setTimeout(addLogLine, 1000);
 
-
-    // --- Form API Integration Logic ---
-    const form    = document.getElementById('demo-form');
-    const submit  = document.getElementById('req-submit');
-    const errEl   = document.getElementById('req-error');
+    const form = document.getElementById('demo-form');
+    const submit = document.getElementById('req-submit');
+    const errEl = document.getElementById('req-error');
     const success = document.getElementById('req-success');
-    const wrap    = document.getElementById('demo-form-wrap');
-
-    function showError(msg) { errEl.textContent = msg; errEl.hidden = false; }
-    function clearError() { errEl.textContent = ''; errEl.hidden = true; }
+    const wrap = document.getElementById('demo-form-wrap');
 
     form.addEventListener('submit', async function(e) {
       e.preventDefault();
-      clearError();
-
-      const name    = document.getElementById('req-name').value.trim();
-      const email   = document.getElementById('req-email').value.trim();
+      errEl.hidden = true;
+      const name = document.getElementById('req-name').value.trim();
+      const email = document.getElementById('req-email').value.trim();
       const company = document.getElementById('req-company').value.trim();
-      const pain    = document.getElementById('req-pain').value;
+      const pain = document.getElementById('req-pain').value;
 
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-      if (!name || !email || !company || !pain) {
-        showError('All fields are mandatory.');
-        return;
-      }
-
-      if (!emailRegex.test(email)) {
-        showError('Invalid email format.');
-        return;
-      }
+      if (!name || !email || !company || !pain) { errEl.textContent = 'All fields are mandatory.'; errEl.hidden = false; return; }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { errEl.textContent = 'Invalid email format.'; errEl.hidden = false; return; }
 
       submit.disabled = true;
       submit.textContent = 'Transmitting...';
-
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 8000);
 
@@ -464,26 +486,11 @@ const asciiArt = `
           body: JSON.stringify({ name, email, company, pain }),
           signal: controller.signal
         });
-
         clearTimeout(timeoutId);
-
-        if (resp.status === 201 || resp.status === 200) {
-          wrap.hidden = true; success.hidden = false; return;
-        }
-        
-        const contentType = resp.headers.get("content-type");
-        if (contentType && contentType.includes("application/json")) {
-          const data = await resp.json();
-          showError(data.message || 'Validation failed.');
-        } else {
-          showError('Validation failed.');
-        }
+        if (resp.status === 201 || resp.status === 200) { wrap.hidden = true; success.hidden = false; return; }
+        errEl.textContent = 'Validation failed.'; errEl.hidden = false;
       } catch (err) {
-        if (err.name === 'AbortError') {
-          showError('Transmission timeout.');
-        } else {
-          showError('Network failure.');
-        }
+        errEl.textContent = err.name === 'AbortError' ? 'Transmission timeout.' : 'Network failure.'; errEl.hidden = false;
       } finally {
         submit.disabled = false;
         submit.textContent = 'Request Deployment';
