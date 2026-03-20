@@ -70,7 +70,7 @@
     .theme-toggle { position: fixed; bottom: 2rem; right: 2rem; z-index: 100; width: 2.5rem; height: 2.5rem; border-radius: 50%; background: var(--fg); color: var(--bg); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: transform 0.2s ease, opacity 0.2s ease; opacity: 0.7; }
     .theme-toggle:hover { opacity: 1; transform: scale(1.1); }
     .theme-toggle svg { width: 1.1rem; height: 1.1rem; }
-    .menu-toggle { display: none; flex-direction: column; gap: 4px; background: none; border: none; cursor: pointer; padding: 0.5rem; z-index: 201; }
+    .menu-toggle { display: none; flex-direction: column; gap: 4px; background: none; border: none; outline: none; cursor: pointer; padding: 0.5rem; z-index: 201; color: var(--fg); -webkit-tap-highlight-color: transparent; }
     .menu-toggle span { display: block; width: 18px; height: 1.5px; background: var(--fg); transition: all 0.3s ease; }
     header.inverted .menu-toggle span { background: var(--services-fg); }
     .menu-toggle.open span { background: var(--fg); }
@@ -148,6 +148,11 @@
           <h3 data-i18n="services.optimization.title">Optimization</h3>
           <p data-i18n="services.optimization.desc">Scenario modeling and bottleneck prevention. Cost reduction and growth without system overhauls.</p>
         </div>
+        <div class="service-item">
+          <p class="service-number">04</p>
+          <h3 data-i18n="services.training.title">Staff Training</h3>
+          <p data-i18n="services.training.desc">Hands-on AI enablement for your teams. Practical workflows, tool adoption, and internal capability building.</p>
+        </div>
       </div>
     </section>
 
@@ -196,13 +201,15 @@
         'services.design.desc': 'Custom AI solutions designed for production. From proof of concept to full-scale deployment.',
         'services.optimization.title': 'Optimization',
         'services.optimization.desc': 'Scenario modeling and bottleneck prevention. Cost reduction and growth without system overhauls.',
+        'services.training.title': 'Staff Training',
+        'services.training.desc': 'Hands-on AI enablement for your teams. Practical workflows, tool adoption, and internal capability building.',
         'about.title': 'Precision meets possibility',
         'about.p1': 'Founded in the heart of Europe, Askus brings a culture of discretion, reliability, and long-term thinking to the application of artificial intelligence.',
         'about.p2': 'We work with organizations that want to use AI thoughtfully, with a clear focus on real outcomes and durable value.',
         'footer.imprint': 'Imprint', 'footer.privacy': 'Privacy'
       },
       es: {
-        'nav.consultancy': 'Consultoría IA', 'nav.assessment': 'AI Assessment', 'nav.engineering': 'Engineering', 'nav.solutions': 'Soluciones', 'nav.contact': 'Contacto',
+        'nav.consultancy': 'Consultoría IA', 'nav.assessment': 'Evaluación IA', 'nav.engineering': 'Ingeniería', 'nav.solutions': 'Soluciones', 'nav.contact': 'Contacto',
         'hero.subtitle': 'Consultoría IA · Liechtenstein',
         'hero.title': 'Claridad a través de la inteligencia.',
         'hero.intro': 'Ayudamos a las organizaciones a navegar la complejidad de la inteligencia artificial con precisión y propósito.',
@@ -214,13 +221,15 @@
         'services.design.desc': 'Soluciones de IA a medida diseñadas para producción. Del concepto inicial al despliegue a escala.',
         'services.optimization.title': 'Optimización',
         'services.optimization.desc': 'Modelado de escenarios y prevención de cuellos de botella. Reducción de costes y crecimiento sin transformaciones radicales.',
+        'services.training.title': 'Formación de equipos',
+        'services.training.desc': 'Capacitación práctica en IA para sus equipos. Flujos de trabajo, adopción de herramientas y desarrollo de capacidades internas.',
         'about.title': 'Donde la precisión encuentra la posibilidad',
         'about.p1': 'Fundada en el corazón de Europa, Askus aporta una cultura de discreción, fiabilidad y visión a largo plazo a la aplicación de la inteligencia artificial.',
         'about.p2': 'Trabajamos con organizaciones que quieren usar la IA de forma reflexiva, con un enfoque claro en resultados reales y valor duradero.',
         'footer.imprint': 'Aviso legal', 'footer.privacy': 'Privacidad'
       },
       de: {
-        'nav.consultancy': 'KI-Beratung', 'nav.assessment': 'AI Assessment', 'nav.engineering': 'Engineering', 'nav.solutions': 'Lösungen', 'nav.contact': 'Kontakt',
+        'nav.consultancy': 'KI-Beratung', 'nav.assessment': 'KI-Assessment', 'nav.engineering': 'Engineering', 'nav.solutions': 'Lösungen', 'nav.contact': 'Kontakt',
         'hero.subtitle': 'KI-Beratung · Liechtenstein',
         'hero.title': 'Klarheit Durch Intelligenz.',
         'hero.intro': 'Wir helfen Organisationen, die Komplexität künstlicher Intelligenz mit Präzision und Zielstrebigkeit zu meistern.',
@@ -232,13 +241,15 @@
         'services.design.desc': 'Massgeschneiderte KI-Lösungen für den Produktivbetrieb. Vom Proof of Concept zum Vollbetrieb.',
         'services.optimization.title': 'Optimierung',
         'services.optimization.desc': 'Szenariomodellierung und Engpassvermeidung. Kostenreduktion und Wachstum ohne Systemumbrüche.',
+        'services.training.title': 'Mitarbeiterschulung',
+        'services.training.desc': 'Praxisorientierte KI-Befähigung für Ihre Teams. Workflows, Tool-Adoption und interner Kompetenzaufbau.',
         'about.title': 'Präzision trifft Möglichkeit',
         'about.p1': 'Im Herzen Europas gegründet, steht Askus für Diskretion, Verlässlichkeit und langfristiges Denken im Einsatz künstlicher Intelligenz.',
         'about.p2': 'Wir arbeiten mit Organisationen, die KI bewusst einsetzen möchten, mit klarem Fokus auf nachhaltigen Nutzen.',
         'footer.imprint': 'Impressum', 'footer.privacy': 'Datenschutz'
       },
       fr: {
-        'nav.consultancy': 'Conseil IA', 'nav.assessment': 'AI Assessment', 'nav.engineering': 'Engineering', 'nav.solutions': 'Solutions', 'nav.contact': 'Contact',
+        'nav.consultancy': 'Conseil IA', 'nav.assessment': 'Évaluation IA', 'nav.engineering': 'Ingénierie', 'nav.solutions': 'Solutions', 'nav.contact': 'Contact',
         'hero.subtitle': 'Conseil en IA · Liechtenstein',
         'hero.title': 'Clarté Par L\'Intelligence.',
         'hero.intro': 'Nous aidons les organisations à naviguer dans la complexité de l\'intelligence artificielle avec précision et détermination.',
@@ -250,13 +261,15 @@
         'services.design.desc': 'Solutions IA sur mesure conçues pour la production. Du proof of concept au déploiement à grande échelle.',
         'services.optimization.title': 'Optimisation',
         'services.optimization.desc': 'Modélisation de scénarios et prévention des goulets d\'étranglement. Réduction des coûts et croissance sans refonte.',
+        'services.training.title': 'Formation des équipes',
+        'services.training.desc': 'Formation pratique à l\'IA pour vos équipes. Workflows, adoption d\'outils et développement des compétences internes.',
         'about.title': 'La précision rencontre le possible',
         'about.p1': 'Fondée au cœur de l\'Europe, Askus incarne une culture de discrétion, de fiabilité et de vision à long terme.',
         'about.p2': 'Nous accompagnons des organisations qui souhaitent utiliser l\'IA de manière réfléchie.',
         'footer.imprint': 'Mentions légales', 'footer.privacy': 'Confidentialité'
       },
       it: {
-        'nav.consultancy': 'Consulenza IA', 'nav.assessment': 'AI Assessment', 'nav.engineering': 'Engineering', 'nav.solutions': 'Soluzioni', 'nav.contact': 'Contatto',
+        'nav.consultancy': 'Consulenza IA', 'nav.assessment': 'Valutazione IA', 'nav.engineering': 'Ingegneria', 'nav.solutions': 'Soluzioni', 'nav.contact': 'Contatto',
         'hero.subtitle': 'Consulenza IA · Liechtenstein',
         'hero.title': 'Chiarezza Attraverso L\'Intelligenza.',
         'hero.intro': 'Aiutiamo le organizzazioni a navigare nella complessità dell\'intelligenza artificiale con precisione e determinazione.',
@@ -268,13 +281,15 @@
         'services.design.desc': 'Soluzioni IA su misura progettate per la produzione. Dal proof of concept al deployment su larga scala.',
         'services.optimization.title': 'Ottimizzazione',
         'services.optimization.desc': 'Modellazione di scenari e prevenzione dei colli di bottiglia. Riduzione dei costi e crescita senza stravolgimenti.',
+        'services.training.title': 'Formazione del personale',
+        'services.training.desc': 'Formazione pratica sull\'IA per i vostri team. Workflow, adozione di strumenti e sviluppo delle competenze interne.',
         'about.title': 'La precisione incontra la possibilità',
         'about.p1': 'Fondata nel cuore dell\'Europa, Askus riflette una cultura di discrezione, affidabilità e visione di lungo periodo.',
         'about.p2': 'Lavoriamo con organizzazioni che vogliono utilizzare l\'IA in modo consapevole.',
         'footer.imprint': 'Impronta', 'footer.privacy': 'Privacy'
       },
       rm: {
-        'nav.consultancy': 'Cussegliaziun IA', 'nav.assessment': 'AI Assessment', 'nav.engineering': 'Engineering', 'nav.solutions': 'Soluziuns', 'nav.contact': 'Contact',
+        'nav.consultancy': 'Cussegliaziun IA', 'nav.assessment': 'Evaluaziun IA', 'nav.engineering': 'Ingenieria', 'nav.solutions': 'Soluziuns', 'nav.contact': 'Contact',
         'hero.subtitle': 'Cussegliaziun IA · Liechtenstein',
         'hero.title': 'Clarezia Tras Intelligenza.',
         'hero.intro': 'Nus gidain organisaziuns da navigar tras la cumplexitad da l\'intelligenza artifiziala cun precisiun e determinaziun.',
@@ -286,6 +301,8 @@
         'services.design.desc': 'Soluziuns IA persunalisadas concepidas per la producziun. Dal proof of concept al deployment cumplain.',
         'services.optimization.title': 'Optimisaziun',
         'services.optimization.desc': 'Modellaziun da scenarios e prevenziun da bottlenecks. Reducziun da custs e creschentscha senza revoluziuns da sistem.',
+        'services.training.title': 'Furmaziun dal persunal',
+        'services.training.desc': 'Furmaziun pratica en IA per voss teams. Workflows, adopziun d\'utensils e construcziun da cumpetenzas internas.',
         'about.title': 'Precisiun inscuntra pussaivladad',
         'about.p1': 'Fundada en il cor da l\'Europa, Askus represchenta ina cultura da discreziun, fidabladad e pensar a lunga vista.',
         'about.p2': 'Nus lavurain cun organisaziuns che vulan duvrar l\'IA en moda reflechida.',

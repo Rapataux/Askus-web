@@ -54,6 +54,10 @@
     .service-number { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.2em; color: var(--muted); margin-bottom: 1.5rem; }
     .service-item h3 { font-weight: 400; font-size: 1.5rem; letter-spacing: -0.01em; margin-bottom: 1rem; color: var(--services-fg); }
     .service-item p { font-size: 0.9rem; color: var(--muted); line-height: 1.7; }
+    .contact-prominent { text-align: center; }
+    .contact-email { font-size: clamp(1.5rem, 4vw, 2.5rem); color: var(--services-fg); text-decoration: none; letter-spacing: -0.02em; display: block; margin-bottom: 1rem; }
+    .contact-email:hover { opacity: 0.7; }
+    .contact-note { font-family: 'Space Mono', monospace; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
     .about { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
     .about h2 { font-weight: 400; font-size: clamp(2rem, 5vw, 3.5rem); letter-spacing: -0.02em; line-height: 1.2; }
     .about-text { color: var(--gray); font-size: 1rem; max-width: 500px; }
@@ -69,7 +73,7 @@
     .theme-toggle { position: fixed; bottom: 2rem; right: 2rem; z-index: 100; width: 2.5rem; height: 2.5rem; border-radius: 50%; background: var(--fg); color: var(--bg); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: transform 0.2s ease, opacity 0.2s ease; opacity: 0.7; }
     .theme-toggle:hover { opacity: 1; transform: scale(1.1); }
     .theme-toggle svg { width: 1.1rem; height: 1.1rem; }
-    .menu-toggle { display: none; flex-direction: column; gap: 4px; background: none; border: none; cursor: pointer; padding: 0.5rem; z-index: 201; }
+    .menu-toggle { display: none; flex-direction: column; gap: 4px; background: none; border: none; outline: none; cursor: pointer; padding: 0.5rem; z-index: 201; color: var(--fg); -webkit-tap-highlight-color: transparent; }
     .menu-toggle span { display: block; width: 18px; height: 1.5px; background: var(--fg); transition: all 0.3s ease; }
     header.inverted .menu-toggle span { background: var(--services-fg); }
     .menu-toggle.open span { background: var(--fg); }
@@ -114,7 +118,7 @@
       </div>
       <button class="menu-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
     </header>
-        <nav>
+    <nav>
       <a href="/consultancy/" data-i18n="nav.consultancy">AI Consultancy</a>
       <a href="/MindGap/" data-i18n="nav.assessment">AI Assessment</a>
       <a href="/Operator/" data-i18n="nav.solutions">Solutions</a>
@@ -123,41 +127,27 @@
     </nav>
 
     <section class="hero">
-      <p class="subtitle" data-i18n="hero.subtitle">Contact · Liechtenstein</p>
-      <h1 data-i18n="hero.title">Direct, Confidential Communication.</h1>
-      <p class="intro" data-i18n="hero.intro">No sales funnels. No automation. Reach us directly.</p>
-      <a href="mailto:contact@askus.li" class="cta" data-i18n="hero.cta">Email us</a>
+      <p class="subtitle" data-i18n="hero.subtitle">Vaduz, Liechtenstein</p>
+      <h1 data-i18n="hero.title">Write to us.</h1>
+      <p class="intro" data-i18n="hero.intro">No forms. No automation. A principal responds directly.</p>
+      <a href="mailto:contact@askus.li" class="cta" data-i18n="hero.cta">Send email</a>
     </section>
 
     <section class="services" id="services">
-      <h2 data-i18n="services.title">Contact details</h2>
-      <div class="service-grid">
-        <div class="service-item">
-          <p class="service-number">01</p>
-          <h3 data-i18n="contact.email.title">Email</h3>
-          <p data-i18n="contact.email.desc">contact@askus.li</p>
-        </div>
-        <div class="service-item">
-          <p class="service-number">02</p>
-          <h3 data-i18n="contact.location.title">Location</h3>
-          <p data-i18n="contact.location.desc">Pflugstrasse 20, 9490 Vaduz, Liechtenstein</p>
-        </div>
-        <div class="service-item">
-          <p class="service-number">03</p>
-          <h3 data-i18n="contact.engagement.title">Engagement</h3>
-          <p data-i18n="contact.engagement.desc">Initial conversations are exploratory and confidential.</p>
-        </div>
+      <div class="contact-prominent">
+        <a href="mailto:contact@askus.li" class="contact-email">contact@askus.li</a>
+        <p class="contact-note" data-i18n="contact.note">Responses within one business day.</p>
       </div>
     </section>
 
     <section class="about" id="about">
       <div>
-        <h2 data-i18n="about.title">How to reach us</h2>
+        <h2 data-i18n="about.title">How we work</h2>
       </div>
       <div class="about-text">
-        <p data-i18n="about.p1">We prefer direct communication. No intake forms, no chatbots, no gatekeepers. Write to us and a principal will respond.</p>
-        <p data-i18n="about.p2">Every conversation begins confidentially. We discuss scope, fit, and expectations before any engagement.</p>
-        <p class="location">Vaduz, Liechtenstein</p>
+        <p data-i18n="about.p1">Initial conversations happen over email. We discuss what you need, whether we can help, and what working together would look like. No pitch decks, no discovery calls.</p>
+        <p data-i18n="about.p2">If there is a fit, we scope the engagement together. If not, we say so.</p>
+        <p class="location" data-i18n="about.address">Pflugstrasse 20, 9490 Vaduz</p>
       </div>
     </section>
 
@@ -184,86 +174,74 @@
     const translations = {
       en: {
         'nav.consultancy': 'AI Consultancy', 'nav.assessment': 'AI Assessment', 'nav.engineering': 'Engineering', 'nav.solutions': 'Solutions', 'nav.contact': 'Contact',
-        'hero.subtitle': 'Contact · Liechtenstein', 'hero.title': 'Direct, Confidential Communication.',
-        'hero.intro': 'No sales funnels. No automation. Reach us directly.',
-        'hero.cta': 'Email us',
-        'services.title': 'Contact details',
-        'contact.email.title': 'Email', 'contact.email.desc': 'contact@askus.li',
-        'contact.location.title': 'Location', 'contact.location.desc': 'Pflugstrasse 20, 9490 Vaduz, Liechtenstein',
-        'contact.engagement.title': 'Engagement', 'contact.engagement.desc': 'Initial conversations are exploratory and confidential.',
-        'about.title': 'How to reach us',
-        'about.p1': 'We prefer direct communication. No intake forms, no chatbots, no gatekeepers. Write to us and a principal will respond.',
-        'about.p2': 'Every conversation begins confidentially. We discuss scope, fit, and expectations before any engagement.',
+        'hero.subtitle': 'Vaduz, Liechtenstein', 'hero.title': 'Write to us.',
+        'hero.intro': 'No forms. No automation. A principal responds directly.',
+        'hero.cta': 'Send email',
+        'about.title': 'How we work',
+        'about.p1': 'Initial conversations happen over email. We discuss what you need, whether we can help, and what working together would look like. No pitch decks, no discovery calls.',
+        'about.p2': 'If there is a fit, we scope the engagement together. If not, we say so.',
+        'contact.note': 'Responses within one business day.',
+        'about.address': 'Pflugstrasse 20, 9490 Vaduz',
         'footer.imprint': 'Imprint', 'footer.privacy': 'Privacy'
       },
       es: {
-        'nav.consultancy': 'Consultoría IA', 'nav.assessment': 'AI Assessment', 'nav.engineering': 'Engineering', 'nav.solutions': 'Soluciones', 'nav.contact': 'Contacto',
-        'hero.subtitle': 'Contacto · Liechtenstein', 'hero.title': 'Comunicación directa y confidencial.',
-        'hero.intro': 'Sin embudos de ventas. Sin automatización. Contáctanos directamente.',
-        'hero.cta': 'Escríbenos',
-        'services.title': 'Datos de contacto',
-        'contact.email.title': 'Correo', 'contact.email.desc': 'contact@askus.li',
-        'contact.location.title': 'Ubicación', 'contact.location.desc': 'Pflugstrasse 20, 9490 Vaduz, Liechtenstein',
-        'contact.engagement.title': 'Colaboración', 'contact.engagement.desc': 'Las conversaciones iniciales son exploratorias y confidenciales.',
-        'about.title': 'Cómo contactarnos',
-        'about.p1': 'Preferimos la comunicación directa. Sin formularios, sin chatbots, sin intermediarios. Escríbenos y un socio te responderá.',
-        'about.p2': 'Cada conversación empieza de forma confidencial. Hablamos de alcance, encaje y expectativas antes de cualquier compromiso.',
+        'nav.consultancy': 'Consultoría IA', 'nav.assessment': 'Evaluación IA', 'nav.engineering': 'Ingeniería', 'nav.solutions': 'Soluciones', 'nav.contact': 'Contacto',
+        'hero.subtitle': 'Vaduz, Liechtenstein', 'hero.title': 'Escríbenos.',
+        'hero.intro': 'Sin formularios. Sin automatización. Un socio responde directamente.',
+        'hero.cta': 'Enviar email',
+        'about.title': 'Cómo trabajamos',
+        'about.p1': 'Las conversaciones iniciales son por email. Hablamos de lo que necesitas, si podemos ayudar y cómo sería trabajar juntos. Sin presentaciones, sin llamadas de descubrimiento.',
+        'about.p2': 'Si hay encaje, definimos el alcance juntos. Si no, lo decimos.',
+        'contact.note': 'Respuesta en un día laborable.',
+        'about.address': 'Pflugstrasse 20, 9490 Vaduz',
         'footer.imprint': 'Aviso legal', 'footer.privacy': 'Privacidad'
       },
       de: {
-        'nav.consultancy': 'KI-Beratung', 'nav.assessment': 'AI Assessment', 'nav.engineering': 'Engineering', 'nav.solutions': 'Lösungen', 'nav.contact': 'Kontakt',
-        'hero.subtitle': 'Kontakt · Liechtenstein', 'hero.title': 'Direkte, vertrauliche Kommunikation.',
-        'hero.intro': 'Keine Verkaufstrichter. Keine Automatisierung. Erreichen Sie uns direkt.',
+        'nav.consultancy': 'KI-Beratung', 'nav.assessment': 'KI-Assessment', 'nav.engineering': 'Engineering', 'nav.solutions': 'Lösungen', 'nav.contact': 'Kontakt',
+        'hero.subtitle': 'Vaduz, Liechtenstein', 'hero.title': 'Schreiben Sie uns.',
+        'hero.intro': 'Keine Formulare. Keine Automatisierung. Ein Partner antwortet persönlich.',
         'hero.cta': 'E-Mail senden',
-        'services.title': 'Kontaktdaten',
-        'contact.email.title': 'E-Mail', 'contact.email.desc': 'contact@askus.li',
-        'contact.location.title': 'Standort', 'contact.location.desc': 'Pflugstrasse 20, 9490 Vaduz, Liechtenstein',
-        'contact.engagement.title': 'Zusammenarbeit', 'contact.engagement.desc': 'Erstgespräche sind unverbindlich und vertraulich.',
-        'about.title': 'So erreichen Sie uns',
-        'about.p1': 'Wir bevorzugen direkte Kommunikation. Keine Formulare, keine Chatbots, keine Zwischenstellen. Schreiben Sie uns und ein Partner antwortet.',
-        'about.p2': 'Jedes Gespräch beginnt vertraulich. Wir besprechen Umfang, Passung und Erwartungen vor jeder Zusammenarbeit.',
+        'about.title': 'Wie wir arbeiten',
+        'about.p1': 'Erste Gespräche finden per E-Mail statt. Wir besprechen, was Sie brauchen, ob wir helfen können und wie eine Zusammenarbeit aussehen würde. Keine Pitch-Decks, keine Discovery-Calls.',
+        'about.p2': 'Wenn es passt, definieren wir den Umfang gemeinsam. Wenn nicht, sagen wir es.',
+        'contact.note': 'Antwort innerhalb eines Werktags.',
+        'about.address': 'Pflugstrasse 20, 9490 Vaduz',
         'footer.imprint': 'Impressum', 'footer.privacy': 'Datenschutz'
       },
       fr: {
-        'nav.consultancy': 'Conseil IA', 'nav.assessment': 'AI Assessment', 'nav.engineering': 'Engineering', 'nav.solutions': 'Solutions', 'nav.contact': 'Contact',
-        'hero.subtitle': 'Contact · Liechtenstein', 'hero.title': 'Communication directe et confidentielle.',
-        'hero.intro': 'Pas de tunnels de vente. Pas d\'automatisation. Contactez-nous directement.',
-        'hero.cta': 'Nous écrire',
-        'services.title': 'Coordonnées',
-        'contact.email.title': 'E-mail', 'contact.email.desc': 'contact@askus.li',
-        'contact.location.title': 'Adresse', 'contact.location.desc': 'Pflugstrasse 20, 9490 Vaduz, Liechtenstein',
-        'contact.engagement.title': 'Collaboration', 'contact.engagement.desc': 'Les premières conversations sont exploratoires et confidentielles.',
-        'about.title': 'Comment nous joindre',
-        'about.p1': 'Nous privilégions la communication directe. Pas de formulaires, pas de chatbots, pas d\'intermédiaires. Écrivez-nous et un associé vous répondra.',
-        'about.p2': 'Chaque conversation commence de manière confidentielle. Nous discutons du périmètre, de l\'adéquation et des attentes avant tout engagement.',
+        'nav.consultancy': 'Conseil IA', 'nav.assessment': 'Évaluation IA', 'nav.engineering': 'Ingénierie', 'nav.solutions': 'Solutions', 'nav.contact': 'Contact',
+        'hero.subtitle': 'Vaduz, Liechtenstein', 'hero.title': 'Écrivez-nous.',
+        'hero.intro': 'Pas de formulaires. Pas d\'automatisation. Un associé répond directement.',
+        'hero.cta': 'Envoyer un email',
+        'about.title': 'Notre approche',
+        'about.p1': 'Les premiers échanges se font par email. Nous discutons de vos besoins, de notre capacité à vous aider et de ce que pourrait être une collaboration. Pas de présentations commerciales, pas d\'appels de qualification.',
+        'about.p2': 'Si l\'adéquation est là, nous définissons le périmètre ensemble. Sinon, nous le disons.',
+        'contact.note': 'Réponse sous un jour ouvré.',
+        'about.address': 'Pflugstrasse 20, 9490 Vaduz',
         'footer.imprint': 'Mentions légales', 'footer.privacy': 'Confidentialité'
       },
       it: {
-        'nav.consultancy': 'Consulenza IA', 'nav.assessment': 'AI Assessment', 'nav.engineering': 'Engineering', 'nav.solutions': 'Soluzioni', 'nav.contact': 'Contatto',
-        'hero.subtitle': 'Contatto · Liechtenstein', 'hero.title': 'Comunicazione diretta e riservata.',
-        'hero.intro': 'Nessun funnel di vendita. Nessuna automazione. Contattateci direttamente.',
-        'hero.cta': 'Scrivici',
-        'services.title': 'Recapiti',
-        'contact.email.title': 'E-mail', 'contact.email.desc': 'contact@askus.li',
-        'contact.location.title': 'Sede', 'contact.location.desc': 'Pflugstrasse 20, 9490 Vaduz, Liechtenstein',
-        'contact.engagement.title': 'Collaborazione', 'contact.engagement.desc': 'Le conversazioni iniziali sono esplorative e riservate.',
-        'about.title': 'Come raggiungerci',
-        'about.p1': 'Preferiamo la comunicazione diretta. Nessun modulo, nessun chatbot, nessun intermediario. Scriveteci e un partner vi risponderà.',
-        'about.p2': 'Ogni conversazione inizia in modo riservato. Discutiamo portata, compatibilità e aspettative prima di qualsiasi collaborazione.',
-        'footer.imprint': 'Impronta', 'footer.privacy': 'Privacy'
+        'nav.consultancy': 'Consulenza IA', 'nav.assessment': 'Valutazione IA', 'nav.engineering': 'Ingegneria', 'nav.solutions': 'Soluzioni', 'nav.contact': 'Contatto',
+        'hero.subtitle': 'Vaduz, Liechtenstein', 'hero.title': 'Scriveteci.',
+        'hero.intro': 'Nessun modulo. Nessuna automazione. Un partner risponde direttamente.',
+        'hero.cta': 'Invia email',
+        'about.title': 'Come lavoriamo',
+        'about.p1': 'I primi scambi avvengono via email. Parliamo di ciò che serve, se possiamo aiutare e come sarebbe lavorare insieme. Niente presentazioni, niente call conoscitive.',
+        'about.p2': 'Se c\'è affinità, definiamo l\'ambito insieme. Altrimenti, lo diciamo.',
+        'contact.note': 'Risposta entro un giorno lavorativo.',
+        'about.address': 'Pflugstrasse 20, 9490 Vaduz',
+        'footer.imprint': 'Note legali', 'footer.privacy': 'Privacy'
       },
       rm: {
-        'nav.consultancy': 'Cussegliaziun IA', 'nav.assessment': 'AI Assessment', 'nav.engineering': 'Engineering', 'nav.solutions': 'Soluziuns', 'nav.contact': 'Contact',
-        'hero.subtitle': 'Contact · Liechtenstein', 'hero.title': 'Communicaziun directa e confidenziala.',
-        'hero.intro': 'Nagins funnel da vendita. Nagina automaziun. Contactai nus directamain.',
-        'hero.cta': 'Scriver a nus',
-        'services.title': 'Datas da contact',
-        'contact.email.title': 'E-mail', 'contact.email.desc': 'contact@askus.li',
-        'contact.location.title': 'Lieu', 'contact.location.desc': 'Pflugstrasse 20, 9490 Vaduz, Liechtenstein',
-        'contact.engagement.title': 'Cooperaziun', 'contact.engagement.desc': 'Las emprimas conversaziuns èn explorativas e confidenzialas.',
-        'about.title': 'Co ans cuntanscher',
-        'about.p1': 'Nus preferain la communicaziun directa. Nagins formulars, nagins chatbots, nagins intermediaris. Scrivai a nus ed in associà respunda.',
-        'about.p2': 'Mintga conversaziun cumenza en moda confidenziala. Nus discutain l\'extensiun, la cumpatibilitad e las expectativas avant mintga cooperaziun.',
+        'nav.consultancy': 'Cussegliaziun IA', 'nav.assessment': 'Evaluaziun IA', 'nav.engineering': 'Ingenieria', 'nav.solutions': 'Soluziuns', 'nav.contact': 'Contact',
+        'hero.subtitle': 'Vaduz, Liechtenstein', 'hero.title': 'Scrivai a nus.',
+        'hero.intro': 'Nagins formulars. Nagina automaziun. In associà respunda directamain.',
+        'hero.cta': 'Trametter email',
+        'about.title': 'Co nus lavurain',
+        'about.p1': 'Las emprimas conversaziuns han lieu via email. Nus discutain tge che ti dovras, sche nus pudain gidar e co ina collavuraziun vess ora. Nagins pitch decks, naginas telefonadas da discovery.',
+        'about.p2': 'Sche quai sa cumporta, definain nus il volumen ensemen. Uschiglio, gein nus quai.',
+        'contact.note': 'Resposta entaifer in di da lavur.',
+        'about.address': 'Pflugstrasse 20, 9490 Vaduz',
         'footer.imprint': 'Impressum', 'footer.privacy': 'Protecziun da datas'
       }
     };
@@ -352,18 +330,57 @@
     let mouse = { x: -1000, y: -1000 };
     const DOT_SPACING = 24, DOT_RADIUS = 1.2, INFLUENCE_RADIUS = 130, MAX_DISPLACEMENT = 28;
 
-    function resize() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; initDots(); }
-    function initDots() { dots = []; const cols = Math.ceil(width / DOT_SPACING) + 1; const rows = Math.ceil(height / DOT_SPACING) + 1; for (let i = 0; i < cols; i++) { for (let j = 0; j < rows; j++) { dots.push({ baseX: i * DOT_SPACING, baseY: j * DOT_SPACING, x: i * DOT_SPACING, y: j * DOT_SPACING }); } } }
-    function draw() { ctx.clearRect(0, 0, width, height); for (const dot of dots) { const dx = mouse.x - dot.baseX, dy = mouse.y - dot.baseY; const dist = Math.sqrt(dx * dx + dy * dy); let targetX = dot.baseX, targetY = dot.baseY; if (dist < INFLUENCE_RADIUS) { const force = (1 - dist / INFLUENCE_RADIUS) * MAX_DISPLACEMENT; const angle = Math.atan2(dy, dx); targetX -= Math.cos(angle) * force; targetY -= Math.sin(angle) * force; } dot.x += (targetX - dot.x) * 0.12; dot.y += (targetY - dot.y) * 0.12; ctx.beginPath(); ctx.arc(dot.x, dot.y, DOT_RADIUS, 0, Math.PI * 2); ctx.fillStyle = `rgba(${getComputedStyle(document.documentElement).getPropertyValue('--dot-color').trim()},0.1)`; ctx.fill(); } requestAnimationFrame(draw); }
+    function resize() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+      initDots();
+    }
+
+    function initDots() {
+      dots = [];
+      const cols = Math.ceil(width / DOT_SPACING) + 1;
+      const rows = Math.ceil(height / DOT_SPACING) + 1;
+      for (let i = 0; i < cols; i++) {
+        for (let j = 0; j < rows; j++) {
+          dots.push({
+            baseX: i * DOT_SPACING,
+            baseY: j * DOT_SPACING,
+            x: i * DOT_SPACING,
+            y: j * DOT_SPACING
+          });
+        }
+      }
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, width, height);
+      for (const dot of dots) {
+        const dx = mouse.x - dot.baseX;
+        const dy = mouse.y - dot.baseY;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        let targetX = dot.baseX;
+        let targetY = dot.baseY;
+        if (dist < INFLUENCE_RADIUS) {
+          const force = (1 - dist / INFLUENCE_RADIUS) * MAX_DISPLACEMENT;
+          const angle = Math.atan2(dy, dx);
+          targetX -= Math.cos(angle) * force;
+          targetY -= Math.sin(angle) * force;
+        }
+        dot.x += (targetX - dot.x) * 0.12;
+        dot.y += (targetY - dot.y) * 0.12;
+        ctx.beginPath();
+        ctx.arc(dot.x, dot.y, DOT_RADIUS, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${getComputedStyle(document.documentElement).getPropertyValue('--dot-color').trim()},0.1)`;
+        ctx.fill();
+      }
+      requestAnimationFrame(draw);
+    }
+
     document.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
     document.addEventListener('mouseleave', () => { mouse.x = -1000; mouse.y = -1000; });
     window.addEventListener('resize', resize);
-    resize(); draw();
+    resize();
+    draw();
   </script>
 </body>
 </html>
-
-
-
-
-

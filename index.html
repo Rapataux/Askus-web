@@ -192,7 +192,7 @@
     .theme-toggle:hover { opacity: 1; transform: scale(1.1); }
     .theme-toggle svg { width: 1.1rem; height: 1.1rem; }
 
-    .menu-toggle { display: none; flex-direction: column; gap: 4px; background: none; border: none; cursor: pointer; padding: 0.5rem; z-index: 201; }
+    .menu-toggle { display: none; flex-direction: column; gap: 4px; background: none; border: none; outline: none; cursor: pointer; padding: 0.5rem; z-index: 201; color: var(--fg); -webkit-tap-highlight-color: transparent; }
     .menu-toggle span { display: block; width: 18px; height: 1.5px; background: var(--fg); transition: all 0.3s ease; }
     header.inverted .menu-toggle span { background: var(--services-fg); }
     .menu-toggle.open span { background: var(--fg); }
@@ -269,16 +269,16 @@
           <p data-i18n="services.consultancy.desc">AI strategy, integration, and governance. From roadmap to deployment.</p>
         </a>
 
-        <a href="/engineering/" class="service-item">
+        <a href="/Operator/" class="service-item">
           <p class="service-number">02</p>
-          <h3 data-i18n="services.engineering.title">Engineering</h3>
-          <p data-i18n="services.engineering.desc">High performance systems, security, and integration work.</p>
+          <h3 data-i18n="services.operator.title">Operator</h3>
+          <p data-i18n="services.operator.desc">Autonomous software agents that execute against objectives, verify results, and ship code.</p>
         </a>
 
-        <a href="/enablement/" class="service-item">
+        <a href="/engineering/" class="service-item">
           <p class="service-number">03</p>
-          <h3 data-i18n="services.enablement.title">AI Enablement</h3>
-          <p data-i18n="services.enablement.desc">Training in AI assisted workflows for engineers. Patterns, tools, and review practices.</p>
+          <h3 data-i18n="services.engineering.title">Engineering</h3>
+          <p data-i18n="services.engineering.desc">High performance systems, security, and integration work.</p>
         </a>
 
       </div>
@@ -289,8 +289,7 @@
         <h2 data-i18n="about.title">Built for production</h2>
       </div>
       <div class="about-text">
-        <p data-i18n="about.p1">We work with teams that need systems to ship, run, and improve under real constraints.</p>
-        <p data-i18n="about.p2">Clear scope. Measurable outcomes. Documentation that survives handover.</p>
+        <p data-i18n="about.p1">From initial scoping through production deployment, we deliver systems that meet the demands of regulated industries. Security, compliance, and maintainability are built in from the start. Complete handover documentation ensures your teams can operate independently.</p>
         <p class="location" data-i18n="about.location">Vaduz, Liechtenstein</p>
       </div>
     </section>
@@ -332,11 +331,10 @@
         'services.consultancy.desc': 'AI strategy, integration, and governance. From roadmap to deployment.',
         'services.engineering.title': 'Engineering',
         'services.engineering.desc': 'High performance systems, security, and integration work.',
-        'services.enablement.title': 'AI Enablement',
-        'services.enablement.desc': 'Training in AI assisted workflows for engineers. Patterns, tools, and review practices.',
+        'services.operator.title': 'Operator',
+        'services.operator.desc': 'Autonomous software agents that execute against objectives, verify results, and ship code.',
         'about.title': 'Built for production',
-        'about.p1': 'We work with teams that need systems to ship, run, and improve under real constraints.',
-        'about.p2': 'Clear scope. Measurable outcomes. Documentation that survives handover.',
+        'about.p1': 'From initial scoping through production deployment, we deliver systems that meet the demands of regulated industries. Security, compliance, and maintainability are built in from the start. Complete handover documentation ensures your teams can operate independently.',
         'about.location': 'Vaduz, Liechtenstein',
 
         'footer.imprint': 'Imprint',
@@ -345,7 +343,7 @@
 
       es: {
         'nav.consultancy': 'Consultoría IA',
-        'nav.assessment': 'AI Assessment', 'nav.engineering': 'Engineering',
+        'nav.assessment': 'Evaluación IA', 'nav.engineering': 'Ingeniería',
         'nav.solutions': 'Soluciones',
         'nav.contact': 'Contacto',
 
@@ -359,11 +357,10 @@
         'services.consultancy.desc': 'Estrategia, integración y gobernanza de IA. Del plan de ruta al despliegue.',
         'services.engineering.title': 'Ingeniería',
         'services.engineering.desc': 'Sistemas de alto rendimiento, seguridad y trabajo de integración.',
-        'services.enablement.title': 'Capacitación IA',
-        'services.enablement.desc': 'Formación en flujos de trabajo asistidos por IA para ingenieros. Patrones, herramientas y prácticas de revisión.',
+        'services.operator.title': 'Operator',
+        'services.operator.desc': 'Agentes de software autónomos que ejecutan objetivos, verifican resultados y entregan código.',
         'about.title': 'Hecho para producción',
-        'about.p1': 'Trabajamos con equipos que necesitan sistemas que funcionen, escalen y mejoren bajo restricciones reales.',
-        'about.p2': 'Alcance claro. Resultados medibles. Documentación que sobrevive al traspaso.',
+        'about.p1': 'Desde el alcance inicial hasta el despliegue en producción, entregamos sistemas que cumplen con las exigencias de industrias reguladas. Seguridad, cumplimiento y mantenibilidad están integrados desde el inicio. La documentación completa de traspaso garantiza que sus equipos puedan operar de forma independiente.',
         'about.location': 'Vaduz, Liechtenstein',
 
         'footer.imprint': 'Aviso legal',
@@ -372,7 +369,7 @@
 
       de: {
         'nav.consultancy': 'KI-Beratung',
-        'nav.assessment': 'AI Assessment', 'nav.engineering': 'Engineering',
+        'nav.assessment': 'KI-Assessment', 'nav.engineering': 'Engineering',
         'nav.solutions': 'Lösungen',
         'nav.contact': 'Kontakt',
 
@@ -386,11 +383,10 @@
         'services.consultancy.desc': 'KI-Strategie, Integration und Governance. Von der Roadmap bis zum Deployment.',
         'services.engineering.title': 'Engineering',
         'services.engineering.desc': 'High-Performance-Systeme, Security und Integrationsarbeit.',
-        'services.enablement.title': 'KI-Befähigung',
-        'services.enablement.desc': 'Training zu KI-gestützten Workflows für Engineers. Patterns, Tools und Review-Praktiken.',
+        'services.operator.title': 'Operator',
+        'services.operator.desc': 'Autonome Software-Agenten, die Ziele ausführen, Ergebnisse verifizieren und Code ausliefern.',
         'about.title': 'Für den Betrieb gebaut',
-        'about.p1': 'Wir arbeiten mit Teams, die Systeme unter realen Rahmenbedingungen ausliefern, betreiben und weiterentwickeln müssen.',
-        'about.p2': 'Klarer Umfang. Messbare Ergebnisse. Dokumentation, die die Übergabe übersteht.',
+        'about.p1': 'Von der ersten Anforderungsanalyse bis zum Produktivbetrieb liefern wir Systeme, die den Anforderungen regulierter Branchen entsprechen. Sicherheit, Compliance und Wartbarkeit sind von Anfang an integriert. Eine vollständige Übergabedokumentation stellt sicher, dass Ihre Teams eigenständig arbeiten können.',
         'about.location': 'Vaduz, Liechtenstein',
 
         'footer.imprint': 'Impressum',
@@ -399,7 +395,7 @@
 
       fr: {
         'nav.consultancy': 'Conseil IA',
-        'nav.assessment': 'AI Assessment', 'nav.engineering': 'Engineering',
+        'nav.assessment': 'Évaluation IA', 'nav.engineering': 'Ingénierie',
         'nav.solutions': 'Solutions',
         'nav.contact': 'Contact',
 
@@ -413,11 +409,10 @@
         'services.consultancy.desc': 'Stratégie IA, intégration et gouvernance. De la feuille de route au déploiement.',
         'services.engineering.title': 'Ingénierie',
         'services.engineering.desc': 'Systèmes haute performance, sécurité et intégration.',
-        'services.enablement.title': 'Formation IA',
-        'services.enablement.desc': 'Formation aux workflows assistés par IA pour les ingénieurs. Patterns, outils et pratiques de revue.',
+        'services.operator.title': 'Operator',
+        'services.operator.desc': 'Agents logiciels autonomes qui exécutent des objectifs, vérifient les résultats et livrent du code.',
         'about.title': 'Conçu pour la production',
-        'about.p1': 'Nous travaillons avec des équipes qui doivent livrer, opérer et améliorer des systèmes sous contraintes réelles.',
-        'about.p2': 'Périmètre clair. Résultats mesurables. Documentation qui tient après la passation.',
+        'about.p1': 'Du cadrage initial au déploiement en production, nous livrons des systèmes conformes aux exigences des secteurs réglementés. Sécurité, conformité et maintenabilité sont intégrées dès le départ. Une documentation complète de passation permet à vos équipes d\'opérer en toute autonomie.',
         'about.location': 'Vaduz, Liechtenstein',
 
         'footer.imprint': 'Mentions légales',
@@ -426,7 +421,7 @@
 
       it: {
         'nav.consultancy': 'Consulenza IA',
-        'nav.assessment': 'AI Assessment', 'nav.engineering': 'Engineering',
+        'nav.assessment': 'Valutazione IA', 'nav.engineering': 'Ingegneria',
         'nav.solutions': 'Soluzioni',
         'nav.contact': 'Contatto',
 
@@ -440,11 +435,10 @@
         'services.consultancy.desc': 'Strategia IA, integrazione e governance. Dalla roadmap al deployment.',
         'services.engineering.title': 'Ingegneria',
         'services.engineering.desc': 'Sistemi ad alte prestazioni, sicurezza e integrazione.',
-        'services.enablement.title': 'Formazione IA',
-        'services.enablement.desc': 'Formazione su workflow assistiti dall’IA per ingegneri. Pattern, strumenti e pratiche di review.',
+        'services.operator.title': 'Operator',
+        'services.operator.desc': 'Agenti software autonomi che eseguono obiettivi, verificano risultati e consegnano codice.',
         'about.title': 'Progettato per la produzione',
-        'about.p1': 'Lavoriamo con team che devono rilasciare, gestire e migliorare sistemi sotto vincoli reali.',
-        'about.p2': 'Ambito chiaro. Risultati misurabili. Documentazione che regge il passaggio di consegne.',
+        'about.p1': 'Dalla definizione iniziale al rilascio in produzione, consegniamo sistemi conformi ai requisiti dei settori regolamentati. Sicurezza, compliance e manutenibilità sono integrate fin dall\'inizio. La documentazione completa di passaggio consente ai vostri team di operare in autonomia.',
         'about.location': 'Vaduz, Liechtenstein',
 
         'footer.imprint': 'Impronta',
@@ -453,7 +447,7 @@
 
       rm: {
         'nav.consultancy': 'Cussegliaziun IA',
-        'nav.assessment': 'AI Assessment', 'nav.engineering': 'Engineering',
+        'nav.assessment': 'Evaluaziun IA', 'nav.engineering': 'Ingenieria',
         'nav.solutions': 'Soluziuns',
         'nav.contact': 'Contact',
 
@@ -467,11 +461,10 @@
         'services.consultancy.desc': 'Strategia IA, integraziun e governance. Da la roadmap fin al deployment.',
         'services.engineering.title': 'Ingenieria',
         'services.engineering.desc': 'Sistems ad auta prestaziun, segirezza e lavur d’integraziun.',
-        'services.enablement.title': 'Furmaziun IA',
-        'services.enablement.desc': 'Furmaziun en workflows cun sustegn IA per engineers. Patterns, utensils e praticas da review.',
+        'services.operator.title': 'Operator',
+        'services.operator.desc': 'Agents da software autonoms che exequeschan objectives, verifitgeschan resultats e furneschan code.',
         'about.title': 'Fat per la producziun',
-        'about.p1': 'Nus lavurain cun teams che ston consegnar, manar e meglierar sistems sut novitadsaziuns realas.',
-        'about.p2': 'Tscherta clera. Resultats mesirabels. Documentaziun che tegna suenter la surdada.',
+        'about.p1': 'Da la definiziun iniziala fin al deployment en producziun, nus furnin sistems che correspundan a las pretensiuns da secturs regulads. Segirezza, compliance e mantenibladad èn integradas da l\'entschatta. Ina documentaziun cumpletta da surdada garantescha che voss teams pon operar independent.',
         'about.location': 'Vaduz, Liechtenstein',
 
         'footer.imprint': 'Impressum',

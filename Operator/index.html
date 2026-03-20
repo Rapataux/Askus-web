@@ -35,8 +35,8 @@
     nav a { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; transition: opacity 0.3s ease, color 0.3s ease; color: var(--fg); }
     nav a:hover { opacity: 0.5; }
     nav a.active { text-decoration: underline; text-underline-offset: 4px; }
-    .menu-toggle { display: none; flex-direction: column; gap: 4px; background: none; border: none; cursor: pointer; padding: 0.5rem; z-index: 201; }
-    .menu-toggle span { display: block; width: 18px; height: 1.5px; background: currentColor; transition: all 0.3s ease; }
+    .menu-toggle { display: none; flex-direction: column; gap: 4px; background: none; border: none; outline: none; cursor: pointer; padding: 0.5rem; z-index: 201; color: var(--fg); -webkit-tap-highlight-color: transparent; }
+    .menu-toggle span { display: block; width: 18px; height: 1.5px; background: var(--fg); transition: all 0.3s ease; }
     .menu-toggle.open span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
     .menu-toggle.open span:nth-child(2) { opacity: 0; }
     .menu-toggle.open span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
@@ -184,62 +184,62 @@
 
     <div class="section hero-section">
       <div class="content-shell">
-        <span class="hero-tag">Solutions</span>
-        <h1>Reclaim Your Engineering Hours.</h1>
-        <p class="lead">Autonomous software agents that execute against objectives you define, verify results against your quality gates, and ship code that passes CI. Enterprise-grade with full audit trails and governance controls.</p>
+        <span class="hero-tag" data-i18n="hero.tag">Solutions</span>
+        <h1 data-i18n="hero.title">Reclaim Your Engineering Hours.</h1>
+        <p class="lead" data-i18n="hero.lead">Autonomous software agents that execute against objectives you define, verify results against your quality gates, and ship code that passes CI. Enterprise-grade with full audit trails and governance controls.</p>
       </div>
     </div>
 
     <div class="section">
       <div class="content-shell">
-        <h2>The Bottleneck Inversion</h2>
-        <p>Every AI coding tool available today is a faster typist. You prompt, it answers, it stops. Stop prompting, it stops working. The human is still the bottleneck, just a more expensive one.</p>
-        <p>Operator inverts that. The leverage point shifts from how many hours your team puts in to how precisely your team can define what "good" looks like. Write a clear objective. Operator pursues it indefinitely. Write ten objectives. Ten agents pursue them simultaneously.</p>
+        <h2 data-i18n="bottleneck.title">The Bottleneck Inversion</h2>
+        <p data-i18n="bottleneck.p1">Every AI coding tool available today is a faster typist. You prompt, it answers, it stops. Stop prompting, it stops working. The human is still the bottleneck, just a more expensive one.</p>
+        <p data-i18n="bottleneck.p2">Operator inverts that. The leverage point shifts from how many hours your team puts in to how precisely your team can define what "good" looks like. Write a clear objective. Operator pursues it indefinitely. Write ten objectives. Ten agents pursue them simultaneously.</p>
       </div>
     </div>
 
     <div class="section pilot-section">
       <div class="content-shell">
-        <h2>Initiate Pilot</h2>
-        <p>Define one specific, measurable objective. We execute a two-week run. Quantifiable ROI based on reclaimed engineering hours, not AI technology purchased.</p>
+        <h2 data-i18n="pilot.title">Initiate Pilot</h2>
+        <p data-i18n="pilot.desc">Define one specific, measurable objective. We execute a two-week run. Quantifiable ROI based on reclaimed engineering hours, not AI technology purchased.</p>
 
         <div class="form-container" id="demo-form-wrap">
           <div class="form-panel">
             <form id="demo-form" novalidate>
               <div class="form-group">
-                <label for="req-name">Technical Lead Name</label>
+                <label for="req-name" data-i18n="form.name">Technical Lead Name</label>
                 <input id="req-name" type="text" placeholder="Jane Smith" required />
               </div>
               <div class="form-group">
-                <label for="req-email">Work Email</label>
+                <label for="req-email" data-i18n="form.email">Work Email</label>
                 <input id="req-email" type="email" placeholder="jane@company.com" required />
               </div>
               <div class="form-group">
-                <label for="req-company">Organization</label>
+                <label for="req-company" data-i18n="form.company">Organization</label>
                 <input id="req-company" type="text" placeholder="Acme Corp" required />
               </div>
               <div class="form-group">
-                <label for="req-pain">Primary Engineering Constraint</label>
+                <label for="req-pain" data-i18n="form.pain">Primary Engineering Constraint</label>
                 <select id="req-pain" required>
-                  <option value="" disabled selected>Select operational bottleneck...</option>
-                  <option value="legacy_debt">Legacy Code & Tech Debt</option>
-                  <option value="security">Continuous Security & Compliance</option>
-                  <option value="tests">Test Generation & Coverage</option>
-                  <option value="pr_gates">PR Quality Gates</option>
-                  <option value="other">Other Automation Workflow</option>
+                  <option value="" disabled selected data-i18n="form.opt.select">Select operational bottleneck...</option>
+                  <option value="legacy_debt" data-i18n="form.opt.legacy">Legacy Code & Tech Debt</option>
+                  <option value="security" data-i18n="form.opt.security">Continuous Security & Compliance</option>
+                  <option value="tests" data-i18n="form.opt.tests">Test Generation & Coverage</option>
+                  <option value="pr_gates" data-i18n="form.opt.pr">PR Quality Gates</option>
+                  <option value="other" data-i18n="form.opt.other">Other Automation Workflow</option>
                 </select>
               </div>
-              
+
               <div class="form-msg error-msg" id="req-error" hidden></div>
-              <button type="submit" class="btn-submit" id="req-submit">Request Deployment</button>
+              <button type="submit" class="btn-submit" id="req-submit" data-i18n="form.submit">Request Deployment</button>
             </form>
           </div>
         </div>
 
         <div class="form-container" id="req-success" hidden>
           <div class="form-panel">
-            <h2>Deployment Requested</h2>
-            <p>We are reviewing your system constraints. A technical representative will engage within 24 hours to specify the execution bounds.</p>
+            <h2 data-i18n="success.title">Deployment Requested</h2>
+            <p data-i18n="success.desc">We are reviewing your system constraints. A technical representative will engage within 24 hours to specify the execution bounds.</p>
           </div>
         </div>
       </div>
@@ -248,8 +248,8 @@
     <footer>
       <p class="footer-text">© 2026 Askus GmbH · Operator.ai</p>
       <div class="footer-links">
-        <a href="/imprint/" class="footer-link">Imprint</a>
-        <a href="/privacy/" class="footer-link">Privacy</a>
+        <a href="/imprint/" class="footer-link" data-i18n="footer.imprint">Imprint</a>
+        <a href="/privacy/" class="footer-link" data-i18n="footer.privacy">Privacy</a>
       </div>
       <a href="mailto:contact@askus.li" class="contact-link">contact@askus.li</a>
     </footer>
@@ -300,60 +300,55 @@
     const ctx = canvas.getContext('2d');
     let width, height, dots = [];
     let mouse = { x: -1000, y: -1000 };
-    const TARGET_DOT_COLUMNS = 82;
-    const DOT_RADIUS = 1.2;
-    const INFLUENCE_RADIUS = 130;
-    const MAX_DISPLACEMENT = 28;
-    let dotSpacing = 24;
+    const DOT_SPACING = 24, DOT_RADIUS = 1.2, INFLUENCE_RADIUS = 130, MAX_DISPLACEMENT = 28;
 
     function resize() {
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
-      dotSpacing = width / Math.max(1, TARGET_DOT_COLUMNS - 1);
+      initDots();
+    }
+
+    function initDots() {
       dots = [];
-      const cols = TARGET_DOT_COLUMNS;
-      const rows = Math.ceil(height / dotSpacing) + 1;
+      const cols = Math.ceil(width / DOT_SPACING) + 1;
+      const rows = Math.ceil(height / DOT_SPACING) + 1;
       for (let i = 0; i < cols; i++) {
         for (let j = 0; j < rows; j++) {
-          dots.push({ baseX: i * dotSpacing, baseY: j * dotSpacing, x: i * dotSpacing, y: j * dotSpacing });
+          dots.push({
+            baseX: i * DOT_SPACING,
+            baseY: j * DOT_SPACING,
+            x: i * DOT_SPACING,
+            y: j * DOT_SPACING
+          });
         }
       }
     }
 
     function draw() {
       const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-      const runtimeWidth = document.querySelector('.runtime-environment').getBoundingClientRect().width;
+      const runtimeEl = document.querySelector('.runtime-environment');
+      const runtimeWidth = runtimeEl ? runtimeEl.getBoundingClientRect().width : 0;
       ctx.clearRect(0, 0, width, height);
       for (const dot of dots) {
+        if (isDark && dot.baseX < runtimeWidth) continue;
         const dx = mouse.x - dot.baseX;
         const dy = mouse.y - dot.baseY;
         const dist = Math.sqrt(dx * dx + dy * dy);
-        let targetX = dot.baseX, targetY = dot.baseY;
-
+        let targetX = dot.baseX;
+        let targetY = dot.baseY;
         if (dist < INFLUENCE_RADIUS) {
           const force = (1 - dist / INFLUENCE_RADIUS) * MAX_DISPLACEMENT;
           const angle = Math.atan2(dy, dx);
           targetX -= Math.cos(angle) * force;
           targetY -= Math.sin(angle) * force;
         }
-
         dot.x += (targetX - dot.x) * 0.12;
         dot.y += (targetY - dot.y) * 0.12;
-
         ctx.beginPath();
         ctx.arc(dot.x, dot.y, DOT_RADIUS, 0, Math.PI * 2);
-        if (dot.baseX < runtimeWidth) {
-          ctx.fillStyle = isDark
-            ? 'rgba(232,228,222,0.34)'
-            : 'rgba(250,250,250,0.34)';
-        } else {
-          ctx.fillStyle = isDark
-            ? 'rgba(232,228,222,0.18)'
-            : 'rgba(10,10,10,0.1)';
-        }
+        ctx.fillStyle = `rgba(${getComputedStyle(document.documentElement).getPropertyValue('--dot-color').trim()},0.1)`;
         ctx.fill();
       }
-
       requestAnimationFrame(draw);
     }
 
@@ -372,12 +367,102 @@
     draw();
 
     const translations = {
-      en: { 'nav.consultancy': 'AI Consultancy', 'nav.assessment': 'AI Assessment', 'nav.solutions': 'Solutions', 'nav.engineering': 'Engineering', 'nav.contact': 'Contact' },
-      es: { 'nav.consultancy': 'Consultoría IA', 'nav.assessment': 'AI Assessment', 'nav.solutions': 'Soluciones', 'nav.engineering': 'Engineering', 'nav.contact': 'Contacto' },
-      de: { 'nav.consultancy': 'KI-Beratung', 'nav.assessment': 'AI Assessment', 'nav.solutions': 'Lösungen', 'nav.engineering': 'Engineering', 'nav.contact': 'Kontakt' },
-      fr: { 'nav.consultancy': 'Conseil IA', 'nav.assessment': 'AI Assessment', 'nav.solutions': 'Solutions', 'nav.engineering': 'Engineering', 'nav.contact': 'Contact' },
-      it: { 'nav.consultancy': 'Consulenza IA', 'nav.assessment': 'AI Assessment', 'nav.solutions': 'Soluzioni', 'nav.engineering': 'Engineering', 'nav.contact': 'Contatto' },
-      rm: { 'nav.consultancy': 'Cussegliaziun IA', 'nav.assessment': 'AI Assessment', 'nav.solutions': 'Soluziuns', 'nav.engineering': 'Engineering', 'nav.contact': 'Contact' }
+      en: {
+        'nav.consultancy': 'AI Consultancy', 'nav.assessment': 'AI Assessment', 'nav.solutions': 'Solutions', 'nav.engineering': 'Engineering', 'nav.contact': 'Contact',
+        'hero.tag': 'Solutions',
+        'hero.title': 'Reclaim Your Engineering Hours.',
+        'hero.lead': 'Autonomous software agents that execute against objectives you define, verify results against your quality gates, and ship code that passes CI. Enterprise-grade with full audit trails and governance controls.',
+        'bottleneck.title': 'The Bottleneck Inversion',
+        'bottleneck.p1': 'Every AI coding tool available today is a faster typist. You prompt, it answers, it stops. Stop prompting, it stops working. The human is still the bottleneck, just a more expensive one.',
+        'bottleneck.p2': 'Operator inverts that. The leverage point shifts from how many hours your team puts in to how precisely your team can define what "good" looks like. Write a clear objective. Operator pursues it indefinitely. Write ten objectives. Ten agents pursue them simultaneously.',
+        'pilot.title': 'Initiate Pilot',
+        'pilot.desc': 'Define one specific, measurable objective. We execute a two-week run. Quantifiable ROI based on reclaimed engineering hours, not AI technology purchased.',
+        'form.name': 'Technical Lead Name', 'form.email': 'Work Email', 'form.company': 'Organization', 'form.pain': 'Primary Engineering Constraint',
+        'form.opt.select': 'Select operational bottleneck...', 'form.opt.legacy': 'Legacy Code & Tech Debt', 'form.opt.security': 'Continuous Security & Compliance', 'form.opt.tests': 'Test Generation & Coverage', 'form.opt.pr': 'PR Quality Gates', 'form.opt.other': 'Other Automation Workflow',
+        'form.submit': 'Request Deployment',
+        'success.title': 'Deployment Requested', 'success.desc': 'We are reviewing your system constraints. A technical representative will engage within 24 hours to specify the execution bounds.',
+        'footer.imprint': 'Imprint', 'footer.privacy': 'Privacy'
+      },
+      es: {
+        'nav.consultancy': 'Consultoría IA', 'nav.assessment': 'Evaluación IA', 'nav.solutions': 'Soluciones', 'nav.engineering': 'Ingeniería', 'nav.contact': 'Contacto',
+        'hero.tag': 'Soluciones',
+        'hero.title': 'Recupera tus horas de ingeniería.',
+        'hero.lead': 'Agentes de software autónomos que ejecutan objetivos definidos por ti, verifican resultados contra tus criterios de calidad y entregan código que pasa CI. Nivel enterprise con trazabilidad completa y controles de gobernanza.',
+        'bottleneck.title': 'La inversión del cuello de botella',
+        'bottleneck.p1': 'Todas las herramientas de código con IA disponibles hoy son mecanógrafos más rápidos. Tú escribes el prompt, responde, y se detiene. Dejas de escribir, deja de trabajar. El humano sigue siendo el cuello de botella, solo que más caro.',
+        'bottleneck.p2': 'Operator invierte eso. El punto de apalancamiento pasa de cuántas horas dedica tu equipo a cuán precisamente puede definir qué significa "bueno". Escribe un objetivo claro. Operator lo persigue indefinidamente. Escribe diez objetivos. Diez agentes los persiguen simultáneamente.',
+        'pilot.title': 'Iniciar piloto',
+        'pilot.desc': 'Define un objetivo específico y medible. Ejecutamos una prueba de dos semanas. ROI cuantificable basado en horas de ingeniería recuperadas, no en tecnología de IA comprada.',
+        'form.name': 'Nombre del líder técnico', 'form.email': 'Email laboral', 'form.company': 'Organización', 'form.pain': 'Restricción principal de ingeniería',
+        'form.opt.select': 'Selecciona el cuello de botella operativo...', 'form.opt.legacy': 'Código legacy y deuda técnica', 'form.opt.security': 'Seguridad y cumplimiento continuo', 'form.opt.tests': 'Generación de tests y cobertura', 'form.opt.pr': 'Controles de calidad en PR', 'form.opt.other': 'Otro flujo de automatización',
+        'form.submit': 'Solicitar despliegue',
+        'success.title': 'Despliegue solicitado', 'success.desc': 'Estamos revisando las restricciones de tu sistema. Un representante técnico te contactará en 24 horas para especificar los límites de ejecución.',
+        'footer.imprint': 'Aviso legal', 'footer.privacy': 'Privacidad'
+      },
+      de: {
+        'nav.consultancy': 'KI-Beratung', 'nav.assessment': 'KI-Assessment', 'nav.solutions': 'Lösungen', 'nav.engineering': 'Engineering', 'nav.contact': 'Kontakt',
+        'hero.tag': 'Lösungen',
+        'hero.title': 'Engineering-Stunden zurückgewinnen.',
+        'hero.lead': 'Autonome Software-Agenten, die gegen von Ihnen definierte Ziele arbeiten, Ergebnisse gegen Ihre Qualitätskriterien prüfen und Code liefern, der CI besteht. Enterprise-tauglich mit vollständiger Auditierung und Governance-Kontrollen.',
+        'bottleneck.title': 'Die Engpass-Umkehr',
+        'bottleneck.p1': 'Jedes heute verfügbare KI-Coding-Tool ist ein schnellerer Tipper. Sie prompten, es antwortet, es stoppt. Hören Sie auf zu prompten, hört es auf zu arbeiten. Der Mensch bleibt der Engpass, nur ein teurerer.',
+        'bottleneck.p2': 'Operator kehrt das um. Der Hebelpunkt verschiebt sich von der Anzahl der Stunden, die Ihr Team investiert, hin zur Präzision, mit der Ihr Team definieren kann, was "gut" bedeutet. Schreiben Sie ein klares Ziel. Operator verfolgt es unbegrenzt. Schreiben Sie zehn Ziele. Zehn Agenten verfolgen sie gleichzeitig.',
+        'pilot.title': 'Pilot starten',
+        'pilot.desc': 'Definieren Sie ein spezifisches, messbares Ziel. Wir führen einen zweiwöchigen Lauf durch. Quantifizierbarer ROI basierend auf zurückgewonnenen Engineering-Stunden, nicht auf gekaufter KI-Technologie.',
+        'form.name': 'Name des technischen Leiters', 'form.email': 'Geschäftliche E-Mail', 'form.company': 'Organisation', 'form.pain': 'Primäre Engineering-Einschränkung',
+        'form.opt.select': 'Operativen Engpass auswählen...', 'form.opt.legacy': 'Legacy-Code & technische Schulden', 'form.opt.security': 'Kontinuierliche Sicherheit & Compliance', 'form.opt.tests': 'Testgenerierung & Abdeckung', 'form.opt.pr': 'PR-Qualitätsprüfungen', 'form.opt.other': 'Anderer Automatisierungs-Workflow',
+        'form.submit': 'Deployment anfordern',
+        'success.title': 'Deployment angefordert', 'success.desc': 'Wir prüfen Ihre Systemeinschränkungen. Ein technischer Ansprechpartner wird sich innerhalb von 24 Stunden melden, um die Ausführungsgrenzen zu spezifizieren.',
+        'footer.imprint': 'Impressum', 'footer.privacy': 'Datenschutz'
+      },
+      fr: {
+        'nav.consultancy': 'Conseil IA', 'nav.assessment': 'Évaluation IA', 'nav.solutions': 'Solutions', 'nav.engineering': 'Ingénierie', 'nav.contact': 'Contact',
+        'hero.tag': 'Solutions',
+        'hero.title': 'Récupérez vos heures d\'ingénierie.',
+        'hero.lead': 'Agents logiciels autonomes qui exécutent des objectifs que vous définissez, vérifient les résultats selon vos critères de qualité et livrent du code qui passe la CI. Niveau entreprise avec traçabilité complète et contrôles de gouvernance.',
+        'bottleneck.title': 'L\'inversion du goulot',
+        'bottleneck.p1': 'Chaque outil de code IA disponible aujourd\'hui est un dactylographe plus rapide. Vous promptez, il répond, il s\'arrête. Arrêtez de prompter, il arrête de travailler. L\'humain reste le goulot d\'étranglement, juste plus cher.',
+        'bottleneck.p2': 'Operator inverse cela. Le point de levier passe du nombre d\'heures investies par votre équipe à la précision avec laquelle elle peut définir ce que "bien" signifie. Écrivez un objectif clair. Operator le poursuit indéfiniment. Écrivez dix objectifs. Dix agents les poursuivent simultanément.',
+        'pilot.title': 'Lancer le pilote',
+        'pilot.desc': 'Définissez un objectif spécifique et mesurable. Nous exécutons un test de deux semaines. ROI quantifiable basé sur les heures d\'ingénierie récupérées, pas sur la technologie IA achetée.',
+        'form.name': 'Nom du responsable technique', 'form.email': 'Email professionnel', 'form.company': 'Organisation', 'form.pain': 'Contrainte d\'ingénierie principale',
+        'form.opt.select': 'Sélectionner le goulot opérationnel...', 'form.opt.legacy': 'Code legacy & dette technique', 'form.opt.security': 'Sécurité & conformité continues', 'form.opt.tests': 'Génération de tests & couverture', 'form.opt.pr': 'Contrôles qualité PR', 'form.opt.other': 'Autre workflow d\'automatisation',
+        'form.submit': 'Demander le déploiement',
+        'success.title': 'Déploiement demandé', 'success.desc': 'Nous examinons les contraintes de votre système. Un représentant technique vous contactera sous 24 heures pour spécifier les limites d\'exécution.',
+        'footer.imprint': 'Mentions légales', 'footer.privacy': 'Confidentialité'
+      },
+      it: {
+        'nav.consultancy': 'Consulenza IA', 'nav.assessment': 'Valutazione IA', 'nav.solutions': 'Soluzioni', 'nav.engineering': 'Ingegneria', 'nav.contact': 'Contatto',
+        'hero.tag': 'Soluzioni',
+        'hero.title': 'Recupera le tue ore di ingegneria.',
+        'hero.lead': 'Agenti software autonomi che eseguono obiettivi da te definiti, verificano i risultati rispetto ai tuoi criteri di qualità e consegnano codice che supera la CI. Livello enterprise con tracciabilità completa e controlli di governance.',
+        'bottleneck.title': 'L\'inversione del collo di bottiglia',
+        'bottleneck.p1': 'Ogni strumento di codice IA disponibile oggi è un dattilografo più veloce. Tu scrivi il prompt, risponde, si ferma. Smetti di scrivere prompt, smette di lavorare. L\'umano rimane il collo di bottiglia, solo più costoso.',
+        'bottleneck.p2': 'Operator inverte questo. Il punto di leva si sposta da quante ore investe il tuo team a quanto precisamente il tuo team può definire cosa significa "buono". Scrivi un obiettivo chiaro. Operator lo persegue indefinitamente. Scrivi dieci obiettivi. Dieci agenti li perseguono simultaneamente.',
+        'pilot.title': 'Avvia il pilota',
+        'pilot.desc': 'Definisci un obiettivo specifico e misurabile. Eseguiamo un test di due settimane. ROI quantificabile basato sulle ore di ingegneria recuperate, non sulla tecnologia IA acquistata.',
+        'form.name': 'Nome del responsabile tecnico', 'form.email': 'Email aziendale', 'form.company': 'Organizzazione', 'form.pain': 'Vincolo di ingegneria principale',
+        'form.opt.select': 'Seleziona il collo di bottiglia operativo...', 'form.opt.legacy': 'Codice legacy e debito tecnico', 'form.opt.security': 'Sicurezza e conformità continue', 'form.opt.tests': 'Generazione test e copertura', 'form.opt.pr': 'Controlli qualità PR', 'form.opt.other': 'Altro workflow di automazione',
+        'form.submit': 'Richiedi deployment',
+        'success.title': 'Deployment richiesto', 'success.desc': 'Stiamo esaminando i vincoli del tuo sistema. Un rappresentante tecnico ti contatterà entro 24 ore per specificare i limiti di esecuzione.',
+        'footer.imprint': 'Note legali', 'footer.privacy': 'Privacy'
+      },
+      rm: {
+        'nav.consultancy': 'Cussegliaziun IA', 'nav.assessment': 'Evaluaziun IA', 'nav.solutions': 'Soluziuns', 'nav.engineering': 'Ingenieria', 'nav.contact': 'Contact',
+        'hero.tag': 'Soluziuns',
+        'hero.title': 'Recuperescha tias uras d\'ingenieria.',
+        'hero.lead': 'Agents da software autonoms che exequeschan objectivs definids da tai, verifitgeschan resultats cunter tes criteris da qualitad e furneschan code che passa CI. Nivel enterprise cun traciabladad cumpletta e controllas da governance.',
+        'bottleneck.title': 'L\'inversiun dal cul da buttiglia',
+        'bottleneck.p1': 'Mintga utensil da code IA disponibel oz è in dactilograf pli svelt. Ti scrivs prompts, el respunda, el sa ferma. Smanettas da scriver prompts, el smetta da lavurar. L\'uman resta il cul da buttiglia, mo pli char.',
+        'bottleneck.p2': 'Operator inversa quai. Il punct da levra sa mida dal dumber d\'uras che tes team investescha a la precisiun cun la quala tes team po definir tge che "bun" vul dir. Scriva in objectiv cler. Operator al persequitescha senza fin. Scriva diesch objectivs. Diesch agents als persequiteschan simultandamain.',
+        'pilot.title': 'Lantschar il pilot',
+        'pilot.desc': 'Definescha in objectiv specific e mesirabel. Nus exequin ina emprova da duas emnas. ROI quantificabel basà sin uras d\'ingenieria recuperadas, betg sin tecnologia IA cumprada.',
+        'form.name': 'Num dal responsabel tecnic', 'form.email': 'Email da lavur', 'form.company': 'Organisaziun', 'form.pain': 'Restricziun principala d\'ingenieria',
+        'form.opt.select': 'Tscherna il cul da buttiglia operativ...', 'form.opt.legacy': 'Code legacy e debits tecnics', 'form.opt.security': 'Segirezza e conformitad cuntinuada', 'form.opt.tests': 'Generaziun da tests e cuvrida', 'form.opt.pr': 'Controllas da qualitad PR', 'form.opt.other': 'Auter workflow d\'automaziun',
+        'form.submit': 'Dumandar deployment',
+        'success.title': 'Deployment dumandà', 'success.desc': 'Nus examinain las restricziuns da tes sistem. In represchentant tecnic ta contactescha entaifer 24 uras per specifitgar ils cunfins d\'execuziun.',
+        'footer.imprint': 'Impressum', 'footer.privacy': 'Protecziun da datas'
+      }
     };
 
     const asciiArt = `

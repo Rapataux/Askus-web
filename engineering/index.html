@@ -69,7 +69,7 @@
     .theme-toggle { position: fixed; bottom: 2rem; right: 2rem; z-index: 100; width: 2.5rem; height: 2.5rem; border-radius: 50%; background: var(--fg); color: var(--bg); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: transform 0.2s ease, opacity 0.2s ease; opacity: 0.7; }
     .theme-toggle:hover { opacity: 1; transform: scale(1.1); }
     .theme-toggle svg { width: 1.1rem; height: 1.1rem; }
-    .menu-toggle { display: none; flex-direction: column; gap: 4px; background: none; border: none; cursor: pointer; padding: 0.5rem; z-index: 201; }
+    .menu-toggle { display: none; flex-direction: column; gap: 4px; background: none; border: none; outline: none; cursor: pointer; padding: 0.5rem; z-index: 201; color: var(--fg); -webkit-tap-highlight-color: transparent; }
     .menu-toggle span { display: block; width: 18px; height: 1.5px; background: var(--fg); transition: all 0.3s ease; }
     header.inverted .menu-toggle span { background: var(--services-fg); }
     .menu-toggle.open span { background: var(--fg); }
@@ -161,8 +161,7 @@
         <h2 data-i18n="about.title">Built to last</h2>
       </div>
       <div class="about-text">
-        <p data-i18n="about.p1">We have built and operated large scale systems in demanding environments. Experience teaches what holds up over time.</p>
-        <p data-i18n="about.p2">Every system we build is designed to endure. Clear structure. Maintainable code. Documentation that remains useful years later.</p>
+        <p data-i18n="about.p1">Liechtenstein has existed as a sovereign state since 1866. Over a century and a half of careful decisions, clear boundaries, and knowing when not to move. We bring the same disposition to engineering. Not every problem needs solving. Not every feature needs building. Restraint is a technical skill.</p>
         <p class="location">Vaduz, Liechtenstein</p>
       </div>
     </section>
@@ -204,12 +203,11 @@
         'services.delivery.title': 'Delivery Framework',
         'services.delivery.desc': 'Product-oriented delivery with engineering-led UX. Cross-functional teams, clear ownership, and transparent execution.',
         'about.title': 'Built to last',
-        'about.p1': 'We have built and operated large scale systems in demanding environments. Experience teaches what holds up over time.',
-        'about.p2': 'Every system we build is designed to endure. Clear structure. Maintainable code. Documentation that remains useful years later.',
+        'about.p1': 'Liechtenstein has existed as a sovereign state since 1866. Over a century and a half of careful decisions, clear boundaries, and knowing when not to move. We bring the same disposition to engineering. Not every problem needs solving. Not every feature needs building. Restraint is a technical skill.',
         'footer.imprint': 'Imprint', 'footer.privacy': 'Privacy'
       },
       es: {
-        'nav.consultancy': 'Consultoría IA', 'nav.assessment': 'AI Assessment', 'nav.engineering': 'Engineering', 'nav.solutions': 'Soluciones', 'nav.contact': 'Contacto',
+        'nav.consultancy': 'Consultoría IA', 'nav.assessment': 'Evaluación IA', 'nav.engineering': 'Ingeniería', 'nav.solutions': 'Soluciones', 'nav.contact': 'Contacto',
         'hero.subtitle': 'Ingeniería · Liechtenstein',
         'hero.title': 'Sistemas que no fallan.',
         'hero.intro': 'Sistemas robustos y escalables para entornos de misión crítica. La fiabilidad y el cumplimiento normativo van primero.',
@@ -224,12 +222,11 @@
         'services.delivery.title': 'Marco de entrega',
         'services.delivery.desc': 'Entrega orientada al producto con UX liderada por ingeniería. Equipos multifuncionales, responsabilidad clara y ejecución transparente.',
         'about.title': 'Construido para durar',
-        'about.p1': 'Hemos construido y operado sistemas a gran escala en entornos exigentes. La experiencia enseña qué resiste con el tiempo.',
-        'about.p2': 'Cada sistema que construimos está diseñado para perdurar. Estructura clara. Código mantenible. Documentación que sigue siendo útil años después.',
+        'about.p1': 'Liechtenstein existe como estado soberano desde 1866. Más de un siglo y medio de decisiones cuidadosas, límites claros y saber cuándo no actuar. Aportamos la misma disposición a la ingeniería. No todo problema necesita solución. No toda funcionalidad necesita construirse. La contención es una habilidad técnica.',
         'footer.imprint': 'Aviso legal', 'footer.privacy': 'Privacidad'
       },
       de: {
-        'nav.consultancy': 'KI-Beratung', 'nav.assessment': 'AI Assessment', 'nav.engineering': 'Engineering', 'nav.solutions': 'Lösungen', 'nav.contact': 'Kontakt',
+        'nav.consultancy': 'KI-Beratung', 'nav.assessment': 'KI-Assessment', 'nav.engineering': 'Engineering', 'nav.solutions': 'Lösungen', 'nav.contact': 'Kontakt',
         'hero.subtitle': 'Engineering · Liechtenstein',
         'hero.title': 'Systeme, die nicht versagen.',
         'hero.intro': 'Robuste, skalierbare Systeme für geschäftskritische Umgebungen. Zuverlässigkeit und Compliance stehen an erster Stelle.',
@@ -244,12 +241,11 @@
         'services.delivery.title': 'Delivery-Framework',
         'services.delivery.desc': 'Produktorientierte Umsetzung mit engineering-getriebener UX. Cross-funktionale Teams, klare Verantwortung und transparente Ausführung.',
         'about.title': 'Gebaut für die Zukunft',
-        'about.p1': 'Wir haben grossskalige Systeme in anspruchsvollen Umgebungen gebaut und betrieben. Erfahrung zeigt, was über Jahre trägt.',
-        'about.p2': 'Jedes System, das wir bauen, ist auf Dauer ausgelegt. Klare Struktur. Wartbarer Code. Dokumentation, die auch später noch hilft.',
+        'about.p1': 'Liechtenstein besteht seit 1866 als souveräner Staat. Über anderthalb Jahrhunderte sorgfältiger Entscheidungen, klarer Grenzen und dem Wissen, wann man nicht handelt. Wir bringen dieselbe Haltung ins Engineering. Nicht jedes Problem braucht eine Lösung. Nicht jedes Feature muss gebaut werden. Zurückhaltung ist eine technische Kompetenz.',
         'footer.imprint': 'Impressum', 'footer.privacy': 'Datenschutz'
       },
       fr: {
-        'nav.consultancy': 'Conseil IA', 'nav.assessment': 'AI Assessment', 'nav.engineering': 'Engineering', 'nav.solutions': 'Solutions', 'nav.contact': 'Contact',
+        'nav.consultancy': 'Conseil IA', 'nav.assessment': 'Évaluation IA', 'nav.engineering': 'Ingénierie', 'nav.solutions': 'Solutions', 'nav.contact': 'Contact',
         'hero.subtitle': 'Ingénierie · Liechtenstein',
         'hero.title': 'Des systèmes qui tiennent.',
         'hero.intro': 'Systèmes robustes et scalables pour environnements critiques. Fiabilité et conformité avant tout.',
@@ -264,12 +260,11 @@
         'services.delivery.title': 'Cadre de livraison',
         'services.delivery.desc': 'Livraison orientée produit avec UX pilotée par l\'ingénierie. Équipes pluridisciplinaires, responsabilité claire, exécution transparente.',
         'about.title': 'Construit pour durer',
-        'about.p1': 'Nous avons conçu et exploité des systèmes à grande échelle dans des environnements exigeants. L\'expérience montre ce qui tient dans le temps.',
-        'about.p2': 'Chaque système que nous construisons est pensé pour durer. Structure claire. Code maintenable. Documentation utile sur la durée.',
+        'about.p1': 'Le Liechtenstein existe en tant qu\'État souverain depuis 1866. Plus d\'un siècle et demi de décisions prudentes, de limites claires et de savoir quand ne pas agir. Nous apportons la même disposition à l\'ingénierie. Chaque problème n\'a pas besoin d\'être résolu. Chaque fonctionnalité n\'a pas besoin d\'être construite. La retenue est une compétence technique.',
         'footer.imprint': 'Mentions légales', 'footer.privacy': 'Confidentialité'
       },
       it: {
-        'nav.consultancy': 'Consulenza IA', 'nav.assessment': 'AI Assessment', 'nav.engineering': 'Engineering', 'nav.solutions': 'Soluzioni', 'nav.contact': 'Contatto',
+        'nav.consultancy': 'Consulenza IA', 'nav.assessment': 'Valutazione IA', 'nav.engineering': 'Ingegneria', 'nav.solutions': 'Soluzioni', 'nav.contact': 'Contatto',
         'hero.subtitle': 'Ingegneria · Liechtenstein',
         'hero.title': 'Sistemi che non cedono.',
         'hero.intro': 'Sistemi robusti e scalabili per ambienti mission-critical. Affidabilità e conformità vengono prima di tutto.',
@@ -284,12 +279,11 @@
         'services.delivery.title': 'Framework di delivery',
         'services.delivery.desc': 'Consegna orientata al prodotto con UX guidata dall\'ingegneria. Team cross-funzionali, responsabilità chiara, esecuzione trasparente.',
         'about.title': 'Costruito per durare',
-        'about.p1': 'Abbiamo costruito e gestito sistemi su larga scala in contesti esigenti. L\'esperienza insegna cosa regge nel tempo.',
-        'about.p2': 'Ogni sistema che costruiamo è pensato per durare. Struttura chiara. Codice manutenibile. Documentazione utile anche negli anni.',
+        'about.p1': 'Il Liechtenstein esiste come stato sovrano dal 1866. Oltre un secolo e mezzo di decisioni ponderate, confini chiari e sapere quando non agire. Portiamo la stessa disposizione nell\'ingegneria. Non ogni problema ha bisogno di una soluzione. Non ogni funzionalità deve essere costruita. La moderazione è una competenza tecnica.',
         'footer.imprint': 'Impronta', 'footer.privacy': 'Privacy'
       },
       rm: {
-        'nav.consultancy': 'Cussegliaziun IA', 'nav.assessment': 'AI Assessment', 'nav.engineering': 'Engineering', 'nav.solutions': 'Soluziuns', 'nav.contact': 'Contact',
+        'nav.consultancy': 'Cussegliaziun IA', 'nav.assessment': 'Evaluaziun IA', 'nav.engineering': 'Ingenieria', 'nav.solutions': 'Soluziuns', 'nav.contact': 'Contact',
         'hero.subtitle': 'Ingenieria · Liechtenstein',
         'hero.title': 'Systems che na crodian betg.',
         'hero.intro': 'Sistems robusts e scalabels per conturns mission-critical. Fidabladad e conformitad van avant.',
@@ -304,8 +298,7 @@
         'services.delivery.title': 'Framework da delivery',
         'services.delivery.desc': 'Delivery orientada al product cun UX manada da l\'ingenieria. Teams cross-funcziunals, responsabladad clera ed execuziun transparenta.',
         'about.title': 'Construì per durar',
-        'about.p1': 'Nus avain construì ed operà systems gronds en conturns pretensius. L\'experientscha mussa tge che tegna ditg.',
-        'about.p2': 'Mintga sistem che nus construin è fatg per durar. Structura clera. Code che sa mantegnair. Documentaziun che resta utila pli tard.',
+        'about.p1': 'Il Liechtenstein exista sco stadi suveran dapi 1866. Dapi passa in tschientaner e mez da decisiuns attentivas, cunfins clers e saver cura betg agir. Nus portain la medema disposiziun en l\'ingenieria. Betg mintga problem dovra ina soluziun. Betg mintga funcziun dovra vegnir construida. La moderaziun è ina cumpetenza tecnica.',
         'footer.imprint': 'Impressum', 'footer.privacy': 'Protecziun da datas'
       }
     };
