@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(tree:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(git -C C:Userscorpaaskus-web add engineering/index.html imprint/index.html privacy/index.html legal/index.html)",
+      "Bash(git -C C:Userscorpaaskus-web commit -m \"$\\(cat <<''EOF''\nStandardize page titles: consistent capitalization and trailing dots\n\n- Engineering hero title: sentence case to Title Case with dot \\(EN\\)\n- Engineering translations: added trailing dot \\(all languages\\)\n- Simple page title tags: reordered to Page · Askus format\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git -C C:Userscorpaaskus-web push)",
+      "Bash(where:*)"
+    ]
+  }
+}
